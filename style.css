@@ -10,3 +10,82 @@ Version: 1.0.0.1719895108
 Updated: 2024-07-02 04:38:28
 
 */
+:root {
+    --primary-color: #db6414;
+    --body-backgroud: #ffffff;
+    --primary-text-color: #1d5b06;
+    --menu-text-color: #000000;
+    --menu-background: #b7cd0e;
+}
+
+.widget_shopping_cart .product_list_widget {
+    padding: 0;
+}
+
+.site-header p {
+    margin: 0;
+}
+
+.top-header {
+    padding: 10px 0;
+}
+
+.site-header {
+    padding-top: 0;
+}
+
+.icon {
+    font-size: 30px;
+    color: var(--primary-color);
+    transform: rotate(rotate(104deg));
+}
+
+
+@media (min-width: 768px) {
+    .site-header .main-navigation {
+        background: var(--primary-color);
+        padding: 0.5em 0;
+    }
+
+    .main-navigation ul.menu>li>a,
+    .main-navigation ul.nav-menu>li>a {
+        padding: 0 1em;
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .woocommerce-active .site-header .site-branding,
+    .storefront-secondary-navigation.woocommerce-active .site-header .site-branding,
+    .storefront-secondary-navigation .site-header .site-branding,
+    .woocommerce-active .site-header .site-search,
+    .woocommerce-active .site-header .site-header-cart,
+    .woocommerce-active .site-header .main-navigation {
+        width: 100%;
+        float: left;
+        margin-right: 0;
+    }
+
+    .site-header-cart:hover .widget_shopping_cart,
+    .site-header-cart.focus .widget_shopping_cart {
+        position: absolute;
+        min-width: 250px;
+        width: 100%;
+        right: 0;
+        left: unset;
+    }
+
+    .storefront-secondary-navigation.woocommerce-active .site-header .secondary-navigation {
+        width: 100%;
+        float: right;
+        margin: 0;
+    }
+
+    .secondary-navigation .menu a {
+        padding: 0.5em .875em;
+    }
+
+    .main-navigation ul.menu,
+    .main-navigation ul.nav-menu {
+        margin-left: 0;
+    }
+}

@@ -23,3 +23,4 @@ add_action('wp_enqueue_scripts', 'enqueue_bootstrap_cdn', 20);
 
 require 'inc/template-functions.php';
 require 'inc/hooks.php';
+require 'inc/helper.php';
