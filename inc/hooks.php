@@ -21,3 +21,8 @@ function stylish_remove_parent_actions()
 }
 
 add_action('init', 'stylish_remove_parent_actions');
+
+
+// Filter Hooks
+
+add_filter('woocommerce_breadcrumb_defaults', 'stylish_change_breadcrumb_delimiter', 20);

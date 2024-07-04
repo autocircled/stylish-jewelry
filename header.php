@@ -60,11 +60,12 @@
          * @hooked storefront_header_widget_region - 10
          * @hooked woocommerce_breadcrumb - 10
          */
+        // woocommerce_breadcrumb();
         do_action('storefront_before_content');
         ?>
 
         <div id="content" class="site-content" tabindex="-1">
-            <div class="col-full">
+            <div class="container">
 
                 <?php
                 do_action('storefront_content_top');

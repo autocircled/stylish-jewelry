@@ -17,7 +17,7 @@ if (!function_exists('storefront_header_container')) {
          */
         do_action('stylish_top_header');
 
-        echo '<div class="col-full">';
+        echo '<div class="container">';
     }
 }
 
@@ -28,7 +28,7 @@ if (!function_exists('stylish_top_header_container')) {
      */
     function stylish_top_header_container()
     {
-        echo '<div class="col-full top-header">';
+        echo '<div class="top-header">';
         echo '<div class="container">';
         echo '<div class="row">';
     }
@@ -61,7 +61,15 @@ if (!function_exists('stylish_top_header_left_block')) {
     <?php
     }
 }
-
+if (!function_exists('storefront_primary_navigation_wrapper')) {
+    /**
+     * The primary navigation wrapper
+     */
+    function storefront_primary_navigation_wrapper()
+    {
+        echo '<div class="storefront-primary-navigation"><div class="container">';
+    }
+}
 if (!function_exists('stylish_top_header_right_block')) {
     /**
      * The stylish_top_header_right_block
@@ -107,7 +115,7 @@ if (!function_exists('stylish_middle_header_container')) {
                                 <div class="icon">
                                     <i class="fa fa-phone" aria-hidden="true"></i>
                                 </div>
-                                <div class="text lh-1">
+                                <div class="text d-flex flex-column lh-1">
                                     <span class="title">Call Us</span>
                                     <span class="number fw-bold">0123456789</span>
                                 </div>
@@ -123,5 +131,15 @@ if (!function_exists('stylish_middle_header_container')) {
 
         </div>
 <?php
+    }
+}
+// woocommerce_breadcrumb_defaults
+if (!function_exists('stylish_change_breadcrumb_delimiter')) {
+    function stylish_change_breadcrumb_delimiter($defaults)
+    {
+        // $defaults['delimiter']   = '<span class="breadcrumb-separator"> / </span>';
+        $defaults['wrap_before'] = '<div class="storefront-breadcrumb"><div class="container"><nav class="woocommerce-breadcrumb" aria-label="' . esc_attr__('breadcrumbs', 'storefront') . '">';
+        // $defaults['wrap_after']  = '</nav></div></div>';
+        return $defaults;
     }
 }

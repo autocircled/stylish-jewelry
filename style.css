@@ -40,6 +40,16 @@ Updated: 2024-07-02 04:38:28
     transform: rotate(rotate(104deg));
 }
 
+.home article header.entry-header {
+    display: none;
+}
+
+.home.blog .site-header,
+.home.page:not(.page-template-template-homepage) .site-header,
+.home.post-type-archive-product .site-header {
+    margin-bottom: 10px;
+}
+
 
 @media (min-width: 768px) {
     .site-header .main-navigation {
