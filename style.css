@@ -50,8 +50,48 @@ Updated: 2024-07-02 04:38:28
     margin-bottom: 10px;
 }
 
+.site-footer {
+    background-color: #191919;
+    color: #999;
+}
+
+.site-footer a:not(.button):not(.components-button) {
+    color: #999;
+}
+
+.wp-social-link svg {
+    fill: #FFF;
+}
+
+.site-footer h1,
+.site-footer h2,
+.site-footer h3,
+.site-footer h4,
+.site-footer h5,
+.site-footer h6,
+.site-footer .widget .widget-title,
+.site-footer .widget .widgettitle {
+    color: #999;
+}
+
+.site-footer ul.menu,
+.site-footer ul.wp-block-social-links {
+    padding: 0;
+}
+
+.widget {
+    margin: 0 0 1em;
+}
 
 @media (min-width: 768px) {
+    .wp-social-link svg {
+        fill: #999;
+    }
+
+    .wp-social-link:hover svg {
+        fill: #FFF;
+    }
+
     .site-header .main-navigation {
         background: var(--primary-color);
         padding: 0.5em 0;

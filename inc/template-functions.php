@@ -130,7 +130,7 @@ if (!function_exists('stylish_middle_header_container')) {
             </div>
 
         </div>
-<?php
+        <?php
     }
 }
 // woocommerce_breadcrumb_defaults
@@ -141,5 +141,52 @@ if (!function_exists('stylish_change_breadcrumb_delimiter')) {
         $defaults['wrap_before'] = '<div class="storefront-breadcrumb"><div class="container"><nav class="woocommerce-breadcrumb" aria-label="' . esc_attr__('breadcrumbs', 'storefront') . '">';
         // $defaults['wrap_after']  = '</nav></div></div>';
         return $defaults;
+    }
+}
+
+
+if (!function_exists('storefront_footer_widgets')) {
+    /**
+     * Display the footer widget regions.
+     *
+     * @since  1.0.0
+     * @return void
+     */
+    function storefront_footer_widgets()
+    {
+        $rows    = intval(apply_filters('storefront_footer_widget_rows', 1));
+        $regions = intval(apply_filters('storefront_footer_widget_columns', 4));
+
+        for ($row = 1; $row <= $rows; $row++) :
+
+            // Defines the number of active columns in this footer row.
+            for ($region = $regions; 0 < $region; $region--) {
+                if (is_active_sidebar('footer-' . esc_attr($region + $regions * ($row - 1)))) {
+                    $columns = $region;
+                    break;
+                }
+            }
+
+            if (isset($columns)) :
+        ?>
+                <div class=<?php echo '"footer-widgets row row-' . esc_attr($row) . ' cols-' . esc_attr($columns) . ' fix"'; ?>>
+                    <?php
+                    for ($column = 1; $column <= $columns; $column++) :
+                        $footer_n = $column + $regions * ($row - 1);
+
+                        if (is_active_sidebar('footer-' . esc_attr($footer_n))) :
+                    ?>
+                            <div class="block footer-widget-<?php echo esc_attr($column); ?> col-md-<?php echo $column == 1 ? '4' : ($column == 2 || $column == 3 ? '2' : ($column == 4 ? '4' : 0)); ?>">
+                                <?php dynamic_sidebar('footer-' . esc_attr($footer_n)); ?>
+                            </div>
+                    <?php
+                        endif;
+                    endfor;
+                    ?>
+                </div><!-- .footer-widgets.row-<?php echo esc_attr($row); ?> -->
+<?php
+                unset($columns);
+            endif;
+        endfor;
     }
 }
