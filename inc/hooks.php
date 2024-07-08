@@ -19,6 +19,10 @@ function stylish_remove_parent_actions()
     remove_action('storefront_header', 'storefront_product_search', 40);
     remove_action('storefront_header', 'storefront_header_cart', 60);
     remove_action('storefront_footer', 'storefront_credit', 20);
+
+    // remove block styles
+    remove_action('wp_enqueue_scripts', 'wp_common_block_scripts_and_styles');
+    remove_action('admin_enqueue_scripts', 'wp_common_block_scripts_and_styles');
 }
 
 add_action('init', 'stylish_remove_parent_actions');

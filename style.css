@@ -95,8 +95,12 @@ Updated: 2024-07-02 04:38:28
     padding: 0;
 }
 
-.widget {
+.site-footer .widget {
     margin: 0 0 1em;
+}
+
+.footer-before-copyright .wp-block-image {
+    margin: 0;
 }
 
 .site-info {

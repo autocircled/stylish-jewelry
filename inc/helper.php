@@ -12,7 +12,7 @@ function before_footer_copy_widget_init()
         'name'          => __('Before Footer Copyright', 'stylish-jewelry'),
         'id'            => 'footer-before-copyright',
         'description'   => __('Widgets added here will appear in before the copyright in the footer.', 'stylish-jewelry'),
-        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'before_widget' => '<div id="%1$s" class="footer-before-copyright %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<span class="gamma widget-title">',
         'after_title'   => '</span>',
