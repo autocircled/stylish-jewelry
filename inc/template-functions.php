@@ -184,9 +184,60 @@ if (!function_exists('storefront_footer_widgets')) {
                     endfor;
                     ?>
                 </div><!-- .footer-widgets.row-<?php echo esc_attr($row); ?> -->
-<?php
+        <?php
                 unset($columns);
             endif;
         endfor;
+    }
+}
+
+
+if (!function_exists('stylish_footer_before_copyright_widgets')) {
+
+    function stylish_footer_before_copyright_widgets()
+    {
+        if (is_active_sidebar('footer-before-copyright')) {
+            dynamic_sidebar('footer-before-copyright');
+        }
+    }
+}
+
+
+if (!function_exists('storefront_credit')) {
+    /**
+     * Display the theme credit
+     *
+     * @since  1.0.0
+     * @return void
+     */
+    function storefront_credit()
+    {
+        $links_output = '';
+
+        if (apply_filters('storefront_credit_link', true)) {
+
+            $links_output .= '<a href="https://ticlimited.com.bd" target="_blank" title="' . esc_attr__('Built with TIC Limted', 'stylish-jewelry') . '" rel="noreferrer nofollow">' . esc_html__('Developed by TIC Limted', 'stylish-jewelry') . '</a>.';
+        }
+
+        if (apply_filters('storefront_privacy_policy_link', true) && function_exists('the_privacy_policy_link')) {
+            $separator    = '<span role="separator" aria-hidden="true"></span>';
+            $links_output = get_the_privacy_policy_link('', (!empty($links_output) ? $separator : '')) . $links_output;
+        }
+
+        $links_output = apply_filters('storefront_credit_links_output', $links_output);
+        ?>
+        <div class="site-info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6"><?php echo esc_html(apply_filters('storefront_copyright_text', $content = '&copy; ' . get_bloginfo('name') . ' ' . gmdate('Y'))); ?></div>
+                    <div class="col-md-6 text-end">
+                        <?php if (!empty($links_output)) { ?>
+                            <?php echo wp_kses_post($links_output); ?>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div><!-- .site-info -->
+<?php
     }
 }

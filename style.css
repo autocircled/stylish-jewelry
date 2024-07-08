@@ -50,17 +50,33 @@ Updated: 2024-07-02 04:38:28
     margin-bottom: 10px;
 }
 
-.site-footer {
+.site-footer .footer-top {
     background-color: #191919;
     color: #999;
 }
+
+.site-footer .footer-bottom {
+    background-color: #db6414;
+    color: #FFF;
+}
+
+
 
 .site-footer a:not(.button):not(.components-button) {
     color: #999;
 }
 
+.site-footer .footer-bottom:not(.button):not(.components-button) a {
+    color: #FFF;
+    text-decoration: none;
+}
+
 .wp-social-link svg {
     fill: #FFF;
+}
+
+.site-footer {
+    padding: 1.618em 0 0;
 }
 
 .site-footer h1,
@@ -81,6 +97,14 @@ Updated: 2024-07-02 04:38:28
 
 .widget {
     margin: 0 0 1em;
+}
+
+.site-info {
+    padding: 10px 0px;
+}
+
+.storefront-handheld-footer-bar ul {
+    padding: 0;
 }
 
 @media (min-width: 768px) {
