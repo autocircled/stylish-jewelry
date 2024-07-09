@@ -21,7 +21,10 @@ function stylish_remove_parent_actions()
     remove_action('storefront_footer', 'storefront_credit', 20);
     remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
     remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
-    // remove_action('woocommerce_after_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash', 10);
+    // remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10);
+    remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+    remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10);
 
     // remove block styles
     remove_action('wp_enqueue_scripts', 'wp_common_block_scripts_and_styles');
@@ -39,12 +42,16 @@ add_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop
 add_action('woocommerce_after_shop_loop_item', 'stylish_woocommerce_template_loop_add_to_cart', 10);
 add_action('woocommerce_after_add_to_cart_quantity', 'stylish_woocommerce_buy_now_button', 35);
 add_action('woocommerce_after_add_to_cart_button', 'stylish_add_fav_button', 36);
+add_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 6);
+add_action('woocommerce_single_product_summary', 'stylish_add_wa_ask_button', 7);
+add_action('woocommerce_single_product_summary', 'stylish_get_product_sku', 8);
 
 
 // Filter Hooks
 
 add_filter('woocommerce_breadcrumb_defaults', 'stylish_change_breadcrumb_delimiter', 20);
 add_filter('woocommerce_output_related_products_args', 'stylish_woocommerce_output_related_products_args', 20);
+add_filter('woocommerce_get_price_html', 'stylish_woocommerce_product_price_html', 20, 2);
 
 add_action('storefront_footer', 'stylish_footer_before_copyright_widgets', 15);
 add_action('storefront_after_footer', 'storefront_credit', 10);
