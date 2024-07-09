@@ -255,6 +255,12 @@ p.stars a:after,
     margin: 0 0 10px;
 }
 
+.woocommerce-checkout-review-order .product-total,
+.woocommerce-checkout-review-order tfoot td {
+    text-align: right;
+    width: 10%;
+}
+
 @media (min-width: 768px) {
     .wp-social-link svg {
         fill: #999;

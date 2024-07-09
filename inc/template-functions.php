@@ -385,3 +385,60 @@ if (!function_exists('storefront_before_content')) {
             return $price;
         }
     }
+
+    // Make postal code optional
+    add_filter('woocommerce_default_address_fields', 'customize_extra_fields', 1000, 1);
+    function customize_extra_fields($address_fields)
+    {
+        $address_fields['postcode']['required'] = false; //Postcode
+        return $address_fields;
+    }
+
+    // Hide checkout fields
+    function reorder_billing_fields($fields)
+    {
+        $billing_order = [
+            'billing_first_name',
+            'billing_phone',
+            'billing_state',
+            'billing_city',
+            'billing_address_1',
+            // 'billing_last_name',
+            // 'billing_email',
+            //         'billing_company',
+            // 'billing_country',
+            //         'billing_address_2',
+            // 'billing_postcode',
+        ];
+
+        foreach ($billing_order as $field) {
+            if ('billing_phone' == $fields['billing'][$field]) {
+            }
+            $ordered_fields[$field] = $fields['billing'][$field];
+        }
+        $ordered_fields['billing_first_name']['label'] = __('নাম', 'stylish-jewelry');
+        $ordered_fields['billing_first_name']['placeholder'] = __('আপনার নাম লিখুন', 'stylish-jewelry');
+        $ordered_fields['billing_first_name']['class'] = ['form-row-wide'];
+
+        $ordered_fields['billing_phone']['priority'] = 15;
+        $ordered_fields['billing_phone']['label'] = __('মোবাইল নম্বর', 'stylish-jewelry');
+        $ordered_fields['billing_phone']['placeholder'] = __('মোবাইল নম্বর', 'stylish-jewelry');
+
+        $ordered_fields['billing_state']['priority'] = 20;
+        $ordered_fields['billing_state']['label'] = __('জেলা', 'stylish-jewelry');
+
+        $ordered_fields['billing_city']['priority'] = 25;
+        $ordered_fields['billing_city']['label'] = __('থানা', 'stylish-jewelry');
+        $ordered_fields['billing_city']['placeholder'] = __('আপনার এলাকার নাম লিখুন', 'stylish-jewelry');
+
+        $ordered_fields['billing_address_1']['priority'] = 30;
+        $ordered_fields['billing_address_1']['label'] = __('সম্পূর্ণ ঠিকানা', 'stylish-jewelry');
+        $ordered_fields['billing_address_1']['placeholder'] = __('আপনার সম্পূর্ণ ঠিকানা লিখুন', 'stylish-jewelry');
+
+
+        $fields['billing'] = $ordered_fields;
+
+        return $fields;
+    }
+
+    add_filter('woocommerce_checkout_fields', 'reorder_billing_fields');
