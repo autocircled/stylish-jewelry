@@ -80,6 +80,10 @@ function QTYPMDomReady(fn) {
 }
 
 QTYPMDomReady(function () {
+    const isSingleProductPage = document.querySelector("body").classList.contains("single-product");
+    if (!isSingleProductPage) {
+        return;
+    }
     QTYPM.init();
     QTYPM.tabInt();
 });
