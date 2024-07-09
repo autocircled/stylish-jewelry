@@ -195,6 +195,15 @@ textdomain: stylish-jewelry
     background-color: #f2f2f2;
 }
 
+form.cart a.la-wc-product-link {
+    background: #db6414;
+    color: #fff;
+    text-decoration: none;
+    padding: .6180469716em 2.41575em;
+    font-weight: 500;
+    display: inline-block;
+}
+
 @media (min-width: 768px) {
     .wp-social-link svg {
         fill: #999;
