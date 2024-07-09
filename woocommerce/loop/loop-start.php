@@ -21,4 +21,4 @@ if (!defined('ABSPATH')) {
 }
 ?>
 <div class="container">
-    <div class="products row columns-<?php echo esc_attr(wc_get_loop_prop('columns')); ?>">
+    <div class="la-wc-products products row columns-<?php echo esc_attr(wc_get_loop_prop('columns')); ?>">

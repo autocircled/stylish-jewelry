@@ -238,7 +238,7 @@ if (!function_exists('storefront_credit')) {
                 </div>
             </div>
         </div><!-- .site-info -->
-<?php
+    <?php
     }
 }
 
@@ -250,5 +250,95 @@ if (!function_exists('stylish_woocommerce_output_related_products_args')) {
         $args['posts_per_page'] = 6;
         $args['columns']        = 6;
         return $args;
+    }
+}
+
+
+if (!function_exists('storefront_before_content')) {
+    /**
+     * Before Content
+     * Wraps all WooCommerce content in wrappers which match the theme markup
+     *
+     * @since   1.0.0
+     * @return  void
+     */
+    function storefront_before_content()
+    {
+    ?>
+        <div id="primary" class="content-area col-md-9 order-5">
+            <main id="main" class="site-main" role="main">
+        <?php
+    }
+}
+
+
+if (!function_exists('langle_addons_woocommerce_show_product_loop_sale_flash')) {
+    function langle_addons_woocommerce_show_product_loop_sale_flash()
+    {
+        global $product;
+
+        if (!$product->is_on_sale() || !$product->is_purchasable() || $product->is_type('variable')) {
+            return;
+        }
+        // var_dump($product);
+
+        $regular_price = (float) $product->get_regular_price(); // Regular price
+        $sale_price = (float) $product->get_price(); // Active price (the "Sale price" when on-sale)
+
+        $precision = 1; // Max number of decimals
+        $saving_percentage = round(100 - ($sale_price / $regular_price * 100), $precision) . '%';
+
+        echo '<span class="la-onsale">' . esc_html__('-' . $saving_percentage, 'langle-addons') . '</span>';
+    }
+}
+
+if (!function_exists('stylish_woocommerce_template_loop_product_link_open')) {
+    /**
+     * Insert the opening anchor tag for products in the loop.
+     */
+    function stylish_woocommerce_template_loop_product_link_open()
+    {
+        global $product;
+
+        $link = apply_filters('woocommerce_loop_product_link', get_the_permalink(), $product);
+
+        echo '<a href="' . esc_url($link) . '" class="woocommerce-LoopProduct-link woocommerce-loop-product__link position-relative d-block overflow-hidden rounded border border-dark-subtle">';
+    }
+}
+
+if (!function_exists('stylish_woocommerce_template_loop_add_to_cart')) {
+    /**
+     * Insert the opening anchor tag for products in the loop.
+     */
+    function stylish_woocommerce_template_loop_add_to_cart()
+    {
+        global $product;
+
+        $link = apply_filters('woocommerce_loop_product_link', get_the_permalink(), $product);
+
+        echo '<a href="' . esc_url($link) . '" class="la-wc-product-link">' . __('Buy Now', 'stylish-jewelry') . '</a>';
+    }
+}
+
+if (!function_exists('stylish_woocommerce_buy_now_button')) {
+    function stylish_woocommerce_buy_now_button()
+    {
+        global $product;
+        if ($product->is_type('simple')) {
+            $link = apply_filters('woocommerce_loop_product_link', wc_get_checkout_url(), $product);
+            echo '<a href="' . esc_url($link) . '?add-to-cart=' . $product->get_id() . '&quantity=1" class="la-wc-product-link">' . __('Buy Now', 'stylish-jewelry') . '</a>';
+        }
+    }
+}
+
+// <a href="/?add-to-cart=123&quantity=1&redirect_to_checkout=yes" class="button buy-now-button">Buy Now</a>
+
+if (!function_exists('stylish_add_fav_button')) {
+    function stylish_add_fav_button()
+    {
+        global $product;
+        $post_id = $product->get_id();
+        $site_id = get_current_blog_id();
+        the_favorites_button($post_id, $site_id);
     }
 }

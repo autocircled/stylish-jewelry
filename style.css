@@ -8,6 +8,7 @@ Description: This theme is built based on special requirements by client
 Tags: e-commerce,two-columns,left-sidebar,right-sidebar,custom-background,custom-colors,custom-header,custom-menu,featured-images,full-width-template,threaded-comments,accessibility-ready,rtl-language-support,footer-widgets,sticky-post,theme-options,editor-style
 Version: 1.0.0.1719895108
 Updated: 2024-07-02 04:38:28
+textdomain: stylish-jewelry
 
 */
 :root {
@@ -16,6 +17,7 @@ Updated: 2024-07-02 04:38:28
     --primary-text-color: #1d5b06;
     --menu-text-color: #000000;
     --menu-background: #b7cd0e;
+    /* --bs-body-bg: #efefef; */
 }
 
 .widget_shopping_cart .product_list_widget {
@@ -109,6 +111,88 @@ Updated: 2024-07-02 04:38:28
 
 .storefront-handheld-footer-bar ul {
     padding: 0;
+}
+
+.la-widget-area ul.wc-block-product-categories-list {
+    margin: 0;
+    padding: 0;
+}
+
+.la-widget-area .widget {
+    margin: 0 0 3.706325903em;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.la-widget-area .widget h4.wp-block-heading {
+    font-size: 1.2em;
+}
+
+.la-widget-area ul.wc-block-product-categories-list li.wc-block-product-categories-list-item {
+    cursor: pointer;
+}
+
+.la-widget-area ul.wc-block-product-categories-list li.wc-block-product-categories-list-item a {
+    color: var(--bs-gray-800);
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.la-widget-area ul.wc-block-product-categories-list li.wc-block-product-categories-list-item:hover span {
+    color: var(--primary-color);
+}
+
+
+.la-wc-product {
+    position: relative;
+    margin-bottom: 2em;
+}
+
+.la-wc-product a.woocommerce-LoopProduct-link-title {
+    text-decoration: none !important;
+    display: block;
+    margin-top: 10px;
+}
+
+.la-wc-product span.la-onsale {
+    position: absolute;
+    background: #db6414;
+    color: #fff;
+    top: 15px;
+    padding: 0.2em 0.5em;
+    border-radius: 0 3px 3px 0;
+    font-size: 90%;
+}
+
+.la-wc-product a.woocommerce-LoopProduct-link.woocommerce-loop-product__link {
+    text-decoration: none;
+    color: var(--bs-gray-800);
+}
+
+.la-wc-product h2 {
+    font-size: 90%;
+    overflow: hidden;
+    font-weight: 600;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #333;
+    margin-top: 10px;
+}
+
+.la-wc-product a.la-wc-product-link {
+    display: block;
+    text-decoration: none !important;
+    text-align: center;
+    background: #db6414;
+    color: #fff;
+    padding: 0.2em;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.la-wc-product .inner-wrapper {
+    background-color: #f2f2f2;
 }
 
 @media (min-width: 768px) {
