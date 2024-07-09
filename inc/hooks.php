@@ -31,6 +31,7 @@ add_action('init', 'stylish_remove_parent_actions');
 // Filter Hooks
 
 add_filter('woocommerce_breadcrumb_defaults', 'stylish_change_breadcrumb_delimiter', 20);
+add_filter('woocommerce_output_related_products_args', 'stylish_woocommerce_output_related_products_args', 20);
 
 add_action('storefront_footer', 'stylish_footer_before_copyright_widgets', 15);
 add_action('storefront_after_footer', 'storefront_credit', 10);

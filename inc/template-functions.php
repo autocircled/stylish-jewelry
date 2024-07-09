@@ -241,3 +241,14 @@ if (!function_exists('storefront_credit')) {
 <?php
     }
 }
+
+
+if (!function_exists('stylish_woocommerce_output_related_products_args')) {
+
+    function stylish_woocommerce_output_related_products_args($args)
+    {
+        $args['posts_per_page'] = 6;
+        $args['columns']        = 6;
+        return $args;
+    }
+}
