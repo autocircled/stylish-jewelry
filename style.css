@@ -204,6 +204,10 @@ form.cart a.la-wc-product-link {
     display: inline-block;
 }
 
+.woocommerce-tabs ul.nav.nav-tabs {
+    margin: 0 0 20px;
+}
+
 @media (min-width: 768px) {
     .wp-social-link svg {
         fill: #999;
@@ -258,5 +262,9 @@ form.cart a.la-wc-product-link {
     .main-navigation ul.menu,
     .main-navigation ul.nav-menu {
         margin-left: 0;
+    }
+
+    .storefront-full-width-content .woocommerce-tabs .panel {
+        width: 100%;
     }
 }

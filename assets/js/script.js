@@ -32,7 +32,28 @@ QTYPM.decrease = function () {
     }
 }
 
+QTYPM.tabInt = function () {
+    this.tabs = document.querySelectorAll(".woocommerce-tabs ul.nav li");
+    this.tabsBox = document.querySelectorAll(".woocommerce-tabs .woocommerce-Tabs-panel");
+    // now set class active on first tab
+    this.tabs[0].querySelector(".nav-link").classList.add("active");
+    this.tabsBox[0].style.display = "block";
 
+    this.tabs.forEach(function (tab) {
+        tab.addEventListener("click", function (e) {
+            e.preventDefault();
+            QTYPM.tabs.forEach(function (tab) {
+                tab.querySelector(".nav-link").classList.remove("active");
+            });
+            QTYPM.tabsBox.forEach(function (tabBox) {
+                tabBox.style.display = "none";
+            });
+            tab.querySelector(".nav-link").classList.add("active");
+            const tabId = tab.querySelector(".nav-link").getAttribute("href");
+            document.querySelector(tabId).style.display = "block";
+        })
+    })
+}
 
 /**
  * Is the DOM ready?
@@ -60,4 +81,5 @@ function QTYPMDomReady(fn) {
 
 QTYPMDomReady(function () {
     QTYPM.init();
+    QTYPM.tabInt();
 });
