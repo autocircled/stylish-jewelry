@@ -442,3 +442,38 @@ if (!function_exists('storefront_before_content')) {
     }
 
     add_filter('woocommerce_checkout_fields', 'reorder_billing_fields');
+
+    // add_filter('wc_add_to_cart_message', 'remove_add_to_cart_message');
+
+    function remove_add_to_cart_message()
+    {
+        return;
+    }
+    // wc_print_notice(esc_html__('No saved methods found.', 'woocommerce'), 'notice');
+    // wc_add_to_cart_message()
+
+    if (!function_exists('stylish_checkout_notice')) {
+        function stylish_checkout_notice()
+        {
+            wc_add_notice('অর্ডার করতে আপনার সঠিক তথ্য দিয়ে নিচের ফর্মটি সম্পূর্ণ পূরণ করুন। (আমাদের একজন প্রতিনিধি দ্রুত সময়ের মধ্যে আপনার সাথে যোগাযোগ করবে)', 'success');
+        }
+    }
+
+
+    add_action('woocommerce_review_order_before_submit', 'stylish_checkout_terms');
+    if (!function_exists('stylish_checkout_terms')) {
+        function stylish_checkout_terms()
+        {
+            global $wp;
+            $page_id = get_option('wc_terms_page_id');
+            if ($page_id) {
+                $page = get_post($page_id);
+                if ($page && $page->post_content) {
+                    $page_content = $page->post_content;
+                    $page_content = apply_filters('the_content', $page_content);
+                    echo $page_content;
+                }
+            }
+            wc_print_notice('অর্ডার করতে আপনার সঠিক তথ্য দিয়ে নিচের ফর্মটি সম্পূর্ণ পূরণ করুন।', 'notice');
+        }
+    }

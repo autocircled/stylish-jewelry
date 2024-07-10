@@ -45,6 +45,7 @@ add_action('woocommerce_after_add_to_cart_button', 'stylish_add_fav_button', 36)
 add_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 6);
 add_action('woocommerce_single_product_summary', 'stylish_add_wa_ask_button', 7);
 add_action('woocommerce_single_product_summary', 'stylish_get_product_sku', 8);
+add_action('woocommerce_before_checkout_form', 'stylish_checkout_notice', 10);
 
 
 // Filter Hooks
