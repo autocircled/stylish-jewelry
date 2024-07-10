@@ -261,6 +261,19 @@ p.stars a:after,
     width: 10%;
 }
 
+.storefront-full-width-content.single-product div.product .woocommerce-product-gallery {
+    width: 100%;
+    margin-right: 0;
+}
+
+.storefront-full-width-content.single-product div.product .summary {
+    width: 100%;
+}
+
+.woocommerce-product-gallery__image.flex-active-slide>a>img {
+    width: 100%;
+}
+
 @media (min-width: 768px) {
     .wp-social-link svg {
         fill: #999;

@@ -371,7 +371,7 @@ if (!function_exists('storefront_before_content')) {
                         <path data-v-55282aa0="" fill="#fff" fill-rule="evenodd" d="M19.3,16c-0.4-0.8-0.7-0.8-1.1-0.8c-0.3,0-0.6,0-0.9,0	s-0.8,0.1-1.3,0.6c-0.4,0.5-1.7,1.6-1.7,4s1.7,4.6,1.9,4.9s3.3,5.3,8.1,7.2c4,1.6,4.8,1.3,5.7,1.2c0.9-0.1,2.8-1.1,3.2-2.3	c0.4-1.1,0.4-2.1,0.3-2.3c-0.1-0.2-0.4-0.3-0.9-0.6s-2.8-1.4-3.2-1.5c-0.4-0.2-0.8-0.2-1.1,0.2c-0.3,0.5-1.2,1.5-1.5,1.9	c-0.3,0.3-0.6,0.4-1,0.1c-0.5-0.2-2-0.7-3.8-2.4c-1.4-1.3-2.4-2.8-2.6-3.3c-0.3-0.5,0-0.7,0.2-1c0.2-0.2,0.5-0.6,0.7-0.8	c0.2-0.3,0.3-0.5,0.5-0.8c0.2-0.3,0.1-0.6,0-0.8C20.6,19.3,19.7,17,19.3,16z" clip-rule="evenodd"></path>
                     </svg>
                     Ask for details</a>
-        <?php
+            <?php
         }
     }
 
@@ -475,5 +475,41 @@ if (!function_exists('storefront_before_content')) {
                 }
             }
             wc_print_notice('অর্ডার করতে আপনার সঠিক তথ্য দিয়ে নিচের ফর্মটি সম্পূর্ণ পূরণ করুন।', 'notice');
+        }
+    }
+
+
+    if (!function_exists('stylish_order_concerns_info')) {
+        function stylish_order_concerns_info()
+        {
+            $options = get_option('stylish_setting_info_fields');
+            // echo '<pre>';
+            // var_dump($options);
+            // echo '</pre>';
+
+            if (!empty($options)) {
+                echo '<ul class="list-group ms-0 ps-0">';
+                foreach ($options as $key => $option) {
+                    stylish_print_concern($option);
+                }
+                echo '</ul>';
+            }
+        }
+    }
+
+
+    if (!function_exists('stylish_print_concern')) {
+        function stylish_print_concern($option)
+        {
+            ?>
+                <li class="list-group-item list-group-item-light">
+                    <div class="d-flex w-100 gap-2 align-items-center">
+                        <div class="info-icon">
+                            <?php echo $option['icon']; ?>
+                        </div>
+                        <span><?php echo $option['text']; ?></span>
+                    </div>
+                </li>
+        <?php
         }
     }
