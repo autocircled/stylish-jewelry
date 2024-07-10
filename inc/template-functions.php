@@ -405,15 +405,15 @@ if (!function_exists('storefront_before_content')) {
                 'billing_address_1',
                 // 'billing_last_name',
                 // 'billing_email',
-                //         'billing_company',
+                // 'billing_company',
                 // 'billing_country',
-                //         'billing_address_2',
+                // 'billing_address_2',
                 // 'billing_postcode',
             ];
 
             foreach ($billing_order as $field) {
-                if ('billing_phone' == $fields['billing'][$field]) {
-                }
+                // if ('billing_phone' == $fields['billing'][$field]) {
+                // }
                 $ordered_fields[$field] = $fields['billing'][$field];
             }
             $ordered_fields['billing_first_name']['label'] = __('নাম', 'stylish-jewelry');
@@ -424,17 +424,19 @@ if (!function_exists('storefront_before_content')) {
             $ordered_fields['billing_phone']['label'] = __('মোবাইল নম্বর', 'stylish-jewelry');
             $ordered_fields['billing_phone']['placeholder'] = __('মোবাইল নম্বর', 'stylish-jewelry');
 
-            $ordered_fields['billing_state']['priority'] = 20;
+            $ordered_fields['billing_state']['priority'] = 40;
             $ordered_fields['billing_state']['label'] = __('জেলা', 'stylish-jewelry');
 
-            $ordered_fields['billing_city']['priority'] = 25;
+            $ordered_fields['billing_city']['priority'] = 50;
             $ordered_fields['billing_city']['label'] = __('থানা', 'stylish-jewelry');
             $ordered_fields['billing_city']['placeholder'] = __('আপনার এলাকার নাম লিখুন', 'stylish-jewelry');
 
-            $ordered_fields['billing_address_1']['priority'] = 30;
+            $ordered_fields['billing_address_1']['priority'] = 60;
             $ordered_fields['billing_address_1']['label'] = __('সম্পূর্ণ ঠিকানা', 'stylish-jewelry');
             $ordered_fields['billing_address_1']['placeholder'] = __('আপনার সম্পূর্ণ ঠিকানা লিখুন', 'stylish-jewelry');
 
+            $ordered_fields['billing_country']['priority'] = 70;
+            $ordered_fields['billing_country']['required'] = false;
 
             $fields['billing'] = $ordered_fields;
 
@@ -474,7 +476,10 @@ if (!function_exists('storefront_before_content')) {
                         echo $page_content;
                     }
                 }
-                wc_print_notice('অর্ডার করতে আপনার সঠিক তথ্য দিয়ে নিচের ফর্মটি সম্পূর্ণ পূরণ করুন।', 'notice');
+                wc_print_notice('Stylish Jewelry Shop কোন অগ্রীম পেমেন্ট নেয় না। তাই নিচের শর্তে সম্মত হয়ে অর্ডার প্লেস করার অনুরোধ রইলো।', 'notice');
+                wc_print_notice('সঠিক প্রোডাক্ট পাঠানোর পরেও যদি রিটার্ন করতে চান সেক্ষেত্রে ডেলিভারি চার্জ (ঢাকা সিটি - ৫০ টাকা, ঢাকার বাহিরে ১০০ টাকা) ডেলিভারি ম্যানকে প্রদান করে রিটার্ন করতে হবে।', 'notice');
+                wc_print_notice('উপরের শর্ত ভঙ্গ হলে ‘বাংলাদেশ চুক্তি আইন ১৮৭২’ পরিপন্থী হিসেবে বিবেচিত হবে এবং আমরা এ বিষয়ে যেকোন পদক্ষেপ নেয়ার অধিকার পাবো।', 'notice');
+                wc_print_notice('আমি সম্মতি দিয়ে অর্ডার প্লেস করছি।', 'notice');
             }
         }
 
@@ -553,4 +558,22 @@ if (!function_exists('storefront_before_content')) {
         <?php
                 }
             }
+        }
+
+        function stylish_woocommerce_get_terms_and_conditions_checkbox_text()
+        {
+            return sprintf(__('আমি সকল শর্ত সম্পর্কে অবগত হয়ে অর্ডার করছি %s', 'woocommerce'), '[terms]');
+        }
+
+        function stylish_custom_order_button_text()
+        {
+            return __('অর্ডার করুন', 'woocommerce');
+        }
+
+        add_filter('woocommerce_cart_shipping_method_full_label', 'stylish_cart_shipping_method_full_label', 10);
+        function stylish_cart_shipping_method_full_label($label)
+        {
+            // need to split the label "Flat rate: ৳ 120.00" using :
+            $cost = explode(': ', $label);
+            return $cost[1];
         }

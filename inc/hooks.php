@@ -25,6 +25,7 @@ function stylish_remove_parent_actions()
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10);
     remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
     remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_sale_flash', 10);
+    remove_action('woocommerce_checkout_terms_and_conditions', 'wc_checkout_privacy_policy_text', 20);
 
     // remove block styles
     remove_action('wp_enqueue_scripts', 'wp_common_block_scripts_and_styles');
@@ -49,6 +50,8 @@ add_action('woocommerce_before_checkout_form', 'stylish_checkout_notice', 10);
 
 add_action('woocommerce_side_information_bar', 'stylish_order_concerns_info', 10);
 add_action('woocommerce_side_information_bar', 'stylish_contact_numbers', 20);
+add_filter('woocommerce_order_button_text', 'stylish_custom_order_button_text');
+
 
 
 // Filter Hooks
@@ -56,6 +59,7 @@ add_action('woocommerce_side_information_bar', 'stylish_contact_numbers', 20);
 add_filter('woocommerce_breadcrumb_defaults', 'stylish_change_breadcrumb_delimiter', 20);
 add_filter('woocommerce_output_related_products_args', 'stylish_woocommerce_output_related_products_args', 20);
 add_filter('woocommerce_get_price_html', 'stylish_woocommerce_product_price_html', 20, 2);
+add_filter('woocommerce_get_terms_and_conditions_checkbox_text', 'stylish_woocommerce_get_terms_and_conditions_checkbox_text', 10, 2);
 
 add_action('storefront_footer', 'stylish_footer_before_copyright_widgets', 15);
 add_action('storefront_after_footer', 'storefront_credit', 10);

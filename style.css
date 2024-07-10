@@ -274,6 +274,24 @@ p.stars a:after,
     width: 100%;
 }
 
+p#billing_country_field {
+    display: none;
+}
+
+form.checkout.woocommerce-checkout table thead th,
+form.checkout.woocommerce-checkout table th,
+form.checkout.woocommerce-checkout table td,
+#payment .payment_methods>.woocommerce-PaymentMethod>label,
+#payment .payment_methods>.wc_payment_method>label,
+#payment .payment_methods li .payment_box {
+    padding: 0.2em 1.5em;
+}
+
+#payment .place-order .button {
+    background: #db6414;
+    padding: 0.4em 1.5em;
+}
+
 @media (min-width: 768px) {
     .wp-social-link svg {
         fill: #999;
