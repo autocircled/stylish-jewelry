@@ -47,19 +47,14 @@ function stylish_settings_init()
     register_setting('stylish_setting_fields', 'stylish_setting_info_fields');
     register_setting('stylish_setting_fields', 'stylish_setting_contact_fields_heading');
     register_setting('stylish_setting_fields', 'stylish_setting_contact_fields');
+    register_setting('stylish_setting_fields', 'stylish_setting_how_to_buy');
+    register_setting('stylish_setting_fields', 'stylish_setting_return_policy');
 
     // Add a settings section.
     add_settings_section(
         'stylish_theme_settings_information',
-        'Shopping Information',
-        'stylish_theme_settings_information_callback',
-        'stylish-theme-settings'
-    );
-
-    add_settings_section(
-        'stylish_theme_settings_contacts',
-        'Contact Information',
-        'stylish_theme_settings_contacts_callback',
+        '',
+        '',
         'stylish-theme-settings'
     );
 
@@ -76,36 +71,29 @@ function stylish_settings_init()
         'Heading',
         'stylish_setting_contact_fields_heading_callback',
         'stylish-theme-settings',
-        'stylish_theme_settings_contacts'
+        'stylish_theme_settings_information'
     );
     add_settings_field(
         'stylish_setting_contact_fields',
         'Contact Numbers',
         'stylish_setting_contact_fields_callback',
         'stylish-theme-settings',
-        'stylish_theme_settings_contacts'
+        'stylish_theme_settings_information'
     );
-
-    // for ($i = 1; $i <= 5; $i++) {
-    //     add_settings_field(
-    //         'stylish_setting_contact_field_' . $i,
-    //         'Contact ' . $i,
-    //         'stylish_setting_contact_field_' . $i . '_callback',
-    //         'stylish-theme-settings',
-    //         'stylish_theme_settings_contacts'
-    //     );
-    // }
-}
-
-
-function stylish_theme_settings_information_callback()
-{
-    echo '<p>Enter your settings below:</p>';
-}
-
-function stylish_theme_settings_contacts_callback()
-{
-    echo '<p>Enter your contact information below:</p>';
+    add_settings_field(
+        'stylish_setting_how_to_buy',
+        'How To Buy',
+        'stylish_setting_how_to_buy_callback',
+        'stylish-theme-settings',
+        'stylish_theme_settings_information'
+    );
+    add_settings_field(
+        'stylish_setting_return_policy',
+        'Return Policy',
+        'stylish_setting_return_policy_callback',
+        'stylish-theme-settings',
+        'stylish_theme_settings_information'
+    );
 }
 
 function stylish_setting_info_fields_callback()
@@ -222,6 +210,52 @@ function stylish_setting_contact_fields_callback()
             </div>
             <div class="col-md-6">
                 <input type="text" name="stylish_setting_contact_fields[4][label]" class="form-control" value="<?php echo isset($option[4]) && isset($option[4]['label']) ? esc_attr($option[4]['label']) : ''; ?>" placeholder="Enter label" />
+            </div>
+        </div>
+    </div>
+<?php
+}
+
+function stylish_setting_how_to_buy_callback()
+{
+    $option = get_option('stylish_setting_how_to_buy');
+
+?>
+    <div class="container">
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-12">
+                <?php
+                $content = isset($option) ? $option : '';
+                wp_editor($content, 'stylish_setting_how_to_buy', array(
+                    'textarea_name' => 'stylish_setting_how_to_buy',
+                    'media_buttons' => false,
+                    'textarea_rows' => 10,
+                    'teeny' => true,
+                ));
+                ?>
+            </div>
+        </div>
+    </div>
+<?php
+}
+
+function stylish_setting_return_policy_callback()
+{
+    $option = get_option('stylish_setting_return_policy');
+
+?>
+    <div class="container">
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-12">
+                <?php
+                $content = isset($option) ? $option : '';
+                wp_editor($content, 'stylish_setting_return_policy', array(
+                    'textarea_name' => 'stylish_setting_return_policy',
+                    'media_buttons' => false,
+                    'textarea_rows' => 10,
+                    'teeny' => true,
+                ));
+                ?>
             </div>
         </div>
     </div>

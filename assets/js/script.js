@@ -37,7 +37,13 @@ QTYPM.tabInt = function () {
     this.tabsBox = document.querySelectorAll(".woocommerce-tabs .woocommerce-Tabs-panel");
     // now set class active on first tab
     this.tabs[0].querySelector(".nav-link").classList.add("active");
-    this.tabsBox[0].style.display = "block";
+    this.tabsBox.forEach(function (tabBox, index) {
+        if (index === 0) {
+            tabBox.style.display = "block";
+        } else {
+            tabBox.style.display = "none";
+        }
+    })
 
     this.tabs.forEach(function (tab) {
         tab.addEventListener("click", function (e) {

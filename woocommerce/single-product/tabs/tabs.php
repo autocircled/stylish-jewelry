@@ -29,6 +29,8 @@ if (!defined('ABSPATH')) {
  */
 $product_tabs = apply_filters('woocommerce_product_tabs', array());
 
+// prettify($product_tabs);
+
 if (!empty($product_tabs)) : ?>
 
     <div class="woocommerce-tabs wc-tabs-wrapper">

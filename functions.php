@@ -45,7 +45,12 @@ function stylish_theme_admin_scripts($hook)
 }
 add_action('admin_enqueue_scripts', 'stylish_theme_admin_scripts');
 
-
+function prettify($code)
+{
+    echo '<pre>';
+    var_dump($code);
+    echo '</pre>';
+}
 require 'inc/template-functions.php';
 require 'inc/hooks.php';
 require 'inc/helper.php';

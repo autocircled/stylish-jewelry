@@ -555,7 +555,7 @@ if (!function_exists('storefront_before_content')) {
                             <?php echo !empty($option['label']) ? '<span>' . esc_html($option['label']) . '</span>' : ''; ?>
                         </a>
                     </li>
-        <?php
+                <?php
                 }
             }
         }
@@ -591,4 +591,48 @@ if (!function_exists('storefront_before_content')) {
             $total_rows['shipping']['label'] = __('ডেলিভারি চার্জ', 'woocommerce');
             $total_rows['order_total']['label'] = __('সর্বমোট মূল্য', 'woocommerce');
             return $total_rows;
+        }
+        if (!function_exists('stylish_woocommerce_product_tabs')) {
+
+            function stylish_woocommerce_product_tabs($tabs)
+            {
+                // unset($tabs['reviews']); // Remove the reviews tab
+                $tabs = array_merge($tabs, array(
+                    'how_to_buy' => array(
+                        'title'    => __('How To Buy', 'storefront'),
+                        'priority' => 20,
+                        'callback' => 'stylish_woocommerce_product_how_to_buy_tab',
+                    ),
+                    'return_policy' => array(
+                        'title'    => __('Return Policy', 'storefront'),
+                        'priority' => 25,
+                        'callback' => 'stylish_woocommerce_product_return_policy_tab',
+                    )
+                ));
+                return $tabs;
+            }
+        }
+        if (!function_exists('stylish_woocommerce_product_how_to_buy_tab')) {
+            function stylish_woocommerce_product_how_to_buy_tab()
+            {
+                ?>
+                <div class="how-to-buy">
+                    <?php
+                    echo get_option('stylish_setting_how_to_buy');
+                    ?>
+                </div>
+            <?php
+            }
+        }
+        if (!function_exists('stylish_woocommerce_product_return_policy_tab')) {
+            function stylish_woocommerce_product_return_policy_tab()
+            {
+            ?>
+                <div class="return-policy">
+                    <?php
+                    echo get_option('stylish_setting_return_policy');
+                    ?>
+                </div>
+        <?php
+            }
         }
