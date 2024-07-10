@@ -48,6 +48,7 @@ add_action('woocommerce_single_product_summary', 'stylish_get_product_sku', 8);
 add_action('woocommerce_before_checkout_form', 'stylish_checkout_notice', 10);
 
 add_action('woocommerce_side_information_bar', 'stylish_order_concerns_info', 10);
+add_action('woocommerce_side_information_bar', 'stylish_contact_numbers', 20);
 
 
 // Filter Hooks

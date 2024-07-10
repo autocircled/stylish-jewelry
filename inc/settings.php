@@ -45,9 +45,8 @@ function stylish_settings_init()
     // Register a setting for this page.
     // create a for loop from an array of size 5
     register_setting('stylish_setting_fields', 'stylish_setting_info_fields');
-    for ($i = 1; $i <= 5; $i++) {
-        register_setting('stylish_setting_fields', 'stylish_setting_contact_field_' . $i);
-    }
+    register_setting('stylish_setting_fields', 'stylish_setting_contact_fields_heading');
+    register_setting('stylish_setting_fields', 'stylish_setting_contact_fields');
 
     // Add a settings section.
     add_settings_section(
@@ -72,16 +71,30 @@ function stylish_settings_init()
         'stylish-theme-settings',
         'stylish_theme_settings_information'
     );
+    add_settings_field(
+        'stylish_setting_contact_fields_heading',
+        'Heading',
+        'stylish_setting_contact_fields_heading_callback',
+        'stylish-theme-settings',
+        'stylish_theme_settings_contacts'
+    );
+    add_settings_field(
+        'stylish_setting_contact_fields',
+        'Contact Numbers',
+        'stylish_setting_contact_fields_callback',
+        'stylish-theme-settings',
+        'stylish_theme_settings_contacts'
+    );
 
-    for ($i = 1; $i <= 5; $i++) {
-        add_settings_field(
-            'stylish_setting_contact_field_' . $i,
-            'Contact ' . $i,
-            'stylish_setting_contact_field_' . $i . '_callback',
-            'stylish-theme-settings',
-            'stylish_theme_settings_contacts'
-        );
-    }
+    // for ($i = 1; $i <= 5; $i++) {
+    //     add_settings_field(
+    //         'stylish_setting_contact_field_' . $i,
+    //         'Contact ' . $i,
+    //         'stylish_setting_contact_field_' . $i . '_callback',
+    //         'stylish-theme-settings',
+    //         'stylish_theme_settings_contacts'
+    //     );
+    // }
 }
 
 
@@ -150,48 +163,67 @@ function stylish_setting_info_fields_callback()
 }
 
 
-function stylish_setting_contact_field_1_callback()
+function stylish_setting_contact_fields_heading_callback()
 {
-    $option = get_option('stylish_setting_contact_field_1');
+    $option = get_option('stylish_setting_contact_fields_heading');
 
 ?>
-    <input type="text" name="stylish_setting_contact_field_1[number]" value="<?php echo isset($option['number']) ? esc_attr($option['number']) : ''; ?>" placeholder="Enter number" />
-    <input type="text" name="stylish_setting_contact_field_1[label]" value="<?php echo isset($option['label']) ? esc_attr($option['label']) : ''; ?>" placeholder="Enter label" />
+    <div class="container">
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-12">
+                <input type="text" name="stylish_setting_contact_fields_heading" class="form-control" value="<?php echo isset($option) ? esc_attr($option) : ''; ?>" placeholder="Enter details" />
+            </div>
+        </div>
+    </div>
 <?php
 }
-function stylish_setting_contact_field_2_callback()
+
+function stylish_setting_contact_fields_callback()
 {
-    $option = get_option('stylish_setting_contact_field_2');
+    $option = get_option('stylish_setting_contact_fields');
 
 ?>
-    <input type="text" name="stylish_setting_contact_field_2[number]" value="<?php echo isset($option['number']) ? esc_attr($option['number']) : ''; ?>" placeholder="Enter number" />
-    <input type="text" name="stylish_setting_contact_field_2[label]" value="<?php echo isset($option['label']) ? esc_attr($option['label']) : ''; ?>" placeholder="Enter label" />
-<?php
-}
-function stylish_setting_contact_field_3_callback()
-{
-    $option = get_option('stylish_setting_contact_field_3');
-
-?>
-    <input type="text" name="stylish_setting_contact_field_3[number]" value="<?php echo isset($option['number']) ? esc_attr($option['number']) : ''; ?>" placeholder="Enter number" />
-    <input type="text" name="stylish_setting_contact_field_3[label]" value="<?php echo isset($option['label']) ? esc_attr($option['label']) : ''; ?>" placeholder="Enter label" />
-<?php
-}
-function stylish_setting_contact_field_4_callback()
-{
-    $option = get_option('stylish_setting_contact_field_4');
-
-?>
-    <input type="text" name="stylish_setting_contact_field_4[number]" value="<?php echo isset($option['number']) ? esc_attr($option['number']) : ''; ?>" placeholder="Enter number" />
-    <input type="text" name="stylish_setting_contact_field_4[label]" value="<?php echo isset($option['label']) ? esc_attr($option['label']) : ''; ?>" placeholder="Enter label" />
-<?php
-}
-function stylish_setting_contact_field_5_callback()
-{
-    $option = get_option('stylish_setting_contact_field_5');
-
-?>
-    <input type="text" name="stylish_setting_contact_field_5[number]" value="<?php echo isset($option['number']) ? esc_attr($option['number']) : ''; ?>" placeholder="Enter number" />
-    <input type="text" name="stylish_setting_contact_field_5[label]" value="<?php echo isset($option['label']) ? esc_attr($option['label']) : ''; ?>" placeholder="Enter label" />
+    <div class="container">
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-6">
+                <input type="text" name="stylish_setting_contact_fields[0][number]" class="form-control" value="<?php echo isset($option[0]) && isset($option[0]['number']) ? esc_attr($option[0]['number']) : ''; ?>" placeholder="Enter number" />
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="stylish_setting_contact_fields[0][label]" class="form-control" value="<?php echo isset($option[0]) && isset($option[0]['label']) ? esc_attr($option[0]['label']) : ''; ?>" placeholder="Enter label" />
+            </div>
+        </div>
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-6">
+                <input type="text" name="stylish_setting_contact_fields[1][number]" class="form-control" value="<?php echo isset($option[1]) && isset($option[1]['number']) ? esc_attr($option[1]['number']) : ''; ?>" placeholder="Enter number" />
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="stylish_setting_contact_fields[1][label]" class="form-control" value="<?php echo isset($option[1]) && isset($option[1]['label']) ? esc_attr($option[1]['label']) : ''; ?>" placeholder="Enter label" />
+            </div>
+        </div>
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-6">
+                <input type="text" name="stylish_setting_contact_fields[2][number]" class="form-control" value="<?php echo isset($option[2]) && isset($option[2]['number']) ? esc_attr($option[2]['number']) : ''; ?>" placeholder="Enter number" />
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="stylish_setting_contact_fields[2][label]" class="form-control" value="<?php echo isset($option[2]) && isset($option[2]['label']) ? esc_attr($option[2]['label']) : ''; ?>" placeholder="Enter label" />
+            </div>
+        </div>
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-6">
+                <input type="text" name="stylish_setting_contact_fields[3][number]" class="form-control" value="<?php echo isset($option[3]) && isset($option[3]['number']) ? esc_attr($option[3]['number']) : ''; ?>" placeholder="Enter number" />
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="stylish_setting_contact_fields[3][label]" class="form-control" value="<?php echo isset($option[3]) && isset($option[3]['label']) ? esc_attr($option[3]['label']) : ''; ?>" placeholder="Enter label" />
+            </div>
+        </div>
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-6">
+                <input type="text" name="stylish_setting_contact_fields[4][number]" class="form-control" value="<?php echo isset($option[4]) && isset($option[4]['number']) ? esc_attr($option[4]['number']) : ''; ?>" placeholder="Enter number" />
+            </div>
+            <div class="col-md-6">
+                <input type="text" name="stylish_setting_contact_fields[4][label]" class="form-control" value="<?php echo isset($option[4]) && isset($option[4]['label']) ? esc_attr($option[4]['label']) : ''; ?>" placeholder="Enter label" />
+            </div>
+        </div>
+    </div>
 <?php
 }

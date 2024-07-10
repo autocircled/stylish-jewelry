@@ -371,145 +371,186 @@ if (!function_exists('storefront_before_content')) {
                         <path data-v-55282aa0="" fill="#fff" fill-rule="evenodd" d="M19.3,16c-0.4-0.8-0.7-0.8-1.1-0.8c-0.3,0-0.6,0-0.9,0	s-0.8,0.1-1.3,0.6c-0.4,0.5-1.7,1.6-1.7,4s1.7,4.6,1.9,4.9s3.3,5.3,8.1,7.2c4,1.6,4.8,1.3,5.7,1.2c0.9-0.1,2.8-1.1,3.2-2.3	c0.4-1.1,0.4-2.1,0.3-2.3c-0.1-0.2-0.4-0.3-0.9-0.6s-2.8-1.4-3.2-1.5c-0.4-0.2-0.8-0.2-1.1,0.2c-0.3,0.5-1.2,1.5-1.5,1.9	c-0.3,0.3-0.6,0.4-1,0.1c-0.5-0.2-2-0.7-3.8-2.4c-1.4-1.3-2.4-2.8-2.6-3.3c-0.3-0.5,0-0.7,0.2-1c0.2-0.2,0.5-0.6,0.7-0.8	c0.2-0.3,0.3-0.5,0.5-0.8c0.2-0.3,0.1-0.6,0-0.8C20.6,19.3,19.7,17,19.3,16z" clip-rule="evenodd"></path>
                     </svg>
                     Ask for details</a>
-            <?php
-        }
-    }
-
-
-    if (!function_exists('stylish_woocommerce_product_price_html')) {
-        function stylish_woocommerce_product_price_html($price, $product)
-        {
-            if (is_singular('product')) {
-                $price = 'Price: ' . $price;
+                <?php
             }
-            return $price;
         }
-    }
 
-    // Make postal code optional
-    add_filter('woocommerce_default_address_fields', 'customize_extra_fields', 1000, 1);
-    function customize_extra_fields($address_fields)
-    {
-        $address_fields['postcode']['required'] = false; //Postcode
-        return $address_fields;
-    }
 
-    // Hide checkout fields
-    function reorder_billing_fields($fields)
-    {
-        $billing_order = [
-            'billing_first_name',
-            'billing_phone',
-            'billing_state',
-            'billing_city',
-            'billing_address_1',
-            // 'billing_last_name',
-            // 'billing_email',
-            //         'billing_company',
-            // 'billing_country',
-            //         'billing_address_2',
-            // 'billing_postcode',
-        ];
-
-        foreach ($billing_order as $field) {
-            if ('billing_phone' == $fields['billing'][$field]) {
+        if (!function_exists('stylish_woocommerce_product_price_html')) {
+            function stylish_woocommerce_product_price_html($price, $product)
+            {
+                if (is_singular('product')) {
+                    $price = 'Price: ' . $price;
+                }
+                return $price;
             }
-            $ordered_fields[$field] = $fields['billing'][$field];
         }
-        $ordered_fields['billing_first_name']['label'] = __('নাম', 'stylish-jewelry');
-        $ordered_fields['billing_first_name']['placeholder'] = __('আপনার নাম লিখুন', 'stylish-jewelry');
-        $ordered_fields['billing_first_name']['class'] = ['form-row-wide'];
 
-        $ordered_fields['billing_phone']['priority'] = 15;
-        $ordered_fields['billing_phone']['label'] = __('মোবাইল নম্বর', 'stylish-jewelry');
-        $ordered_fields['billing_phone']['placeholder'] = __('মোবাইল নম্বর', 'stylish-jewelry');
-
-        $ordered_fields['billing_state']['priority'] = 20;
-        $ordered_fields['billing_state']['label'] = __('জেলা', 'stylish-jewelry');
-
-        $ordered_fields['billing_city']['priority'] = 25;
-        $ordered_fields['billing_city']['label'] = __('থানা', 'stylish-jewelry');
-        $ordered_fields['billing_city']['placeholder'] = __('আপনার এলাকার নাম লিখুন', 'stylish-jewelry');
-
-        $ordered_fields['billing_address_1']['priority'] = 30;
-        $ordered_fields['billing_address_1']['label'] = __('সম্পূর্ণ ঠিকানা', 'stylish-jewelry');
-        $ordered_fields['billing_address_1']['placeholder'] = __('আপনার সম্পূর্ণ ঠিকানা লিখুন', 'stylish-jewelry');
-
-
-        $fields['billing'] = $ordered_fields;
-
-        return $fields;
-    }
-
-    add_filter('woocommerce_checkout_fields', 'reorder_billing_fields');
-
-    // add_filter('wc_add_to_cart_message', 'remove_add_to_cart_message');
-
-    function remove_add_to_cart_message()
-    {
-        return;
-    }
-    // wc_print_notice(esc_html__('No saved methods found.', 'woocommerce'), 'notice');
-    // wc_add_to_cart_message()
-
-    if (!function_exists('stylish_checkout_notice')) {
-        function stylish_checkout_notice()
+        // Make postal code optional
+        add_filter('woocommerce_default_address_fields', 'customize_extra_fields', 1000, 1);
+        function customize_extra_fields($address_fields)
         {
-            wc_add_notice('অর্ডার করতে আপনার সঠিক তথ্য দিয়ে নিচের ফর্মটি সম্পূর্ণ পূরণ করুন। (আমাদের একজন প্রতিনিধি দ্রুত সময়ের মধ্যে আপনার সাথে যোগাযোগ করবে)', 'success');
+            $address_fields['postcode']['required'] = false; //Postcode
+            return $address_fields;
         }
-    }
 
-
-    add_action('woocommerce_review_order_before_submit', 'stylish_checkout_terms');
-    if (!function_exists('stylish_checkout_terms')) {
-        function stylish_checkout_terms()
+        // Hide checkout fields
+        function reorder_billing_fields($fields)
         {
-            global $wp;
-            $page_id = get_option('wc_terms_page_id');
-            if ($page_id) {
-                $page = get_post($page_id);
-                if ($page && $page->post_content) {
-                    $page_content = $page->post_content;
-                    $page_content = apply_filters('the_content', $page_content);
-                    echo $page_content;
+            $billing_order = [
+                'billing_first_name',
+                'billing_phone',
+                'billing_state',
+                'billing_city',
+                'billing_address_1',
+                // 'billing_last_name',
+                // 'billing_email',
+                //         'billing_company',
+                // 'billing_country',
+                //         'billing_address_2',
+                // 'billing_postcode',
+            ];
+
+            foreach ($billing_order as $field) {
+                if ('billing_phone' == $fields['billing'][$field]) {
+                }
+                $ordered_fields[$field] = $fields['billing'][$field];
+            }
+            $ordered_fields['billing_first_name']['label'] = __('নাম', 'stylish-jewelry');
+            $ordered_fields['billing_first_name']['placeholder'] = __('আপনার নাম লিখুন', 'stylish-jewelry');
+            $ordered_fields['billing_first_name']['class'] = ['form-row-wide'];
+
+            $ordered_fields['billing_phone']['priority'] = 15;
+            $ordered_fields['billing_phone']['label'] = __('মোবাইল নম্বর', 'stylish-jewelry');
+            $ordered_fields['billing_phone']['placeholder'] = __('মোবাইল নম্বর', 'stylish-jewelry');
+
+            $ordered_fields['billing_state']['priority'] = 20;
+            $ordered_fields['billing_state']['label'] = __('জেলা', 'stylish-jewelry');
+
+            $ordered_fields['billing_city']['priority'] = 25;
+            $ordered_fields['billing_city']['label'] = __('থানা', 'stylish-jewelry');
+            $ordered_fields['billing_city']['placeholder'] = __('আপনার এলাকার নাম লিখুন', 'stylish-jewelry');
+
+            $ordered_fields['billing_address_1']['priority'] = 30;
+            $ordered_fields['billing_address_1']['label'] = __('সম্পূর্ণ ঠিকানা', 'stylish-jewelry');
+            $ordered_fields['billing_address_1']['placeholder'] = __('আপনার সম্পূর্ণ ঠিকানা লিখুন', 'stylish-jewelry');
+
+
+            $fields['billing'] = $ordered_fields;
+
+            return $fields;
+        }
+
+        add_filter('woocommerce_checkout_fields', 'reorder_billing_fields');
+
+        // add_filter('wc_add_to_cart_message', 'remove_add_to_cart_message');
+
+        function remove_add_to_cart_message()
+        {
+            return;
+        }
+        // wc_print_notice(esc_html__('No saved methods found.', 'woocommerce'), 'notice');
+        // wc_add_to_cart_message()
+
+        if (!function_exists('stylish_checkout_notice')) {
+            function stylish_checkout_notice()
+            {
+                wc_add_notice('অর্ডার করতে আপনার সঠিক তথ্য দিয়ে নিচের ফর্মটি সম্পূর্ণ পূরণ করুন। (আমাদের একজন প্রতিনিধি দ্রুত সময়ের মধ্যে আপনার সাথে যোগাযোগ করবে)', 'success');
+            }
+        }
+
+
+        add_action('woocommerce_review_order_before_submit', 'stylish_checkout_terms');
+        if (!function_exists('stylish_checkout_terms')) {
+            function stylish_checkout_terms()
+            {
+                global $wp;
+                $page_id = get_option('wc_terms_page_id');
+                if ($page_id) {
+                    $page = get_post($page_id);
+                    if ($page && $page->post_content) {
+                        $page_content = $page->post_content;
+                        $page_content = apply_filters('the_content', $page_content);
+                        echo $page_content;
+                    }
+                }
+                wc_print_notice('অর্ডার করতে আপনার সঠিক তথ্য দিয়ে নিচের ফর্মটি সম্পূর্ণ পূরণ করুন।', 'notice');
+            }
+        }
+
+
+        if (!function_exists('stylish_order_concerns_info')) {
+            function stylish_order_concerns_info()
+            {
+                $options = get_option('stylish_setting_info_fields');
+
+                if (!empty($options)) {
+                    echo '<ul class="list-group ms-0 mb-3 ps-0">';
+                    foreach ($options as $key => $option) {
+                        stylish_print_concern($option);
+                    }
+                    echo '</ul>';
                 }
             }
-            wc_print_notice('অর্ডার করতে আপনার সঠিক তথ্য দিয়ে নিচের ফর্মটি সম্পূর্ণ পূরণ করুন।', 'notice');
         }
-    }
 
 
-    if (!function_exists('stylish_order_concerns_info')) {
-        function stylish_order_concerns_info()
-        {
-            $options = get_option('stylish_setting_info_fields');
-            // echo '<pre>';
-            // var_dump($options);
-            // echo '</pre>';
-
-            if (!empty($options)) {
-                echo '<ul class="list-group ms-0 ps-0">';
-                foreach ($options as $key => $option) {
-                    stylish_print_concern($option);
-                }
-                echo '</ul>';
-            }
-        }
-    }
-
-
-    if (!function_exists('stylish_print_concern')) {
-        function stylish_print_concern($option)
-        {
-            ?>
-                <li class="list-group-item list-group-item-light">
-                    <div class="d-flex w-100 gap-2 align-items-center">
-                        <div class="info-icon">
-                            <?php echo $option['icon']; ?>
+        if (!function_exists('stylish_print_concern')) {
+            function stylish_print_concern($option)
+            {
+                if (!empty($option['text'])) {
+                ?>
+                    <li class="list-group-item list-group-item-light">
+                        <div class="d-flex w-100 gap-2 align-items-center">
+                            <div class="info-icon">
+                                <?php echo $option['icon']; ?>
+                            </div>
+                            <span><?php echo $option['text']; ?></span>
                         </div>
-                        <span><?php echo $option['text']; ?></span>
-                    </div>
-                </li>
-        <?php
+                    </li>
+                <?php
+                }
+            }
         }
-    }
+        if (!function_exists('stylish_contact_numbers')) {
+            function stylish_contact_numbers()
+            {
+                $heading = get_option('stylish_setting_contact_fields_heading');
+                $options = get_option('stylish_setting_contact_fields');
+                // echo '<pre>';
+                // var_dump($options);
+                // echo '</pre>';
+                if (!empty($options)) {
+                    echo '<ul class="list-group ms-0 mb-3 ps-0">';
+                    echo !empty($heading) ? '<li class="list-group-item list-group-item-light"><strong>' . esc_html($heading) . '</strong></li>' : '';
+                    foreach ($options as $key => $option) {
+                        stylish_print_contacts($option);
+                    }
+                    echo '</ul>';
+                }
+            }
+        }
+
+
+        if (!function_exists('stylish_print_contacts')) {
+            function stylish_print_contacts($option)
+            {
+                // echo '<pre>';
+                // var_dump($option);
+                // echo '</pre>';
+                if (!empty($option['number'])) {
+                ?>
+                    <li class="list-group-item list-group-item-light">
+                        <a href="tel:<?php echo $option['number']; ?>" class="d-flex w-100 gap-2 align-items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z" />
+                            </svg>
+                            <?php echo esc_html($option['number']); ?>
+
+                            <?php echo !empty($option['label']) ? '<span>' . esc_html($option['label']) . '</span>' : ''; ?>
+                        </a>
+                    </li>
+        <?php
+                }
+            }
+        }
