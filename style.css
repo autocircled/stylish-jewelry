@@ -292,6 +292,11 @@ form.checkout.woocommerce-checkout table td,
     padding: 0.4em 1.5em;
 }
 
+.woocommerce-notice--success.woocommerce-thankyou-order-received {
+    color: #10a335;
+    font-weight: 600;
+}
+
 @media (min-width: 768px) {
     .wp-social-link svg {
         fill: #999;

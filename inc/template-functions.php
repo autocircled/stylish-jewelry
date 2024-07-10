@@ -577,3 +577,18 @@ if (!function_exists('storefront_before_content')) {
             $cost = explode(': ', $label);
             return $cost[1];
         }
+        add_filter('woocommerce_get_order_item_totals', 'stylish_woocommerce_get_order_item_totals', 10, 3);
+        function stylish_woocommerce_get_order_item_totals($total_rows, $order, $tax_display)
+        {
+
+            foreach ($total_rows as $key => $value) {
+                if ($key == 'shipping') {
+                    $total_rows[$key]['value'] = '৳ ' . $order->get_shipping_total();
+                }
+            }
+            unset($total_rows['payment_method']);
+            $total_rows['cart_subtotal']['label'] = __('মোট মূল্য', 'woocommerce');
+            $total_rows['shipping']['label'] = __('ডেলিভারি চার্জ', 'woocommerce');
+            $total_rows['order_total']['label'] = __('সর্বমোট মূল্য', 'woocommerce');
+            return $total_rows;
+        }
