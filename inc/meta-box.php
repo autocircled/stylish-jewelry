@@ -1,19 +1,108 @@
 <?php
-// var_dump("hello");
-add_filter('woocommerce_product_data_tabs', 'myplugin_add_custom_product_data_tab');
-function myplugin_add_custom_product_data_tab($tabs)
+// Add product custom data tabs
+add_filter('woocommerce_product_data_tabs', 'stylish_add_custom_product_data_tab');
+
+// Add product custom data
+add_action('woocommerce_product_data_panels', 'stylish_how_to_buy_tab_fields');
+add_action('woocommerce_product_data_panels', 'stylish_return_policy_tab_fields');
+add_action('woocommerce_product_data_panels', 'stylish_info_custom_data_fields');
+
+// Save product custom data
+add_action('woocommerce_process_product_meta', 'stylish_save_infos_data');
+
+function stylish_save_infos_data($post_id)
 {
-    // var_dump($tabs);
-    $tabs['myplugin_custom_tab'] = array(
+
+    $_stylish_info_value = isset($_POST['_stylish_info']) ? $_POST['_stylish_info'] : '';
+    $_stylish_how_to_buy_value = isset($_POST['_stylish_how_to_buy']) ? $_POST['_stylish_how_to_buy'] : '';
+    $_stylish_return_policy_value = isset($_POST['_stylish_return_policy']) ? $_POST['_stylish_return_policy'] : '';
+
+    update_post_meta($post_id, '_stylish_info', $_stylish_info_value);
+    update_post_meta($post_id, '_stylish_how_to_buy', $_stylish_how_to_buy_value);
+    update_post_meta($post_id, '_stylish_return_policy', $_stylish_return_policy_value);
+}
+function stylish_add_custom_product_data_tab($tabs)
+{
+    $tabs['stylish_info_tab'] = array(
         'label'    => __('Stylish Info', 'stylish-jewelry'),
         'target'   => 'stylish_info_custom_product_data',
         'class'    => array('show_if_simple', 'show_if_variable'),
         'priority' => 21,
     );
+    $tabs['stylish_how_to_buy_tab'] = array(
+        'label'    => __('How To Buy', 'stylish-jewelry'),
+        'target'   => 'stylish_how_to_buy_custom_product_data',
+        'class'    => array('show_if_simple', 'show_if_variable'),
+        'priority' => 22,
+    );
+    $tabs['stylish_return_policy_tab'] = array(
+        'label'    => __('Return Policy', 'stylish-jewelry'),
+        'target'   => 'stylish_return_policy_custom_product_data',
+        'class'    => array('show_if_simple', 'show_if_variable'),
+        'priority' => 23,
+    );
     return $tabs;
 }
 
-add_action('woocommerce_product_data_panels', 'stylish_info_custom_data_fields');
+function stylish_how_to_buy_tab_fields()
+{
+    global $post;
+    $option = get_post_meta($post->ID, '_stylish_how_to_buy', true);
+?>
+    <div id="stylish_how_to_buy_custom_product_data" class="panel woocommerce_options_panel stylish_info_panel">
+
+        <div class="options_group">
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <h3>How To Buy</h3>
+                        <?php
+                        $content = isset($option) ? $option : '';
+                        wp_editor($content, '_stylish_how_to_buy', array(
+                            'textarea_name' => '_stylish_how_to_buy',
+                            'media_buttons' => false,
+                            'textarea_rows' => 10,
+                            'teeny' => true,
+                        ));
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<?php
+}
+function stylish_return_policy_tab_fields()
+{
+    global $post;
+    $option = get_post_meta($post->ID, '_stylish_return_policy', true);
+?>
+    <div id="stylish_return_policy_custom_product_data" class="panel woocommerce_options_panel stylish_info_panel">
+
+        <div class="options_group">
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <h3>Return Policy</h3>
+                        <?php
+                        $content = isset($option) ? $option : '';
+                        wp_editor($content, '_stylish_return_policy', array(
+                            'textarea_name' => '_stylish_return_policy',
+                            'media_buttons' => false,
+                            'textarea_rows' => 10,
+                            'teeny' => true,
+                        ));
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+<?php
+}
+
 function stylish_info_custom_data_fields()
 {
     global $post;
@@ -73,17 +162,4 @@ function stylish_info_custom_data_fields()
 
     </div>
 <?php
-}
-
-
-
-
-
-add_action('woocommerce_process_product_meta', 'stylish_save_infos_data');
-function stylish_save_infos_data($post_id)
-{
-    // prettify($_POST);
-    // die();
-    $custom_field_value = isset($_POST['_stylish_info']) ? $_POST['_stylish_info'] : '';
-    update_post_meta($post_id, '_stylish_info', $custom_field_value);
 }

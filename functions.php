@@ -43,6 +43,14 @@ function stylish_theme_admin_scripts($hook)
         ['woocommerce_admin_styles'],
         '1.0.0'
     );
+    // var_dump($hook);
+
+    // if ($hook == 'post-new.php' || $hook == 'post.php') {
+    //     wp_enqueue_media();
+    //     wp_enqueue_script('jquery');
+    //     wp_enqueue_script('editor');
+    //     wp_enqueue_style('editor-buttons');
+    // }
 
     // Enqueue the script.
     if ($hook == 'toplevel_page_stylish-settings') {
