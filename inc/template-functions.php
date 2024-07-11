@@ -487,7 +487,11 @@ if (!function_exists('storefront_before_content')) {
         if (!function_exists('stylish_order_concerns_info')) {
             function stylish_order_concerns_info()
             {
-                $options = get_option('stylish_setting_info_fields');
+                global $product;
+                $options = get_post_meta($product->get_id(), '_stylish_info', true);
+                if (empty($options)) {
+                    $options = get_option('stylish_setting_info_fields');
+                }
 
                 if (!empty($options)) {
                     echo '<ul class="list-group ms-0 mb-3 ps-0">';
@@ -615,10 +619,15 @@ if (!function_exists('storefront_before_content')) {
         if (!function_exists('stylish_woocommerce_product_how_to_buy_tab')) {
             function stylish_woocommerce_product_how_to_buy_tab()
             {
+                global $product;
                 ?>
                 <div class="how-to-buy">
                     <?php
-                    echo get_option('stylish_setting_how_to_buy');
+                    $option = get_post_meta($product->get_id(), '_stylish_how_to_buy', true);
+                    if (empty($option)) {
+                        $option = get_option('stylish_setting_how_to_buy');
+                    }
+                    echo $option;
                     ?>
                 </div>
             <?php
@@ -627,10 +636,15 @@ if (!function_exists('storefront_before_content')) {
         if (!function_exists('stylish_woocommerce_product_return_policy_tab')) {
             function stylish_woocommerce_product_return_policy_tab()
             {
+                global $product;
             ?>
                 <div class="return-policy">
                     <?php
-                    echo get_option('stylish_setting_return_policy');
+                    $option = get_post_meta($product->get_id(), '_stylish_return_policy', true);
+                    if (empty($option)) {
+                        $option = get_option('stylish_setting_return_policy');
+                    }
+                    echo $option;
                     ?>
                 </div>
         <?php
