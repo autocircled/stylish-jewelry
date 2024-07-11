@@ -28,9 +28,7 @@ function stylish_theme_admin_scripts($hook)
 {
     // var_dump($hook);
     // Check if we are on the custom theme settings page.
-    if ($hook !== 'toplevel_page_stylish-settings') {
-        return;
-    }
+
 
     // Register the script.
     wp_register_style(
@@ -39,9 +37,18 @@ function stylish_theme_admin_scripts($hook)
         [],
         '5.1.3'
     );
+    wp_register_style(
+        'stylish-admin',
+        get_stylesheet_directory_uri() . '/assets/css/stylish-admin.css',
+        ['woocommerce_admin_styles'],
+        '1.0.0'
+    );
 
     // Enqueue the script.
-    wp_enqueue_style('boostrap');
+    if ($hook == 'toplevel_page_stylish-settings') {
+        wp_enqueue_style('boostrap');
+    }
+    wp_enqueue_style('stylish-admin');
 }
 add_action('admin_enqueue_scripts', 'stylish_theme_admin_scripts');
 
@@ -55,3 +62,4 @@ require 'inc/template-functions.php';
 require 'inc/hooks.php';
 require 'inc/helper.php';
 require 'inc/settings.php';
+require 'inc/meta-box.php';
