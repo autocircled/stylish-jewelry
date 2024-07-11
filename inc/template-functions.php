@@ -627,6 +627,7 @@ if (!function_exists('storefront_before_content')) {
                     if (empty($option)) {
                         $option = get_option('stylish_setting_how_to_buy');
                     }
+                    echo '<h2>How To Buy</h2>';
                     echo $option;
                     ?>
                 </div>
@@ -644,6 +645,7 @@ if (!function_exists('storefront_before_content')) {
                     if (empty($option)) {
                         $option = get_option('stylish_setting_return_policy');
                     }
+                    echo '<h2>Return Policy</h2>';
                     echo $option;
                     ?>
                 </div>
