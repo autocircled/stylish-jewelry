@@ -319,6 +319,18 @@ form.checkout.woocommerce-checkout table td,
     margin-bottom: 0.7em;
 }
 
+.kt-reviews-image-container {
+    margin-left: 0;
+}
+
+.kt-wc-reviews-images-wrap-wrap {
+    justify-content: start;
+}
+
+.storefront-full-width-content.single-product div.product .summary span.sku_wrapper {
+    display: block;
+}
+
 @media (min-width: 768px) {
     .wp-social-link svg {
         fill: #999;

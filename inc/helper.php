@@ -29,3 +29,14 @@ function before_footer_copy_widget_init()
     ));
 }
 add_action('widgets_init', 'before_footer_copy_widget_init', 100);
+
+
+// function allow_image_uploads($allowed_mime_types)
+// {
+
+//     $allowed_mime_types['image'] = array('image/jpeg', 'image/png', 'image/gif');
+
+//     return $allowed_mime_types;
+// }
+
+// add_filter('upload_mimes', 'allow_image_uploads');

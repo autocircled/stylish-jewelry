@@ -61,6 +61,14 @@ QTYPM.tabInt = function () {
     })
 }
 
+QTYPM.reviewClickLink = function () {
+    const reviewLink = document.querySelector('.woocommerce-product-rating a.woocommerce-review-link')
+    const reviewTab = document.querySelector('li#tab-title-reviews')
+    reviewLink.addEventListener('click', function () {
+        reviewTab.click();
+    });
+}
+
 /**
  * Is the DOM ready?
  *
@@ -92,4 +100,7 @@ QTYPMDomReady(function () {
     }
     QTYPM.init();
     QTYPM.tabInt();
+    QTYPM.reviewClickLink();
+
+
 });

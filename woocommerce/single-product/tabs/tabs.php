@@ -44,6 +44,8 @@ if (!empty($product_tabs)) : ?>
                 </li>
             <?php endforeach; ?>
         </ul>
+        <?php //prettify($product_tabs); 
+        ?>
         <?php foreach ($product_tabs as $key => $product_tab) : ?>
             <div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--<?php echo esc_attr($key); ?> panel entry-content wc-tabtr" id="tab-<?php echo esc_attr($key); ?>" role="tabpanel" aria-labelledby="tab-title-<?php echo esc_attr($key); ?>">
                 <?php
