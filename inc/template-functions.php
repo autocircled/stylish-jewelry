@@ -400,7 +400,7 @@ if (!function_exists('storefront_before_content')) {
             $billing_order = [
                 'billing_first_name',
                 'billing_phone',
-                'billing_state',
+                // 'billing_state',
                 'billing_city',
                 'billing_address_1',
                 // 'billing_last_name',
@@ -424,8 +424,13 @@ if (!function_exists('storefront_before_content')) {
             $ordered_fields['billing_phone']['label'] = __('মোবাইল নম্বর', 'stylish-jewelry');
             $ordered_fields['billing_phone']['placeholder'] = __('মোবাইল নম্বর', 'stylish-jewelry');
 
-            $ordered_fields['billing_state']['priority'] = 40;
-            $ordered_fields['billing_state']['label'] = __('জেলা', 'stylish-jewelry');
+            // $ordered_fields['billing_state']['priority'] = 40;
+            // $ordered_fields['billing_state']['label'] = __('জেলা', 'stylish-jewelry');
+            $ordered_fields['billing_district']['priority'] = 40;
+            $ordered_fields['billing_district']['label'] = __('জেলা', 'stylish-jewelry');
+            $ordered_fields['billing_district']['type'] = 'text';
+            $ordered_fields['billing_district']['placeholder'] = 'আপনার জেলার নাম লিখুন';
+            $ordered_fields['billing_district']['required'] = true;
 
             $ordered_fields['billing_city']['priority'] = 50;
             $ordered_fields['billing_city']['label'] = __('থানা', 'stylish-jewelry');
