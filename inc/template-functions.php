@@ -100,7 +100,7 @@ if (!function_exists('stylish_middle_header_container')) {
         <div class="header-middle">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-12 d-flex justify-content-center">
                         <!-- logo -->
                         <?php storefront_site_branding(); ?>
                     </div>
@@ -125,9 +125,24 @@ if (!function_exists('stylish_middle_header_container')) {
                     <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 mobile_screen_768_view_none">
                         <!-- cart -->
                         <?php storefront_header_cart(); ?>
+
+                        <div class="social-links">
+                            <a href="https://facebook.com">
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
+                            </svg> -->
+                            <svg enable-background="new 0 0 56.693 56.693" height="56.693px" id="Layer_1" version="1.1" viewBox="0 0 56.693 56.693" width="56.693px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M40.43,21.739h-7.645v-5.014c0-1.883,1.248-2.322,2.127-2.322c0.877,0,5.395,0,5.395,0V6.125l-7.43-0.029  c-8.248,0-10.125,6.174-10.125,10.125v5.518h-4.77v8.53h4.77c0,10.947,0,24.137,0,24.137h10.033c0,0,0-13.32,0-24.137h6.77  L40.43,21.739z"/></svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
+                <!-- <div class="row">
+                    <div class="col-md-12">
+                        
+                    </div>
+                </div> -->
             </div>
+            <?php storefront_primary_navigation(); ?>
 
         </div>
         <?php
@@ -654,7 +669,7 @@ if (!function_exists('storefront_before_content')) {
                     echo $option;
                     ?>
                 </div>
-        <?php
+            <?php
             }
         }
         //default checkout state
@@ -664,3 +679,56 @@ if (!function_exists('storefront_before_content')) {
         {
             return ''; //set state code if you want to set it otherwise leave it blank.
         }
+
+
+        if (!function_exists('storefront_primary_navigation')) {
+            /**
+             * Display Primary Navigation
+             *
+             * @since  1.0.0
+             * @return void
+             */
+            function storefront_primary_navigation()
+            {
+            ?>
+                <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Navigation', 'storefront'); ?>">
+                    <?php //storefront_site_branding(); ?>
+                    <button id="site-navigation-menu-toggle" class="menu-toggle" aria-controls="site-navigation" aria-expanded="false"><span><?php echo esc_html(apply_filters('storefront_menu_toggle_text', __('Menu', 'storefront'))); ?></span></button>
+                    <?php
+                    wp_nav_menu(
+                        array(
+                            'theme_location'  => 'primary',
+                            'container_class' => 'primary-navigation',
+                        )
+                    );
+
+                    // wp_nav_menu(
+                    //     array(
+                    //         'theme_location'  => 'handheld',
+                    //         'container_class' => 'handheld-navigation ddd',
+                    //     )
+                    // );
+                    ?>
+                </nav><!-- #site-navigation -->
+        <?php
+            }
+        }
+
+add_filter('wp_nav_menu_items', function($items, $args){
+    // echo '<pre>';
+    // var_dump($items, $menu, $args);
+    // var_dump( $items);
+    // echo '</pre>';
+    // prettify($args);
+    if ($args->theme_location == 'primary') {
+        // Define the new menu item
+        $new_item = '<li class="menu-item site-branding-wrapper-handheld"><div class="site-brandingd">'. storefront_site_title_or_logo(false) .'</div></li>';
+        
+        // Append the new item to the existing menu items
+        $new_item .= $items;
+        return $new_item;
+    }
+   
+
+    return $items;
+}, 10, 2);

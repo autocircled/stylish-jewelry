@@ -14,6 +14,13 @@ add_action('stylish_middle_header', 'storefront_header_cart', 15);
 
 function stylish_remove_parent_actions()
 {
+    remove_action('storefront_header', 'storefront_primary_navigation_wrapper', 42);
+    remove_action('storefront_header', 'storefront_primary_navigation', 50);
+    remove_action('storefront_header', 'storefront_header_cart', 60);
+    remove_action('storefront_header', 'storefront_primary_navigation_wrapper_close', 68);
+
+
+
     remove_action('storefront_header', 'storefront_site_branding', 20);
     remove_action('storefront_header', 'storefront_secondary_navigation', 30);
     remove_action('storefront_header', 'storefront_product_search', 40);
@@ -66,3 +73,5 @@ add_filter('woocommerce_product_tabs', 'stylish_woocommerce_product_tabs', 10);
 
 // hide Additional information notes from checkout page
 add_filter('woocommerce_enable_order_notes_field', '__return_false');
+add_filter('storefront_menu_toggle_text', '__return_false');
+

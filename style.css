@@ -23,6 +23,61 @@ textdomain: stylish-jewelry
 .widget_shopping_cart .product_list_widget {
     padding: 0;
 }
+.site-branding {
+    width: 150px;
+}
+.header-middle .social-links {
+    position: absolute;
+    top: calc((100% - 36px) / 2);
+    right: 0;
+}
+.header-middle .social-links a {
+    display: flex;
+    border: 1px solid #000;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+}
+.header-middle .social-links svg {
+    width: 20px;
+    height: 20px;
+}
+.header-middle {
+    position: relative;
+}
+.header-middle button#site-navigation-menu-toggle {
+    position: absolute;
+    left: 0;
+    top: calc((100% - 36px) / 2);
+    height: 36px;
+    width: 36px;
+    display: flex;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border-width: 1px;
+    border-color: #000;
+}
+.header-middle button.menu-toggle::before,
+.header-middle button.menu-toggle::after,
+.header-middle button.menu-toggle span::before {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 14px;
+    position: absolute;
+    top: 50%;
+    left: 0.7em;
+    margin-top: -1px;
+    transition: all, ease, .2s;
+    border-radius: 50%;
+}
+.header-middle a.call_us {
+    display: none;
+}
 
 .site-header p {
     margin: 0;
@@ -417,4 +472,37 @@ form.checkout.woocommerce-checkout table td,
         flex-grow: 1;
         width: 100%;
     }
+}
+@media screen and (max-width: 767px) {
+    .admin-bar .primary-navigation {
+        padding: 46px 0 70px;
+    }
+    .main-navigation.toggled .primary-navigation {
+        position: fixed;
+        display: block;
+        background: #db6414;
+        width: 80%;
+        height: 100vh;
+        top: 0;
+        left: -12px;
+    }
+    .main-navigation.toggled .menu {
+        padding-right: 2rem;
+    }
+    .main-navigation.toggled .menu a {
+        text-decoration: none;
+        color: #FFF;
+    }
+
+    .main-navigation.toggled .menu .site-branding-wrapper-handheld {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .main-navigation.toggled .menu .site-branding-wrapper-handheld .site-brandingd {
+        max-width: 150px;
+    }
+
 }
