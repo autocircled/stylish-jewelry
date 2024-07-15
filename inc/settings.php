@@ -50,6 +50,7 @@ function stylish_settings_init()
     register_setting('stylish_setting_fields', 'stylish_setting_how_to_buy');
     register_setting('stylish_setting_fields', 'stylish_setting_return_policy');
     register_setting('stylish_setting_fields', 'stylish_setting_fb_link');
+    register_setting('stylish_setting_fields', 'stylish_setting_top_phone');
 
     // Add a settings section.
     add_settings_section(
@@ -97,8 +98,15 @@ function stylish_settings_init()
     );
     add_settings_field(
         'stylish_setting_fb_link',
-        'Return Policy',
+        'Facebook Page Link',
         'stylish_setting_fb_link_callback',
+        'stylish-theme-settings',
+        'stylish_theme_settings_information'
+    );
+    add_settings_field(
+        'stylish_setting_top_phone',
+        'Phone Number',
+        'stylish_setting_top_phone_callback',
         'stylish-theme-settings',
         'stylish_theme_settings_information'
     );
@@ -280,6 +288,20 @@ function stylish_setting_fb_link_callback()
         <div class="row mb-3" style="max-width: 500px;">
             <div class="col-md-12">
                 <input type="text" name="stylish_setting_fb_link" class="form-control" value="<?php echo isset($option) ? esc_attr($option) : ''; ?>" placeholder="Enter Facebook Page Link" />
+            </div>
+        </div>
+    </div>
+<?php
+}
+function stylish_setting_top_phone_callback()
+{
+    $option = get_option('stylish_setting_top_phone');
+
+?>
+    <div class="container">
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-12">
+                <input type="text" name="stylish_setting_top_phone" class="form-control" value="<?php echo isset($option) ? esc_attr($option) : ''; ?>" placeholder="Enter Phone Number" />
             </div>
         </div>
     </div>

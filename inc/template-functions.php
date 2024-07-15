@@ -110,14 +110,15 @@ if (!function_exists('stylish_middle_header_container')) {
                     </div>
                     <div class="col-xl-2 col-lg-2 col-md-4 col-sm-3 d-none d-md-block">
                         <!-- call us -->
-                        <a href="tel:0123456789" class="call_us text-decoration-none link-dark">
+                        <?php $phone = get_option('stylish_setting_top_phone'); ?>
+                        <a href="tel:<?php echo esc_attr($phone); ?>" class="call_us text-decoration-none link-dark">
                             <div class="phone d-flex align-items-center gap-2">
                                 <div class="icon">
                                     <i class="fa fa-phone" aria-hidden="true"></i>
                                 </div>
                                 <div class="text d-flex flex-column lh-1">
                                     <span class="title">Call Us Now:</span>
-                                    <span class="number fw-bold">0123456789</span>
+                                    <span class="number fw-bold"><?php echo esc_html($phone); ?></span>
                                 </div>
                             </div>
                         </a>
