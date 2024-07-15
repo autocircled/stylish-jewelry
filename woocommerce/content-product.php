@@ -26,7 +26,7 @@ if (empty($product) || !$product->is_visible()) {
 }
 $cols = 12 / wc_get_loop_prop('columns', 4);
 ?>
-<div <?php wc_product_class('la-wc-product col-sm-6 col-md-3 col-lg-' . $cols, $product); ?>>
+<div <?php wc_product_class('la-wc-product col-xs-6 col-sm-6 col-md-3 col-lg-' . $cols, $product); ?>>
     <div class="inner-wrapper rounded-2 p-3">
         <?php
         /**

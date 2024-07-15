@@ -19,6 +19,12 @@ textdomain: stylish-jewelry
     --menu-background: #b7cd0e;
     /* --bs-body-bg: #efefef; */
 }
+.h1, h1 {
+    font-size: 1.5rem;
+}
+.h3, h3 {
+    font-size: 1rem;
+}
 
 .widget_shopping_cart .product_list_widget {
     padding: 0;
@@ -102,6 +108,7 @@ textdomain: stylish-jewelry
 .site-footer .footer-top {
     background-color: #191919;
     color: #999;
+    padding: 20px 0;
 }
 
 .site-footer .footer-bottom {
@@ -166,9 +173,8 @@ textdomain: stylish-jewelry
 }
 
 .la-widget-area .widget {
-    margin: 0 0 3.706325903em;
+    margin: 0 0 20px;
     background: #fff;
-    padding: 20px;
     border-radius: 10px;
 }
 
@@ -233,9 +239,10 @@ textdomain: stylish-jewelry
     text-align: center;
     background: #db6414;
     color: #fff;
-    padding: 0.2em;
+    padding: 0.4em;
     border-radius: 5px;
     margin-top: 10px;
+    font-size: 13px;
 }
 
 .la-wc-product .inner-wrapper {
@@ -246,9 +253,33 @@ form.cart a.la-wc-product-link {
     background: #db6414;
     color: #fff;
     text-decoration: none;
-    padding: .6180469716em 2.41575em;
+    padding: 0 1.5rem;
     font-weight: 500;
-    display: inline-block;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+ul.page-contacts a {
+    text-decoration: none;
+    gap: 10px;
+    color: #db6414;
+    font-weight: 400;
+}
+ul.concern-list {
+    border: 1px dashed #db6414;
+    border-radius: 5px;
+}
+.concern-list li {
+    color: #000;
+    border-left-width: 0;
+    border-right-width: 0;
+}
+.concern-list li:first-child{
+    border-top-width: 0;
+}
+.concern-list li:last-child{
+    border-bottom-width: 0;
 }
 
 .woocommerce-tabs ul.nav.nav-tabs {
@@ -597,6 +628,47 @@ nav.secondary-navigation ul.menu li a:hover {
     color: var(--primary-color);
     transform: rotate(104deg);
 }
+.side_information_bar ul {
+    margin: 0;
+}
+.footer-top .footer-widgets h4.wp-block-heading {
+    color: #FFF;
+    font-size: 16px;
+    position: relative;
+}
+.widget_nav_menu ul.menu {
+    display: flex;
+    flex-direction: column;
+}
+.footer-top .footer-widgets h4.wp-block-heading:after {
+    content: "";
+    display: block;
+    background: #db6414;
+    width: 64px;
+    height: 2px;
+    position: absolute;
+    bottom: -3px;
+}
+.wc-block-product-categories {
+    margin-bottom: 1em;
+    margin: 0;
+}
+.storefront-breadcrumb {
+    margin: 0;
+}
+.site-header {
+    padding-bottom: 0;
+}
+.woocommerce-billing-fields .form-row {
+    flex-direction: column;
+}
+#payment .place-order {
+    padding: 0;
+}
+table.woocommerce-checkout-review-order-table {
+    font-size: 0.8em;
+}
+
 @media (max-width: 768px) {
     .saccha-sm-menu-modal .main-navigation ul li a {
         padding: 0.3em 0;
@@ -667,6 +739,10 @@ nav.secondary-navigation ul.menu li a:hover {
     .header-controls button.btn-outline-primary:focus {
         box-shadow: none;
     }
+    .footer-top .footer-widgets .block.footer-widget-2,
+    .footer-top .footer-widgets .block.footer-widget-3 {
+        width: 50%;
+    }
     
 }
 @media (max-width: 767px) {
@@ -674,8 +750,10 @@ nav.secondary-navigation ul.menu li a:hover {
         margin: 0;
         align-items: center;
         justify-content: center;
-        margin-top: 20px;
         margin-bottom: 10px;
+    }
+    .admin-bar nav.secondary-navigation ul {
+        margin-top: 20px;
     }
 }
 
@@ -787,7 +865,7 @@ nav.secondary-navigation ul.menu li a:hover {
 
     .single-product div.product form.cart {
         display: grid;
-        grid-template-columns: 50% 50%;
+        grid-template-columns: 50% 46%;
         gap: 10px;
     }
 

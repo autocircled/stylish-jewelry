@@ -235,8 +235,9 @@ if (!function_exists('storefront_footer_widgets')) {
                         $footer_n = $column + $regions * ($row - 1);
 
                         if (is_active_sidebar('footer-' . esc_attr($footer_n))) :
-                    ?>
-                            <div class="block footer-widget-<?php echo esc_attr($column); ?> col-md-<?php echo $column == 1 ? '4' : ($column == 2 || $column == 3 ? '2' : ($column == 4 ? '4' : 0)); ?>">
+                            ?>
+                            <!-- <div class="block footer-widget-<?php //echo esc_attr($column); ?> col-md-<?php //echo $column == 1 ? '4' : ($column == 2 || $column == 3 ? '2' : ($column == 4 ? '4' : 0)); ?>"> -->
+                            <div class="block footer-widget-<?php echo esc_attr($column); ?> col-md-4">
                                 <?php dynamic_sidebar('footer-' . esc_attr($footer_n)); ?>
                             </div>
                     <?php
@@ -554,7 +555,7 @@ if (!function_exists('storefront_before_content')) {
                 }
 
                 if (!empty($options)) {
-                    echo '<ul class="list-group ms-0 mb-3 ps-0">';
+                    echo '<ul class="concern-list list-group ms-0 mb-3 ps-0">';
                     foreach ($options as $key => $option) {
                         stylish_print_concern($option);
                     }
@@ -590,7 +591,7 @@ if (!function_exists('storefront_before_content')) {
                 // var_dump($options);
                 // echo '</pre>';
                 if (!empty($options)) {
-                    echo '<ul class="list-group ms-0 mb-3 ps-0">';
+                    echo '<ul class="page-contacts list-group ms-0 mb-3 ps-0">';
                     echo !empty($heading) ? '<li class="list-group-item list-group-item-light"><strong>' . esc_html($heading) . '</strong></li>' : '';
                     foreach ($options as $key => $option) {
                         stylish_print_contacts($option);
@@ -627,10 +628,9 @@ if (!function_exists('storefront_before_content')) {
         function stylish_woocommerce_get_terms_and_conditions_checkbox_text()
         {
             $output = '<p>' .
-                __('Stylish Jewelry Shop কোন অগ্রীম পেমেন্ট নেয় না। তাই নিচের শর্তে সম্মত হয়ে অর্ডার প্লেস করার অনুরোধ রইলো।', 'woocommerce') . '</p>';
-            $output .= '<p>' . __('সঠিক প্রোডাক্ট পাঠানোর পরেও যদি রিটার্ন করতে চান সেক্ষেত্রে ডেলিভারি চার্জ (ঢাকা সিটি - ৫০ টাকা, ঢাকার বাহিরে ১০০ টাকা) ডেলিভারি ম্যানকে প্রদান করে রিটার্ন করতে হবে।', 'woocommerce') . '</p>';
-            $output .= '<p>' . __('উপরের শর্ত ভঙ্গ হলে ‘বাংলাদেশ চুক্তি আইন ১৮৭২’ পরিপন্থী হিসেবে বিবেচিত হবে এবং আমরা এ বিষয়ে যেকোন পদক্ষেপ নেয়ার অধিকার পাবো।', 'woocommerce') . '</p>';
-            $output .= '<p>' . __('আমি সম্মতি দিয়ে অর্ডার প্লেস করছি।', 'woocommerce') . '</p>';
+                __('Stylish jewellery shop  কোন অগ্রীম পেমেন্ট নেয় না। তাই নিচের শর্তে সম্মত হয়ে অর্ডার প্লেস করার অনুরোধ রইলো।', 'woocommerce') . '</p>';
+            $output .= '<p>' . __('সঠিক প্রোডাক্ট পাঠানোর পরেও যদি রিটার্ন করতে চান সেক্ষেত্রে ডেলিভারি চার্জ সারা বাংলাদেশ ১০০ টাকা।  ডেলিভারি ম্যানকে প্রদান করে রিটার্ন করতে হবে।', 'woocommerce') . '</p>';
+            $output .= '<p>' . __('উপরের শর্ত ভঙ্গ হলে "বাংলাদেশ চুক্তি আইন ১৮৭২" পরিপন্থী হিসেবে বিবেচিত হবে এবং আমরা এ বিষয়ে যেকোন পদক্ষেপ নেয়ার অধিকার পাবো।', 'woocommerce') . '</p>';
             echo $output;
         }
 
