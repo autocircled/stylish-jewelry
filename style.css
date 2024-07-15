@@ -75,9 +75,7 @@ textdomain: stylish-jewelry
     transition: all, ease, .2s;
     border-radius: 50%;
 }
-.header-middle a.call_us {
-    display: none;
-}
+
 
 .site-header p {
     margin: 0;
@@ -89,12 +87,6 @@ textdomain: stylish-jewelry
 
 .site-header {
     padding-top: 0;
-}
-
-.icon {
-    font-size: 30px;
-    color: var(--primary-color);
-    transform: rotate(rotate(104deg));
 }
 
 .home article header.entry-header {
@@ -397,21 +389,24 @@ form.checkout.woocommerce-checkout table td,
 .admin-bar .saccha-sm-menu-modal {
     top: 46px;
 }
-
+.modal-header{
+    border-bottom: 0;
+}
 .saccha-sm-menu-inner {
     position: absolute;
     top: 0;
     bottom: 0;
     height: 100%;
-    width: 100%;
+    width: 70%;
     margin: 0;
-    max-width: var(--side-panel-width, 500px);
+    max-width: var(--side-panel-width, 400px);
 }
 .saccha-sm-menu-inner .modal-content {
     height: 100%;
     border: 0;
     border-radius: 0;
     overflow-y: scroll;
+    padding-bottom: 100px;
 }
 .main-navigation.mobile .nav-menu {
     overflow: hidden;
@@ -503,9 +498,110 @@ li.menu-item-has-children:hover>ul, li.menu-item-has-children.focus>ul, li.page_
 .main-navigation ul li a {
     outline: none;
 }
+.saccha-sm-menu-inner .modal-content {
+    background: #db6414;
+}
 
+form.woocommerce-product-search input.search-field {
+    border: 2px solid #db6414;
+    border-radius: 5px;
+    padding: 0.7em 2.7em !important;
+}
+.slick-slide {
+    padding: 5px 0;
+}
+a:focus, button:focus, .button.alt:focus, input:focus, textarea:focus, input[type="button"]:focus,
+input[type="reset"]:focus, input[type="submit"]:focus, input[type="email"]:focus, input[type="tel"]:focus,
+input[type="url"]:focus, input[type="password"]:focus, input[type="search"]:focus {
+    outline-color: #db6414;
+}
+.main-navigation.mobile ul li a {
+    color: #FFF;
+}
+.main-navigation.mobile button{
+    color: #FFF;
+}
+.main-navigation.mobile button:hover {
+    background-color: transparent;
+    border-color: transparent;
+    color: #FFF;
+}
+.saccha-sm-menu-modal .modal-header a.custom-logo-link {
+    display: block;
+    width: 150px;
+}
+.saccha-sm-menu-modal .nav li>ul {
+    background: #fff0;
+}
 
+.saccha-sm-menu-modal button.btn-outline-primary.saccha-btn-close:hover,
+.saccha-sm-menu-modal button.btn-outline-primary.saccha-btn-close:focus,
+.saccha-sm-menu-modal button.btn-outline-primary.saccha-btn-close:active,
+.saccha-sm-menu-modal button.btn-outline-primary.saccha-btn-close {
+    color: #ffffff;
+    background-color: #fff0;
+    border-color: #ffffff;
+    border-radius: 50%;
+    border-width: 2px;
+}
+
+.saccha-sm-menu-inner .modal-content::-webkit-scrollbar {
+    display: none;
+}
+.saccha-sm-menu-modal.fade .saccha-sm-menu-inner {
+    transition: -webkit-transform .3s ease-out;
+    transition: transform .3s ease-out;
+    transition: transform .3s ease-out, -webkit-transform .3s ease-out;
+    -webkit-transform: translate(-30%, 0);
+    transform: translate(-30%, 0);
+}
+.saccha-sm-menu-modal.fade.show .saccha-sm-menu-inner {
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+nav.secondary-navigation ul {
+    gap: 10px;
+}
+nav.secondary-navigation ul li {
+    display: flex;
+    align-items: center;
+    color: #db6414;
+}
+nav.secondary-navigation ul.menu li a,
+nav.secondary-navigation ul.menu li a:hover {
+    padding-left: 5px;
+    color: #db6414;
+    outline: none;
+}
+.secondary-navigation ul {
+    display: flex;
+}
+.site-branding, .site-search, .site-header-cart, .site-logo-anchor, .site-logo-link, .custom-logo-link {
+    margin-bottom: 0;
+}
+
+.header-middle a.call_us {
+    display: block;
+    font-size: 14px;
+    color: #000;
+}
+.header-middle a.call_us .phone {
+    gap: 5px;
+    justify-content: flex-end;
+}
+.header-middle a.call_us span.number {
+    font-weight: 500;
+}
+.header-middle a.call_us .icon {
+    font-size: 30px;
+    color: var(--primary-color);
+    transform: rotate(104deg);
+}
 @media (max-width: 768px) {
+    .saccha-sm-menu-modal .main-navigation ul li a {
+        padding: 0.3em 0;
+        font-size: 14px;
+    }
     .nav-menu {
         flex-direction: column;
     }
@@ -519,13 +615,13 @@ li.menu-item-has-children:hover>ul, li.menu-item-has-children.focus>ul, li.page_
     .nav-menu .menu-item-has-children>.sone-menu-toggle {
         display: inline-block;
         position: absolute;
-        font-size: 20px;
+        font-size: 16px;
         top: 0;
         right: 0;
         cursor: pointer;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        padding: 9px .907em;
+        padding: 0px .907em;
         font-weight: 400;
         line-height: inherit;
         outline: none;
@@ -545,10 +641,47 @@ li.menu-item-has-children:hover>ul, li.menu-item-has-children.focus>ul, li.page_
     .page_link .dropdown-menu-toggle, .menu-link .dropdown-menu-toggle {
         display: none;
     }
+    .nav-wrapper {
+        position: absolute;
+        top: calc((100% - 38px)/2);
+    }
+    .header-bottom .site-search {
+        display: block;
+    }
+    
+    .header-controls button.btn-outline-primary.btn-outline-primary:not(:disabled):not(.disabled):active,
+    .header-controls button.btn-outline-primary,
+    .header-controls button.btn-outline-primary:active,
+    .saccha-sm-menu-modal button.btn-outline-primary.btn-outline-primary:not(:disabled):not(.disabled):active,
+    .saccha-sm-menu-modal button.btn-outline-primary,
+    .saccha-sm-menu-modal button.btn-outline-primary:active {
+        color: #040404;
+        background-color: #FFF;
+        border-color: #040404;
+    }
+    .saccha-sm-menu-modal button.btn-outline-primary:hover,
+    .header-controls button.btn-outline-primary:hover {
+        background-color: #FFF;
+    }
+    .saccha-sm-menu-modal button.btn-outline-primary:focus,
+    .header-controls button.btn-outline-primary:focus {
+        box-shadow: none;
+    }
+    
+}
+@media (max-width: 767px) {
+    nav.secondary-navigation ul {
+        margin: 0;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
 }
 
-
 @media (min-width: 769px) {
+    
+    
     .main-navigation.desktop {
         display: block;
     }
@@ -556,12 +689,10 @@ li.menu-item-has-children:hover>ul, li.menu-item-has-children.focus>ul, li.page_
     button.search-toggler-open {
         display: none;
     }
-    .main-navigation ul, .secondary-navigation ul {
-        /* list-style: none;
-        margin: 0;
-        padding-left: 0; */
+    .main-navigation ul {
         display: flex;
     }
+    
     .main-navigation ul.menu>li.menu-item-has-children>a::after,
     .main-navigation ul.menu>li.page_item_has_children>a::after,
     .main-navigation ul.nav-menu>li.menu-item-has-children>a::after,
@@ -571,6 +702,9 @@ li.menu-item-has-children:hover>ul, li.menu-item-has-children.focus>ul, li.page_
     .main-navigation ul.nav-menu ul li.menu-item-has-children>a::after,
     .main-navigation ul.nav-menu ul li.page_item_has_children>a::after {
         
+        display: none;
+    }
+    .header-bottom .site-search {
         display: none;
     }
 }
@@ -641,6 +775,12 @@ li.menu-item-has-children:hover>ul, li.menu-item-has-children.focus>ul, li.page_
         flex-wrap: wrap;
         gap: 10px;
     }
+    .header-middle .social-links {
+        display: none;
+    }
+    .site-header-cart .cart-contents {
+        padding: 0.6em 0;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -695,4 +835,10 @@ li.menu-item-has-children:hover>ul, li.menu-item-has-children.focus>ul, li.page_
         max-width: 150px;
     }
 
+}
+
+@media screen and (min-width: 768px) and (max-width: 768px) {
+    .site-branding {
+        padding-left: 50px;
+    }
 }

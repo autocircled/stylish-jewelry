@@ -53,7 +53,7 @@ if (!function_exists('stylish_top_header_left_block')) {
     function stylish_top_header_left_block()
     {
 ?>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mobile_screen_768_view_none left_block">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-none d-md-block left_block">
             <div class="inner-wrapper">
                 <p>Welcome to Stylish Jewelry Shop</p>
             </div>
@@ -98,17 +98,17 @@ if (!function_exists('stylish_middle_header_container')) {
     {
     ?>
         <div class="header-middle">
-            <div class="container">
+            <div class="container mb-3">
                 <div class="row">
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-12 d-flex justify-content-center">
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 d-flex align-items-center justify-content-center ">
                         <!-- logo -->
                         <?php storefront_site_branding(); ?>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-5 col-sm-4 col-xs-12">
+                    <div class="col-xl-6 col-lg-6 col-md-5 col-sm-4 col-xs-12 d-none d-lg-block">
                         <!-- product search -->
                         <?php storefront_product_search(); ?>
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-3 mobile_screen_768_view_none">
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-3 d-none d-md-block">
                         <!-- call us -->
                         <a href="tel:0123456789" class="call_us text-decoration-none link-dark">
                             <div class="phone d-flex align-items-center gap-2">
@@ -116,24 +116,15 @@ if (!function_exists('stylish_middle_header_container')) {
                                     <i class="fa fa-phone" aria-hidden="true"></i>
                                 </div>
                                 <div class="text d-flex flex-column lh-1">
-                                    <span class="title">Call Us</span>
+                                    <span class="title">Call Us Now:</span>
                                     <span class="number fw-bold">0123456789</span>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 mobile_screen_768_view_none">
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-3 mobile_screen_768_view_none">
                         <!-- cart -->
                         <?php storefront_header_cart(); ?>
-
-                        <div class="social-links">
-                            <a href="https://facebook.com">
-                            <!-- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
-                            </svg> -->
-                            <svg enable-background="new 0 0 56.693 56.693" height="56.693px" id="Layer_1" version="1.1" viewBox="0 0 56.693 56.693" width="56.693px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M40.43,21.739h-7.645v-5.014c0-1.883,1.248-2.322,2.127-2.322c0.877,0,5.395,0,5.395,0V6.125l-7.43-0.029  c-8.248,0-10.125,6.174-10.125,10.125v5.518h-4.77v8.53h4.77c0,10.947,0,24.137,0,24.137h10.033c0,0,0-13.32,0-24.137h6.77  L40.43,21.739z"/></svg>
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <!-- <div class="row">
@@ -143,6 +134,11 @@ if (!function_exists('stylish_middle_header_container')) {
                 </div> -->
             </div>
             <?php //storefront_primary_navigation(); ?>
+            <div class="social-links">
+                <a href="https://facebook.com">
+                <svg enable-background="new 0 0 56.693 56.693" height="56.693px" id="Layer_1" version="1.1" viewBox="0 0 56.693 56.693" width="56.693px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M40.43,21.739h-7.645v-5.014c0-1.883,1.248-2.322,2.127-2.322c0.877,0,5.395,0,5.395,0V6.125l-7.43-0.029  c-8.248,0-10.125,6.174-10.125,10.125v5.518h-4.77v8.53h4.77c0,10.947,0,24.137,0,24.137h10.033c0,0,0-13.32,0-24.137h6.77  L40.43,21.739z"/></svg>
+                </a>
+            </div>
 
             <div class="nav-wrapper">
                 <?php
@@ -180,15 +176,18 @@ if (!function_exists('stylish_middle_header_container')) {
                         aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'sacchaone' ); ?>">
                         <span class="fa fa-bars"></span>
                     </button>
-                    <button class="btn btn-outline-primary search-toggler-open" type="button"
+                    <!-- <button class="btn btn-outline-primary search-toggler-open" type="button"
                         data-toggle="modal" data-target="#search-modal"
                         aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle search', 'sacchaone' ); ?>">
                         <span class="fa fa-search"></span>
-                    </button>
+                    </button> -->
                     <?php do_action( 'saccha_header_control_after' ); ?>
                 </div>
             </div>
 
+        </div>
+        <div class="header-bottom">
+            <?php storefront_product_search(); ?>
         </div>
         
         <?php
@@ -771,3 +770,29 @@ if (!function_exists('storefront_before_content')) {
 
 //     return $items;
 // }, 10, 2);
+
+if (!function_exists('storefront_secondary_navigation')) {
+    /**
+     * Display Secondary Navigation
+     *
+     * @since  1.0.0
+     * @return void
+     */
+    function storefront_secondary_navigation()
+    {
+        if (has_nav_menu('secondary')) {
+        ?>
+            <nav class="secondary-navigation d-block" role="navigation" aria-label="<?php esc_attr_e('Secondary Navigation', 'storefront'); ?>">
+                <?php
+                wp_nav_menu(
+                    array(
+                        'theme_location' => 'secondary',
+                        'fallback_cb'    => '',
+                    )
+                );
+                ?>
+            </nav><!-- #site-navigation -->
+        <?php
+        }
+    }
+}

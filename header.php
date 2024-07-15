@@ -54,7 +54,7 @@
         </header><!-- #masthead -->
         <?php
 		get_template_part( 'template-parts/modal-menu' );
-        get_template_part( 'template-parts/modal-search' );
+        // get_template_part( 'template-parts/modal-search' );
 		?>
 
         <?php
