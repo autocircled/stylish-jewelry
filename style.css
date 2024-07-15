@@ -842,3 +842,12 @@ nav.secondary-navigation ul.menu li a:hover {
         padding-left: 50px;
     }
 }
+
+@media (max-width: 575px) {
+    .col-xs-6 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}

@@ -325,7 +325,7 @@ if (!function_exists('storefront_before_content')) {
     function storefront_before_content()
     {
     ?>
-        <div id="primary" class="content-area col-md-9 order-5">
+        <div id="primary" class="content-area order-5 <?php echo is_singular() ? "col-md-12" : "col-md-9"; ?>">
             <main id="main" class="site-main" role="main">
             <?php
         }
