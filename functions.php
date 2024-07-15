@@ -69,6 +69,14 @@ function prettify($code)
     var_dump($code);
     echo '</pre>';
 }
+function sacchaone_page_has_children( $page_id ) {
+	$pages = get_pages( 'child_of=' . $page_id );
+	if ( count( $pages ) > 0 ):
+		return true;
+	else:
+		return false;
+	endif;
+}
 require get_stylesheet_directory() . '/inc/class-stylish-walker-page.php';
 require get_stylesheet_directory() . '/inc/class-stylish-walker-menu.php';
 require 'inc/template-functions.php';
