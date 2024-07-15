@@ -75,3 +75,5 @@ add_filter('woocommerce_product_tabs', 'stylish_woocommerce_product_tabs', 10);
 add_filter('woocommerce_enable_order_notes_field', '__return_false');
 add_filter('storefront_menu_toggle_text', '__return_false');
 
+// add_filter('storefront_handheld_footer_bar_links', 'stylish_storefront_handheld_footer_bar_links', 0);
+

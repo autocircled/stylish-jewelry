@@ -796,3 +796,91 @@ if (!function_exists('storefront_secondary_navigation')) {
         }
     }
 }
+
+if (!function_exists('storefront_handheld_footer_bar')) {
+    /**
+     * Display a menu intended for use on handheld devices
+     *
+     * @since 2.0.0
+     */
+    function storefront_handheld_footer_bar()
+    {
+        $links = array(
+            'home-link' => array(
+                'priority' => 10,
+                'callback' => 'stylish_home_link'
+            ),
+            'my-account' => array(
+                'priority' => 20,
+                'callback' => 'storefront_handheld_footer_bar_account_link',
+            ),
+            'search'     => array(
+                'priority' => 30,
+                'callback' => 'storefront_handheld_footer_bar_search',
+            ),
+            'call-link'     => array(
+                'priority' => 40,
+                'callback' => 'stylish_call_link'
+            ),
+            'cart'       => array(
+                'priority' => 50,
+                'callback' => 'storefront_handheld_footer_bar_cart_link',
+            ),
+        );
+
+        if (did_action('woocommerce_blocks_enqueue_cart_block_scripts_after') || did_action('woocommerce_blocks_enqueue_checkout_block_scripts_after')) {
+            return;
+        }
+
+        if (wc_get_page_id('myaccount') === -1) {
+            unset($links['my-account']);
+        }
+
+        if (wc_get_page_id('cart') === -1) {
+            unset($links['cart']);
+        }
+
+        $links = apply_filters('storefront_handheld_footer_bar_links', $links);
+    ?>
+    <div class="storefront-handheld-footer-bar">
+        <ul class="columns-<?php echo count($links); ?>">
+            <?php foreach ($links as $key => $link) : ?>
+                <li class="<?php echo esc_attr($key); ?>">
+                    <?php
+                    if ($link['callback']) {
+                        call_user_func($link['callback'], $key, $link);
+                    }
+                    ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php
+    }
+}
+
+// if( !function_exists('stylish_storefront_handheld_footer_bar_links')){
+//     function stylish_storefront_handheld_footer_bar_links($links){
+//         prettify($links);
+//         $links['home_link'] = array(
+//             'priority' => 5,
+//             'callback' => 'stylish_home_link'
+//         ); 
+//         $links['call_link'] = array(
+//             'priority' => 30,
+//             'callback' => 'stylish_call_link'
+//         ); 
+//         return $links;
+//     }
+// }
+
+if (!function_exists('stylish_home_link')){
+    function stylish_home_link(){
+        echo '<a href="'. get_bloginfo( 'url', 'display' ) .'" class="home-link">Home</a>';
+    }
+}
+if (!function_exists('stylish_call_link')){
+    function stylish_call_link(){
+        echo '<a href="tel:01816111116" class="call-link">Call</a>';
+    }
+}

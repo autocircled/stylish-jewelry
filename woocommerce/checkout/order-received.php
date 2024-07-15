@@ -21,6 +21,8 @@
 defined('ABSPATH') || exit;
 ?>
 
+<p class="congrats"><img src="<?php echo get_stylesheet_directory_uri() . '/assets/images/congratulation.gif'; ?>" alt="Congratulation your order successfully received" width="600" height="400"></p>
+
 <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received text-center mb-5">
     <?php
     /**
