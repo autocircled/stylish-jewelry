@@ -142,9 +142,55 @@ if (!function_exists('stylish_middle_header_container')) {
                     </div>
                 </div> -->
             </div>
-            <?php storefront_primary_navigation(); ?>
+            <?php //storefront_primary_navigation(); ?>
+
+            <div class="nav-wrapper">
+                <?php
+                if ( has_nav_menu( 'primary' ) ) :
+                    wp_nav_menu(
+                        array(
+                            'theme_location'  => 'primary',
+                            'depth'           => 4,
+                            'container'       => 'div',
+                            'container_class' => 'main-navigation desktop',
+                            // 'container_id'    => 'main-navigation',
+                            'menu_class'      => 'nav nav-menu',
+                            'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
+                            'walker'          => new Stylish_Walker_Menu(),
+                        )
+                    );
+                else :
+                    wp_page_menu(
+                        array(
+                            'container'  => 'div',
+                            // 'menu_id'    => 'main-navigation',
+                            'menu_class' => 'main-navigation desktop',
+                            'before'     => '<ul class="nav nav-menu">',
+                            'walker'          => new Stylish_Walker_Page(),
+                        )
+                    );
+                endif;
+                ?>
+
+                <div class="header-controls">
+                    <?php do_action( 'saccha_header_control_before' ); ?>
+                    <!-- Button trigger modal -->
+                    <button class="btn btn-outline-primary navbar-toggler-open" type="button"
+                        data-toggle="modal" data-target="#site-navigation-mobile"
+                        aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'sacchaone' ); ?>">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <button class="btn btn-outline-primary search-toggler-open" type="button"
+                        data-toggle="modal" data-target="#search-modal"
+                        aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle search', 'sacchaone' ); ?>">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <?php do_action( 'saccha_header_control_after' ); ?>
+                </div>
+            </div>
 
         </div>
+        
         <?php
     }
 }
@@ -714,21 +760,14 @@ if (!function_exists('storefront_before_content')) {
             }
         }
 
-add_filter('wp_nav_menu_items', function($items, $args){
-    // echo '<pre>';
-    // var_dump($items, $menu, $args);
-    // var_dump( $items);
-    // echo '</pre>';
-    // prettify($args);
-    if ($args->theme_location == 'primary') {
-        // Define the new menu item
-        $new_item = '<li class="menu-item site-branding-wrapper-handheld"><div class="site-brandingd">'. storefront_site_title_or_logo(false) .'</div></li>';
+// add_filter('wp_nav_menu_items', function($items, $args){
+//     if ($args->theme_location == 'primary') {
+//         $new_item = '<li class="menu-item site-branding-wrapper-handheld"><div class="site-brandingd">'. storefront_site_title_or_logo(false) .'</div></li>';
         
-        // Append the new item to the existing menu items
-        $new_item .= $items;
-        return $new_item;
-    }
+//         $new_item .= $items;
+//         return $new_item;
+//     }
    
 
-    return $items;
-}, 10, 2);
+//     return $items;
+// }, 10, 2);

@@ -16,11 +16,14 @@ defined('CHLD_THM_CFG_IGNORE_PARENT') or define('CHLD_THM_CFG_IGNORE_PARENT', TR
 // Enqueue bootstrap cdn
 function enqueue_bootstrap_cdn()
 {
-    wp_enqueue_style('bootstrap', 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css', false, '5.1.3');
+    wp_enqueue_style('bootstrap', get_stylesheet_directory_uri() . '/assets/css/bootstrap.min.css', false, '4.0.0');
     if (is_singular('product')) {
         wp_enqueue_script('custom-stylish', get_stylesheet_directory_uri() . '/assets/js/script.js', array('jquery'), '1.0.0', true);
         wp_localize_script('custom-stylish', 'CustomStylish', array('ajaxurl' => admin_url('admin-ajax.php')));
     }
+
+    wp_enqueue_script('bootstrap-script', get_stylesheet_directory_uri() . '/assets/js/bootstrap.min.js', [], '4.0.0', true);
+    wp_enqueue_script('stylish-nav', get_stylesheet_directory_uri() . '/assets/js/navigation.js', [], '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_bootstrap_cdn', 20);
 
@@ -33,9 +36,9 @@ function stylish_theme_admin_scripts($hook)
     // Register the script.
     wp_register_style(
         'boostrap',
-        'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css',
+        get_stylesheet_directory_uri() . '/assets/css/bootstrap.min.css',
         [],
-        '5.1.3'
+        '4.0.0'
     );
     wp_register_style(
         'stylish-admin',
@@ -66,8 +69,11 @@ function prettify($code)
     var_dump($code);
     echo '</pre>';
 }
+require get_stylesheet_directory() . '/inc/class-stylish-walker-page.php';
+require get_stylesheet_directory() . '/inc/class-stylish-walker-menu.php';
 require 'inc/template-functions.php';
 require 'inc/hooks.php';
 require 'inc/helper.php';
 require 'inc/settings.php';
 require 'inc/meta-box.php';
+// Custom menu walker.
