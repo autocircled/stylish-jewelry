@@ -53,7 +53,7 @@ if (!function_exists('stylish_top_header_left_block')) {
     function stylish_top_header_left_block()
     {
 ?>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-none d-md-block left_block">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-none d-md-block left_block welcome-msg">
             <div class="inner-wrapper">
                 <p>Welcome to Stylish Jewelry Shop</p>
             </div>
@@ -100,11 +100,11 @@ if (!function_exists('stylish_middle_header_container')) {
         <div class="header-middle">
             <div class="container mb-3">
                 <div class="row">
-                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 d-flex align-items-center justify-content-center ">
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
                         <!-- logo -->
                         <?php storefront_site_branding(); ?>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-5 col-sm-4 col-xs-12 d-none d-lg-block">
+                    <div class="col-xl-6 col-lg-6 col-md-5 col-sm-4 col-xs-12 d-none d-lg-flex align-items-center justify-content-center">
                         <!-- product search -->
                         <?php storefront_product_search(); ?>
                     </div>
@@ -377,7 +377,7 @@ if (!function_exists('storefront_before_content')) {
 
             $link = apply_filters('woocommerce_loop_product_link', get_the_permalink(), $product);
 
-            echo '<a href="' . esc_url($link) . '" class="la-wc-product-link">' . __('Buy Now', 'stylish-jewelry') . '</a>';
+            echo '<a href="' . esc_url($link) . '" class="la-wc-product-link">' . __('Order Now', 'stylish-jewelry') . '</a>';
         }
     }
 
@@ -387,7 +387,7 @@ if (!function_exists('storefront_before_content')) {
             global $product;
             if ($product->is_type('simple')) {
                 $link = apply_filters('woocommerce_loop_product_link', wc_get_checkout_url(), $product);
-                echo '<a href="' . esc_url($link) . '?add-to-cart=' . $product->get_id() . '&quantity=1" class="la-wc-product-link">' . __('Buy Now', 'stylish-jewelry') . '</a>';
+                echo '<a href="' . esc_url($link) . '?add-to-cart=' . $product->get_id() . '&quantity=1" class="la-wc-product-link">' . __('Order Now', 'stylish-jewelry') . '</a>';
             }
         }
     }
@@ -397,6 +397,9 @@ if (!function_exists('storefront_before_content')) {
     if (!function_exists('stylish_add_fav_button')) {
         function stylish_add_fav_button()
         {
+            if (!function_exists('the_favorites_button')){
+                return false;
+            }
             global $product;
             $post_id = $product->get_id();
             $site_id = get_current_blog_id();

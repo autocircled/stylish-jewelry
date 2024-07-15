@@ -617,6 +617,8 @@ nav.secondary-navigation ul.menu li a, nav.secondary-navigation ul.menu li a:hov
     display: block;
     font-size: 14px;
     color: #000;
+    text-decoration: none;
+    outline: none;
 }
 .header-middle a.call_us .phone {
     gap: 5px;
@@ -699,6 +701,44 @@ p.congrats img {
     display: inline;
     max-width: 500px;
 }
+.welcome-msg {
+    font-size: 14px;
+}
+.main-navigation ul li a:hover, .main-navigation ul li:hover > a,
+.site-title a:hover,
+.site-header ul.menu li.current-menu-item > a {
+    color: #db6414;
+}
+.concern-list .d-flex {
+    gap: 10px;
+}
+
+/*Contact form*/
+form.wpcf7-form.init {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+}
+form.wpcf7-form.init label {
+    width: 100%;
+}
+form.wpcf7-form input[type=text],
+form.wpcf7-form input[type=number],
+form.wpcf7-form input[type=email],
+form.wpcf7-form input[type=tel],
+form.wpcf7-form input[type=url],
+form.wpcf7-form form.wpcf7-form input[type=password],
+form.wpcf7-form input[type=search],
+form.wpcf7-form textarea,
+form.wpcf7-form .input-text {
+    width: 100%;
+}
+h2.has-text-align-center {
+    text-align: center;
+}
+
+
+
 @media (max-width: 768px) {
     .saccha-sm-menu-modal .main-navigation ul li a {
         padding: 0.3em 0;
