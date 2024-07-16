@@ -89,7 +89,7 @@ if ( ! comments_open() ) {
 						'label'    => __( 'Name', 'woocommerce' ),
 						'type'     => 'text',
 						'value'    => $commenter['comment_author'],
-						'required' => $name_email_required,
+						'required' => true,
 					),
 					'email'  => array(
 						'label'    => __( 'Email', 'woocommerce' ),

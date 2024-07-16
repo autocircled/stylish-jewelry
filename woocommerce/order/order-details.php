@@ -47,89 +47,87 @@ if ($show_downloads) {
 ?>
 <section class="woocommerce-order-details mt-4">
     <?php do_action('woocommerce_order_details_before_order_table', $order); ?>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <?php
-                /**
-                 * Action hook fired after the order details.
-                 *
-                 * @since 4.4.0
-                 * @param WC_Order $order Order data.
-                 */
-                do_action('woocommerce_after_order_details', $order);
+    <div class="row">
+        <div class="col-md-4">
+            <?php
+            /**
+             * Action hook fired after the order details.
+             *
+             * @since 4.4.0
+             * @param WC_Order $order Order data.
+             */
+            do_action('woocommerce_after_order_details', $order);
 
-                if ($show_customer_details) {
-                    wc_get_template('order/order-details-customer.php', array('order' => $order));
-                }
-                ?>
-            </div>
-            <div class="col-md-8">
-                <h2 class="woocommerce-order-details__title fs-4 mb-3""><?php esc_html_e('Order details', 'woocommerce'); ?></h2>
+            if ($show_customer_details) {
+                wc_get_template('order/order-details-customer.php', array('order' => $order));
+            }
+            ?>
+        </div>
+        <div class="col-md-8">
+            <h2 class="woocommerce-order-details__title fs-4 mb-3""><?php esc_html_e('Order details', 'woocommerce'); ?></h2>
 
-                <table class=" woocommerce-table woocommerce-table--order-details shop_table order_details">
+            <table class=" woocommerce-table woocommerce-table--order-details shop_table order_details">
 
-                    <thead>
-                        <tr>
-                            <th class="woocommerce-table__product-name product-name"><?php esc_html_e('Product', 'woocommerce'); ?></th>
-                            <th class="woocommerce-table__product-table product-total text-center"><?php esc_html_e('Price', 'woocommerce'); ?></th>
-                            <th class="woocommerce-table__product-table product-total text-end"><?php esc_html_e('Total', 'woocommerce'); ?></th>
-                        </tr>
-                    </thead>
+                <thead>
+                    <tr>
+                        <th class="woocommerce-table__product-name product-name"><?php esc_html_e('Product', 'woocommerce'); ?></th>
+                        <th class="woocommerce-table__product-table product-total text-center"><?php esc_html_e('Price', 'woocommerce'); ?></th>
+                        <th class="woocommerce-table__product-table product-total text-end"><?php esc_html_e('Total', 'woocommerce'); ?></th>
+                    </tr>
+                </thead>
 
-                    <tbody>
-                        <?php
-                        do_action('woocommerce_order_details_before_order_table_items', $order);
+                <tbody>
+                    <?php
+                    do_action('woocommerce_order_details_before_order_table_items', $order);
 
-                        foreach ($order_items as $item_id => $item) {
-                            $product = $item->get_product();
+                    foreach ($order_items as $item_id => $item) {
+                        $product = $item->get_product();
 
-                            wc_get_template(
-                                'order/order-details-item.php',
-                                array(
-                                    'order'              => $order,
-                                    'item_id'            => $item_id,
-                                    'item'               => $item,
-                                    'show_purchase_note' => $show_purchase_note,
-                                    'purchase_note'      => $product ? $product->get_purchase_note() : '',
-                                    'product'            => $product,
-                                )
-                            );
-                        }
+                        wc_get_template(
+                            'order/order-details-item.php',
+                            array(
+                                'order'              => $order,
+                                'item_id'            => $item_id,
+                                'item'               => $item,
+                                'show_purchase_note' => $show_purchase_note,
+                                'purchase_note'      => $product ? $product->get_purchase_note() : '',
+                                'product'            => $product,
+                            )
+                        );
+                    }
 
-                        do_action('woocommerce_order_details_after_order_table_items', $order);
-                        ?>
-                    </tbody>
+                    do_action('woocommerce_order_details_after_order_table_items', $order);
+                    ?>
+                </tbody>
 
-                    <tfoot>
-                        <?php
+                <tfoot>
+                    <?php
+                    // echo '<pre>';
+                    // var_dump($order->get_shipping_total());
+                    // echo '</pre>';
+                    foreach ($order->get_order_item_totals() as $key => $total) {
                         // echo '<pre>';
-                        // var_dump($order->get_shipping_total());
+                        // var_dump($total);
                         // echo '</pre>';
-                        foreach ($order->get_order_item_totals() as $key => $total) {
-                            // echo '<pre>';
-                            // var_dump($total);
-                            // echo '</pre>';
-                        ?>
-                            <tr>
-                                <th scope="row"><?php echo esc_html($total['label']); ?></th>
-                                <td></td>
-                                <td class="text-end"><?php echo wp_kses_post($total['value']); ?></td>
-                            </tr>
-                        <?php
-                        }
-                        ?>
-                        <?php if ($order->get_customer_note()) : ?>
-                            <tr>
-                                <th><?php esc_html_e('Note:', 'woocommerce'); ?></th>
-                                <td><?php echo wp_kses_post(nl2br(wptexturize($order->get_customer_note()))); ?></td>
-                            </tr>
-                        <?php endif; ?>
-                    </tfoot>
-                    </table>
+                    ?>
+                        <tr>
+                            <th scope="row"><?php echo esc_html($total['label']); ?></th>
+                            <td></td>
+                            <td class="text-end"><?php echo wp_kses_post($total['value']); ?></td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                    <?php if ($order->get_customer_note()) : ?>
+                        <tr>
+                            <th><?php esc_html_e('Note:', 'woocommerce'); ?></th>
+                            <td><?php echo wp_kses_post(nl2br(wptexturize($order->get_customer_note()))); ?></td>
+                        </tr>
+                    <?php endif; ?>
+                </tfoot>
+                </table>
 
-                    <?php do_action('woocommerce_order_details_after_order_table', $order); ?>
-            </div>
+                <?php do_action('woocommerce_order_details_after_order_table', $order); ?>
         </div>
     </div>
 

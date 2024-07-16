@@ -53,7 +53,7 @@ if (!function_exists('stylish_top_header_left_block')) {
     function stylish_top_header_left_block()
     {
 ?>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mobile_screen_768_view_none left_block">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-none d-md-block left_block welcome-msg">
             <div class="inner-wrapper">
                 <p>Welcome to Stylish Jewelry Shop</p>
             </div>
@@ -98,38 +98,99 @@ if (!function_exists('stylish_middle_header_container')) {
     {
     ?>
         <div class="header-middle">
-            <div class="container">
+            <div class="container mb-3">
                 <div class="row">
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-12 d-flex align-items-center justify-content-center">
                         <!-- logo -->
                         <?php storefront_site_branding(); ?>
                     </div>
-                    <div class="col-xl-6 col-lg-6 col-md-5 col-sm-4 col-xs-12">
+                    <div class="col-xl-6 col-lg-6 col-md-5 col-sm-4 col-xs-12 d-none d-lg-flex align-items-center justify-content-center">
                         <!-- product search -->
                         <?php storefront_product_search(); ?>
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-3 mobile_screen_768_view_none">
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-3 d-none d-md-block">
                         <!-- call us -->
-                        <a href="tel:0123456789" class="call_us text-decoration-none link-dark">
+                        <?php $phone = get_option('stylish_setting_top_phone'); ?>
+                        <a href="tel:<?php echo esc_attr($phone); ?>" class="call_us text-decoration-none link-dark">
                             <div class="phone d-flex align-items-center gap-2">
                                 <div class="icon">
                                     <i class="fa fa-phone" aria-hidden="true"></i>
                                 </div>
                                 <div class="text d-flex flex-column lh-1">
-                                    <span class="title">Call Us</span>
-                                    <span class="number fw-bold">0123456789</span>
+                                    <span class="title">Call Us Now:</span>
+                                    <span class="number fw-bold"><?php echo esc_html($phone); ?></span>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 mobile_screen_768_view_none">
+                    <div class="col-xl-2 col-lg-2 col-md-4 col-sm-3 mobile_screen_768_view_none">
                         <!-- cart -->
                         <?php storefront_header_cart(); ?>
                     </div>
                 </div>
+                <!-- <div class="row">
+                    <div class="col-md-12">
+                        
+                    </div>
+                </div> -->
+            </div>
+            <?php //storefront_primary_navigation(); ?>
+            <div class="social-links">
+                <a href="<?php echo esc_url(get_option('stylish_setting_fb_link')); ?>" target="_blank">
+                <svg enable-background="new 0 0 56.693 56.693" height="56.693px" id="Layer_1" version="1.1" viewBox="0 0 56.693 56.693" width="56.693px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M40.43,21.739h-7.645v-5.014c0-1.883,1.248-2.322,2.127-2.322c0.877,0,5.395,0,5.395,0V6.125l-7.43-0.029  c-8.248,0-10.125,6.174-10.125,10.125v5.518h-4.77v8.53h4.77c0,10.947,0,24.137,0,24.137h10.033c0,0,0-13.32,0-24.137h6.77  L40.43,21.739z"/></svg>
+                </a>
+            </div>
+
+            <div class="nav-wrapper">
+                <?php
+                if ( has_nav_menu( 'primary' ) ) :
+                    wp_nav_menu(
+                        array(
+                            'theme_location'  => 'primary',
+                            'depth'           => 4,
+                            'container'       => 'div',
+                            'container_class' => 'main-navigation desktop',
+                            // 'container_id'    => 'main-navigation',
+                            'menu_class'      => 'nav nav-menu',
+                            'items_wrap'      => '<ul class="%2$s">%3$s</ul>',
+                            'walker'          => new Stylish_Walker_Menu(),
+                        )
+                    );
+                else :
+                    wp_page_menu(
+                        array(
+                            'container'  => 'div',
+                            // 'menu_id'    => 'main-navigation',
+                            'menu_class' => 'main-navigation desktop',
+                            'before'     => '<ul class="nav nav-menu">',
+                            'walker'          => new Stylish_Walker_Page(),
+                        )
+                    );
+                endif;
+                ?>
+
+                <div class="header-controls">
+                    <?php do_action( 'saccha_header_control_before' ); ?>
+                    <!-- Button trigger modal -->
+                    <button class="btn btn-outline-primary navbar-toggler-open" type="button"
+                        data-toggle="modal" data-target="#site-navigation-mobile"
+                        aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'sacchaone' ); ?>">
+                        <span class="fa fa-bars"></span>
+                    </button>
+                    <!-- <button class="btn btn-outline-primary search-toggler-open" type="button"
+                        data-toggle="modal" data-target="#search-modal"
+                        aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle search', 'sacchaone' ); ?>">
+                        <span class="fa fa-search"></span>
+                    </button> -->
+                    <?php do_action( 'saccha_header_control_after' ); ?>
+                </div>
             </div>
 
         </div>
+        <div class="header-bottom">
+            <?php storefront_product_search(); ?>
+        </div>
+        
         <?php
     }
 }
@@ -175,8 +236,9 @@ if (!function_exists('storefront_footer_widgets')) {
                         $footer_n = $column + $regions * ($row - 1);
 
                         if (is_active_sidebar('footer-' . esc_attr($footer_n))) :
-                    ?>
-                            <div class="block footer-widget-<?php echo esc_attr($column); ?> col-md-<?php echo $column == 1 ? '4' : ($column == 2 || $column == 3 ? '2' : ($column == 4 ? '4' : 0)); ?>">
+                            ?>
+                            <!-- <div class="block footer-widget-<?php //echo esc_attr($column); ?> col-md-<?php //echo $column == 1 ? '4' : ($column == 2 || $column == 3 ? '2' : ($column == 4 ? '4' : 0)); ?>"> -->
+                            <div class="block footer-widget-<?php echo esc_attr($column); ?> col-md-4">
                                 <?php dynamic_sidebar('footer-' . esc_attr($footer_n)); ?>
                             </div>
                     <?php
@@ -265,7 +327,7 @@ if (!function_exists('storefront_before_content')) {
     function storefront_before_content()
     {
     ?>
-        <div id="primary" class="content-area col-md-9 order-5">
+        <div id="primary" class="content-area order-5 <?php echo is_singular() ? "col-md-12" : "col-md-9"; ?>">
             <main id="main" class="site-main" role="main">
             <?php
         }
@@ -316,7 +378,7 @@ if (!function_exists('storefront_before_content')) {
 
             $link = apply_filters('woocommerce_loop_product_link', get_the_permalink(), $product);
 
-            echo '<a href="' . esc_url($link) . '" class="la-wc-product-link">' . __('Buy Now', 'stylish-jewelry') . '</a>';
+            echo '<a href="' . esc_url($link) . '" class="la-wc-product-link">' . __('Order Now', 'stylish-jewelry') . '</a>';
         }
     }
 
@@ -326,7 +388,7 @@ if (!function_exists('storefront_before_content')) {
             global $product;
             if ($product->is_type('simple')) {
                 $link = apply_filters('woocommerce_loop_product_link', wc_get_checkout_url(), $product);
-                echo '<a href="' . esc_url($link) . '?add-to-cart=' . $product->get_id() . '&quantity=1" class="la-wc-product-link">' . __('Buy Now', 'stylish-jewelry') . '</a>';
+                echo '<a href="' . esc_url($link) . '?add-to-cart=' . $product->get_id() . '&quantity=1" class="la-wc-product-link">' . __('Order Now', 'stylish-jewelry') . '</a>';
             }
         }
     }
@@ -336,6 +398,9 @@ if (!function_exists('storefront_before_content')) {
     if (!function_exists('stylish_add_fav_button')) {
         function stylish_add_fav_button()
         {
+            if (!function_exists('the_favorites_button')){
+                return false;
+            }
             global $product;
             $post_id = $product->get_id();
             $site_id = get_current_blog_id();
@@ -424,13 +489,10 @@ if (!function_exists('storefront_before_content')) {
             $ordered_fields['billing_phone']['label'] = __('মোবাইল নম্বর', 'stylish-jewelry');
             $ordered_fields['billing_phone']['placeholder'] = __('মোবাইল নম্বর', 'stylish-jewelry');
 
-            // $ordered_fields['billing_state']['priority'] = 40;
-            // $ordered_fields['billing_state']['label'] = __('জেলা', 'stylish-jewelry');
-            $ordered_fields['billing_district']['priority'] = 40;
-            $ordered_fields['billing_district']['label'] = __('জেলা', 'stylish-jewelry');
-            $ordered_fields['billing_district']['type'] = 'text';
-            $ordered_fields['billing_district']['placeholder'] = 'আপনার জেলার নাম লিখুন';
-            $ordered_fields['billing_district']['required'] = true;
+            $ordered_fields['billing_state']['priority'] = 40;
+            $ordered_fields['billing_state']['label'] = __('জেলা', 'stylish-jewelry');
+            $ordered_fields['billing_state']['type'] = 'text';
+            $ordered_fields['billing_state']['placeholder'] = __('আপনার জেলার নাম লিখুন', 'stylish-jewelry');
 
             $ordered_fields['billing_city']['priority'] = 50;
             $ordered_fields['billing_city']['label'] = __('থানা', 'stylish-jewelry');
@@ -456,13 +518,17 @@ if (!function_exists('storefront_before_content')) {
         {
             return;
         }
-        // wc_print_notice(esc_html__('No saved methods found.', 'woocommerce'), 'notice');
-        // wc_add_to_cart_message()
 
         if (!function_exists('stylish_checkout_notice')) {
             function stylish_checkout_notice()
             {
-                wc_add_notice('অর্ডার করতে আপনার সঠিক তথ্য দিয়ে নিচের ফর্মটি সম্পূর্ণ পূরণ করুন। (আমাদের একজন প্রতিনিধি দ্রুত সময়ের মধ্যে আপনার সাথে যোগাযোগ করবে)', 'success');
+                ?>
+                <div class="stylish-woocommerce-NoticeGroup stylish-woocommerce-NoticeGroup-updateOrderReview">
+                    <div class="stylish-woocommerce-message" role="alert">
+                        অর্ডার করতে আপনার সঠিক তথ্য দিয়ে নিচের ফর্মটি সম্পূর্ণ পূরণ করুন। (আমাদের একজন প্রতিনিধি দ্রুত সময়ের মধ্যে আপনার সাথে যোগাযোগ করবে)	</div>
+                </div>
+                <?php
+
             }
         }
 
@@ -499,7 +565,7 @@ if (!function_exists('storefront_before_content')) {
                 }
 
                 if (!empty($options)) {
-                    echo '<ul class="list-group ms-0 mb-3 ps-0">';
+                    echo '<ul class="concern-list list-group ms-0 mb-3 ps-0">';
                     foreach ($options as $key => $option) {
                         stylish_print_concern($option);
                     }
@@ -535,7 +601,7 @@ if (!function_exists('storefront_before_content')) {
                 // var_dump($options);
                 // echo '</pre>';
                 if (!empty($options)) {
-                    echo '<ul class="list-group ms-0 mb-3 ps-0">';
+                    echo '<ul class="page-contacts list-group ms-0 mb-3 ps-0">';
                     echo !empty($heading) ? '<li class="list-group-item list-group-item-light"><strong>' . esc_html($heading) . '</strong></li>' : '';
                     foreach ($options as $key => $option) {
                         stylish_print_contacts($option);
@@ -572,10 +638,9 @@ if (!function_exists('storefront_before_content')) {
         function stylish_woocommerce_get_terms_and_conditions_checkbox_text()
         {
             $output = '<p>' .
-                __('Stylish Jewelry Shop কোন অগ্রীম পেমেন্ট নেয় না। তাই নিচের শর্তে সম্মত হয়ে অর্ডার প্লেস করার অনুরোধ রইলো।', 'woocommerce') . '</p>';
-            $output .= '<p>' . __('সঠিক প্রোডাক্ট পাঠানোর পরেও যদি রিটার্ন করতে চান সেক্ষেত্রে ডেলিভারি চার্জ (ঢাকা সিটি - ৫০ টাকা, ঢাকার বাহিরে ১০০ টাকা) ডেলিভারি ম্যানকে প্রদান করে রিটার্ন করতে হবে।', 'woocommerce') . '</p>';
-            $output .= '<p>' . __('উপরের শর্ত ভঙ্গ হলে ‘বাংলাদেশ চুক্তি আইন ১৮৭২’ পরিপন্থী হিসেবে বিবেচিত হবে এবং আমরা এ বিষয়ে যেকোন পদক্ষেপ নেয়ার অধিকার পাবো।', 'woocommerce') . '</p>';
-            $output .= '<p>' . __('আমি সম্মতি দিয়ে অর্ডার প্লেস করছি।', 'woocommerce') . '</p>';
+                __('Stylish jewellery shop  কোন অগ্রীম পেমেন্ট নেয় না। তাই নিচের শর্তে সম্মত হয়ে অর্ডার প্লেস করার অনুরোধ রইলো।', 'woocommerce') . '</p>';
+            $output .= '<p>' . __('সঠিক প্রোডাক্ট পাঠানোর পরেও যদি রিটার্ন করতে চান সেক্ষেত্রে ডেলিভারি চার্জ সারা বাংলাদেশ ১০০ টাকা।  ডেলিভারি ম্যানকে প্রদান করে রিটার্ন করতে হবে।', 'woocommerce') . '</p>';
+            $output .= '<p>' . __('উপরের শর্ত ভঙ্গ হলে "বাংলাদেশ চুক্তি আইন ১৮৭২" পরিপন্থী হিসেবে বিবেচিত হবে এবং আমরা এ বিষয়ে যেকোন পদক্ষেপ নেয়ার অধিকার পাবো।', 'woocommerce') . '</p>';
             echo $output;
         }
 
@@ -659,7 +724,7 @@ if (!function_exists('storefront_before_content')) {
                     echo $option;
                     ?>
                 </div>
-        <?php
+            <?php
             }
         }
         //default checkout state
@@ -669,3 +734,191 @@ if (!function_exists('storefront_before_content')) {
         {
             return ''; //set state code if you want to set it otherwise leave it blank.
         }
+
+
+        if (!function_exists('storefront_primary_navigation')) {
+            /**
+             * Display Primary Navigation
+             *
+             * @since  1.0.0
+             * @return void
+             */
+            function storefront_primary_navigation()
+            {
+            ?>
+                <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_attr_e('Primary Navigation', 'storefront'); ?>">
+                    <?php //storefront_site_branding(); ?>
+                    <button id="site-navigation-menu-toggle" class="menu-toggle" aria-controls="site-navigation" aria-expanded="false"><span><?php echo esc_html(apply_filters('storefront_menu_toggle_text', __('Menu', 'storefront'))); ?></span></button>
+                    <?php
+                    wp_nav_menu(
+                        array(
+                            'theme_location'  => 'primary',
+                            'container_class' => 'primary-navigation',
+                        )
+                    );
+
+                    // wp_nav_menu(
+                    //     array(
+                    //         'theme_location'  => 'handheld',
+                    //         'container_class' => 'handheld-navigation ddd',
+                    //     )
+                    // );
+                    ?>
+                </nav><!-- #site-navigation -->
+        <?php
+            }
+        }
+
+// add_filter('wp_nav_menu_items', function($items, $args){
+//     if ($args->theme_location == 'primary') {
+//         $new_item = '<li class="menu-item site-branding-wrapper-handheld"><div class="site-brandingd">'. storefront_site_title_or_logo(false) .'</div></li>';
+        
+//         $new_item .= $items;
+//         return $new_item;
+//     }
+   
+
+//     return $items;
+// }, 10, 2);
+
+if (!function_exists('storefront_secondary_navigation')) {
+    /**
+     * Display Secondary Navigation
+     *
+     * @since  1.0.0
+     * @return void
+     */
+    function storefront_secondary_navigation()
+    {
+        if (has_nav_menu('secondary')) {
+        ?>
+            <nav class="secondary-navigation d-block" role="navigation" aria-label="<?php esc_attr_e('Secondary Navigation', 'storefront'); ?>">
+                <?php
+                wp_nav_menu(
+                    array(
+                        'theme_location' => 'secondary',
+                        'fallback_cb'    => '',
+                    )
+                );
+                ?>
+            </nav><!-- #site-navigation -->
+        <?php
+        }
+    }
+}
+
+if (!function_exists('storefront_handheld_footer_bar')) {
+    /**
+     * Display a menu intended for use on handheld devices
+     *
+     * @since 2.0.0
+     */
+    function storefront_handheld_footer_bar()
+    {
+        $links = array(
+            'home-link' => array(
+                'priority' => 10,
+                'callback' => 'stylish_home_link'
+            ),
+            'my-account' => array(
+                'priority' => 20,
+                'callback' => 'storefront_handheld_footer_bar_account_link',
+            ),
+            'search'     => array(
+                'priority' => 30,
+                'callback' => 'storefront_handheld_footer_bar_search',
+            ),
+            'call-link'     => array(
+                'priority' => 40,
+                'callback' => 'stylish_call_link'
+            ),
+            'cart'       => array(
+                'priority' => 50,
+                'callback' => 'storefront_handheld_footer_bar_cart_link',
+            ),
+        );
+
+        if (did_action('woocommerce_blocks_enqueue_cart_block_scripts_after') || did_action('woocommerce_blocks_enqueue_checkout_block_scripts_after')) {
+            return;
+        }
+
+        if (wc_get_page_id('myaccount') === -1) {
+            unset($links['my-account']);
+        }
+
+        if (wc_get_page_id('cart') === -1) {
+            unset($links['cart']);
+        }
+
+        $links = apply_filters('storefront_handheld_footer_bar_links', $links);
+    ?>
+    <div class="storefront-handheld-footer-bar">
+        <ul class="columns-<?php echo count($links); ?>">
+            <?php foreach ($links as $key => $link) : ?>
+                <li class="<?php echo esc_attr($key); ?>">
+                    <?php
+                    if ($link['callback']) {
+                        call_user_func($link['callback'], $key, $link);
+                    }
+                    ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php
+    }
+}
+
+// if( !function_exists('stylish_storefront_handheld_footer_bar_links')){
+//     function stylish_storefront_handheld_footer_bar_links($links){
+//         prettify($links);
+//         $links['home_link'] = array(
+//             'priority' => 5,
+//             'callback' => 'stylish_home_link'
+//         ); 
+//         $links['call_link'] = array(
+//             'priority' => 30,
+//             'callback' => 'stylish_call_link'
+//         ); 
+//         return $links;
+//     }
+// }
+
+if (!function_exists('stylish_home_link')){
+    function stylish_home_link(){
+        echo '<a href="'. get_bloginfo( 'url', 'display' ) .'" class="home-link">Home</a>';
+    }
+}
+if (!function_exists('stylish_call_link')){
+    function stylish_call_link(){
+        echo '<a href="tel:01816111116" class="call-link">Call</a>';
+    }
+}
+if (!function_exists('stylish_comment_form_default_fields')){
+    function stylish_comment_form_default_fields($fields){
+        unset($fields['email']);
+        return $fields;
+    }
+}
+
+if(!function_exists('whatapp_link')){
+    function whatapp_link(){
+        ?>
+        <div class="whatsapp-link">
+            <a href="<?php echo esc_url(get_option('stylish_setting_whataapp_link')); ?>" target="_blank">
+            <svg data-v-647a0143="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="30px" height="30px" fill-rule="evenodd" clip-rule="evenodd"><path data-v-647a0143="" fill="#fff" d="M4.9,43.3l2.7-9.8C5.9,30.6,5,27.3,5,24C5,13.5,13.5,5,24,5c5.1,0,9.8,2,13.4,5.6	C41,14.2,43,18.9,43,24c0,10.5-8.5,19-19,19c0,0,0,0,0,0h0c-3.2,0-6.3-0.8-9.1-2.3L4.9,43.3z"></path> <path data-v-647a0143="" fill="#fff" d="M4.9,43.8c-0.1,0-0.3-0.1-0.4-0.1c-0.1-0.1-0.2-0.3-0.1-0.5L7,33.5c-1.6-2.9-2.5-6.2-2.5-9.6	C4.5,13.2,13.3,4.5,24,4.5c5.2,0,10.1,2,13.8,5.7c3.7,3.7,5.7,8.6,5.7,13.8c0,10.7-8.7,19.5-19.5,19.5c-3.2,0-6.3-0.8-9.1-2.3	L5,43.8C5,43.8,4.9,43.8,4.9,43.8z"></path> <path data-v-647a0143="" fill="#cfd8dc" d="M24,5c5.1,0,9.8,2,13.4,5.6C41,14.2,43,18.9,43,24c0,10.5-8.5,19-19,19h0c-3.2,0-6.3-0.8-9.1-2.3	L4.9,43.3l2.7-9.8C5.9,30.6,5,27.3,5,24C5,13.5,13.5,5,24,5 M24,43L24,43L24,43 M24,43L24,43L24,43 M24,4L24,4C13,4,4,13,4,24	c0,3.4,0.8,6.7,2.5,9.6L3.9,43c-0.1,0.3,0,0.7,0.3,1c0.2,0.2,0.4,0.3,0.7,0.3c0.1,0,0.2,0,0.3,0l9.7-2.5c2.8,1.5,6,2.2,9.2,2.2	c11,0,20-9,20-20c0-5.3-2.1-10.4-5.8-14.1C34.4,6.1,29.4,4,24,4L24,4z"></path> <path data-v-647a0143="" fill="#40c351" d="M35.2,12.8c-3-3-6.9-4.6-11.2-4.6C15.3,8.2,8.2,15.3,8.2,24c0,3,0.8,5.9,2.4,8.4L11,33l-1.6,5.8	l6-1.6l0.6,0.3c2.4,1.4,5.2,2.2,8,2.2h0c8.7,0,15.8-7.1,15.8-15.8C39.8,19.8,38.2,15.8,35.2,12.8z"></path> <path data-v-647a0143="" fill="#fff" fill-rule="evenodd" d="M19.3,16c-0.4-0.8-0.7-0.8-1.1-0.8c-0.3,0-0.6,0-0.9,0	s-0.8,0.1-1.3,0.6c-0.4,0.5-1.7,1.6-1.7,4s1.7,4.6,1.9,4.9s3.3,5.3,8.1,7.2c4,1.6,4.8,1.3,5.7,1.2c0.9-0.1,2.8-1.1,3.2-2.3	c0.4-1.1,0.4-2.1,0.3-2.3c-0.1-0.2-0.4-0.3-0.9-0.6s-2.8-1.4-3.2-1.5c-0.4-0.2-0.8-0.2-1.1,0.2c-0.3,0.5-1.2,1.5-1.5,1.9	c-0.3,0.3-0.6,0.4-1,0.1c-0.5-0.2-2-0.7-3.8-2.4c-1.4-1.3-2.4-2.8-2.6-3.3c-0.3-0.5,0-0.7,0.2-1c0.2-0.2,0.5-0.6,0.7-0.8	c0.2-0.3,0.3-0.5,0.5-0.8c0.2-0.3,0.1-0.6,0-0.8C20.6,19.3,19.7,17,19.3,16z" clip-rule="evenodd"></path></svg>
+            </a>
+        </div>
+        <?php
+    }
+}
+
+if(!function_exists('stylish_address_fields_validation')){
+    function stylish_address_fields_validation($address_fields) {
+        // Remove validation for the state field
+        $address_fields['state']['validate'] = [];
+    
+        return $address_fields;
+    
+    }
+}

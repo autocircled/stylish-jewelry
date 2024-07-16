@@ -49,6 +49,9 @@ function stylish_settings_init()
     register_setting('stylish_setting_fields', 'stylish_setting_contact_fields');
     register_setting('stylish_setting_fields', 'stylish_setting_how_to_buy');
     register_setting('stylish_setting_fields', 'stylish_setting_return_policy');
+    register_setting('stylish_setting_fields', 'stylish_setting_fb_link');
+    register_setting('stylish_setting_fields', 'stylish_setting_top_phone');
+    register_setting('stylish_setting_fields', 'stylish_setting_whataapp_link');
 
     // Add a settings section.
     add_settings_section(
@@ -91,6 +94,27 @@ function stylish_settings_init()
         'stylish_setting_return_policy',
         'Return Policy',
         'stylish_setting_return_policy_callback',
+        'stylish-theme-settings',
+        'stylish_theme_settings_information'
+    );
+    add_settings_field(
+        'stylish_setting_fb_link',
+        'Facebook Page Link',
+        'stylish_setting_fb_link_callback',
+        'stylish-theme-settings',
+        'stylish_theme_settings_information'
+    );
+    add_settings_field(
+        'stylish_setting_top_phone',
+        'Phone Number',
+        'stylish_setting_top_phone_callback',
+        'stylish-theme-settings',
+        'stylish_theme_settings_information'
+    );
+    add_settings_field(
+        'stylish_setting_whataapp_link',
+        'WhatsApp Link',
+        'stylish_setting_whataapp_link_callback',
         'stylish-theme-settings',
         'stylish_theme_settings_information'
     );
@@ -256,6 +280,50 @@ function stylish_setting_return_policy_callback()
                     'teeny' => true,
                 ));
                 ?>
+            </div>
+        </div>
+    </div>
+<?php
+}
+
+
+function stylish_setting_fb_link_callback()
+{
+    $option = get_option('stylish_setting_fb_link');
+
+?>
+    <div class="container">
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-12">
+                <input type="text" name="stylish_setting_fb_link" class="form-control" value="<?php echo isset($option) ? esc_attr($option) : ''; ?>" placeholder="Enter Facebook Page Link" />
+            </div>
+        </div>
+    </div>
+<?php
+}
+function stylish_setting_top_phone_callback()
+{
+    $option = get_option('stylish_setting_top_phone');
+
+?>
+    <div class="container">
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-12">
+                <input type="text" name="stylish_setting_top_phone" class="form-control" value="<?php echo isset($option) ? esc_attr($option) : ''; ?>" placeholder="Enter Phone Number" />
+            </div>
+        </div>
+    </div>
+<?php
+}
+function stylish_setting_whataapp_link_callback()
+{
+    $option = get_option('stylish_setting_whataapp_link');
+
+?>
+    <div class="container">
+        <div class="row mb-3" style="max-width: 500px;">
+            <div class="col-md-12">
+                <input type="text" name="stylish_setting_whataapp_link" class="form-control" value="<?php echo isset($option) ? esc_attr($option) : ''; ?>" placeholder="Enter WhatsApp Link" />
             </div>
         </div>
     </div>

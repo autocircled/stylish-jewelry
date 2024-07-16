@@ -14,6 +14,13 @@ add_action('stylish_middle_header', 'storefront_header_cart', 15);
 
 function stylish_remove_parent_actions()
 {
+    remove_action('storefront_header', 'storefront_primary_navigation_wrapper', 42);
+    remove_action('storefront_header', 'storefront_primary_navigation', 50);
+    remove_action('storefront_header', 'storefront_header_cart', 60);
+    remove_action('storefront_header', 'storefront_primary_navigation_wrapper_close', 68);
+
+
+
     remove_action('storefront_header', 'storefront_site_branding', 20);
     remove_action('storefront_header', 'storefront_secondary_navigation', 30);
     remove_action('storefront_header', 'storefront_product_search', 40);
@@ -54,6 +61,7 @@ add_filter('woocommerce_order_button_text', 'stylish_custom_order_button_text');
 add_action('storefront_footer', 'stylish_footer_before_copyright_widgets', 15);
 add_action('storefront_after_footer', 'storefront_credit', 10);
 add_action('woocommerce_checkout_terms_and_conditions', 'stylish_woocommerce_get_terms_and_conditions_checkbox_text', 10);
+add_action('wp_footer', 'whatapp_link', 10);
 
 
 
@@ -66,3 +74,10 @@ add_filter('woocommerce_product_tabs', 'stylish_woocommerce_product_tabs', 10);
 
 // hide Additional information notes from checkout page
 add_filter('woocommerce_enable_order_notes_field', '__return_false');
+add_filter('storefront_menu_toggle_text', '__return_false');
+add_filter('storefront_credit_links_output', '__return_false');
+add_filter('comment_form_fields', 'stylish_comment_form_default_fields');
+
+// add_filter('storefront_handheld_footer_bar_links', 'stylish_storefront_handheld_footer_bar_links', 0);
+add_filter('woocommerce_default_address_fields', 'stylish_address_fields_validation');
+

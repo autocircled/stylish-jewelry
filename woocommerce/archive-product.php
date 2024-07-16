@@ -20,7 +20,7 @@ defined('ABSPATH') || exit;
 
 get_header('shop');
 
-echo '<div class="row">';
+echo '<div class="row aaa">';
 
 /**
  * Hook: woocommerce_before_main_content.

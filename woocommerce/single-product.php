@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 get_header( 'shop' ); ?>
-
+<div class="row">
 	<?php
 		/**
 		 * woocommerce_before_main_content hook.
@@ -29,6 +29,7 @@ get_header( 'shop' ); ?>
 		 * @hooked woocommerce_breadcrumb - 20
 		 */
 		do_action( 'woocommerce_before_main_content' );
+		// storefront_before_content()
 	?>
 
 		<?php while ( have_posts() ) : ?>
@@ -55,7 +56,7 @@ get_header( 'shop' ); ?>
 		 */
 		do_action( 'woocommerce_sidebar' );
 	?>
-
+</div>
 <?php
 get_footer( 'shop' );
 
