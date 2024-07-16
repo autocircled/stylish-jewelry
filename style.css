@@ -745,7 +745,9 @@ h2.has-text-align-center {
     right: 20px;
     animation: scaleUpDown 2s infinite;
 }
-
+.woocommerce-notices-wrapper {
+    display: none;
+}
 .whatsapp-link svg {
     width: 100%;
     height: 100%;
