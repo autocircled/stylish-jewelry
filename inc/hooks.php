@@ -81,3 +81,91 @@ add_filter('comment_form_fields', 'stylish_comment_form_default_fields');
 // add_filter('storefront_handheld_footer_bar_links', 'stylish_storefront_handheld_footer_bar_links', 0);
 add_filter('woocommerce_default_address_fields', 'stylish_address_fields_validation');
 
+// Add custom radio field to checkout page
+add_action('woocommerce_after_order_notes', 'custom_checkout_field');
+
+function custom_checkout_field($checkout) {
+    echo '<div id="custom_checkout_field"><h2>' . __('Custom Shipping Option') . '</h2>';
+
+    woocommerce_form_field('custom_shipping_option', array(
+        'type' => 'radio',
+        'class' => array('form-row-wide'),
+        'label' => __('Would you like express shipping?'),
+        'options' => array(
+            'yes' => __('Yes'),
+            'no' => __('No')
+        ),
+        'required' => true,
+    ), $checkout->get_value('custom_shipping_option'));
+
+    echo '</div>';
+}
+
+// Save custom radio field value
+add_action('woocommerce_checkout_update_order_meta', 'custom_checkout_field_update_order_meta');
+
+function custom_checkout_field_update_order_meta($order_id) {
+    if ($_POST['custom_shipping_option']) {
+        update_post_meta($order_id, 'custom_shipping_option', sanitize_text_field($_POST['custom_shipping_option']));
+    }
+}
+
+// Adjust shipping charges based on custom radio field value
+add_action('woocommerce_cart_calculate_fees', 'custom_shipping_fee');
+
+function custom_shipping_fee() {
+    if (is_admin() && !defined('DOING_AJAX')) return;
+
+    $custom_shipping_option = isset($_POST['custom_shipping_option']) ? sanitize_text_field($_POST['custom_shipping_option']) : '';
+
+    if ($custom_shipping_option == 'yes') {
+        WC()->cart->add_fee(__('Custom Shipping Fee'), 100);
+    } elseif ($custom_shipping_option == 'no') {
+        WC()->cart->add_fee(__('Custom Shipping Fee'), 50);
+    }
+}
+
+// Save custom shipping option value to session
+// add_action('woocommerce_checkout_update_order_review', 'save_custom_shipping_option');
+
+// function save_custom_shipping_option($posted_data) {
+//     parse_str($posted_data, $output);
+//     if (isset($output['custom_shipping_option'])) {
+//         WC()->session->set('custom_shipping_option', sanitize_text_field($output['custom_shipping_option']));
+//     }
+// }
+
+// Load custom shipping option value from session
+add_action('woocommerce_checkout_update_order_meta', 'load_custom_shipping_option');
+
+function load_custom_shipping_option($order_id) {
+    if ($custom_shipping_option = WC()->session->get('custom_shipping_option')) {
+        update_post_meta($order_id, 'custom_shipping_option', $custom_shipping_option);
+    }
+}
+
+
+// script to checkout page
+add_action('wp_enqueue_scripts', 'enqueue_custom_script');
+function enqueue_custom_script() {
+    if (is_checkout()) {
+        wp_enqueue_script('custom-script', get_stylesheet_directory_uri() . '/assets/js/checkout.js', array('jquery'), '', true);
+
+        // Localize the script with new data
+        wp_localize_script('custom-script', 'custom_params', array(
+            'ajax_url' => admin_url('admin-ajax.php')
+        ));
+    }
+}
+
+add_action('wp_ajax_save_custom_shipping_option', 'save_custom_shipping_option');
+add_action('wp_ajax_nopriv_save_custom_shipping_option', 'save_custom_shipping_option');
+
+function save_custom_shipping_option() {
+    if (isset($_POST['custom_shipping_option'])) {
+        WC()->session->set('custom_shipping_option', sanitize_text_field($_POST['custom_shipping_option']));
+    }
+    // Trigger a cart update
+    WC()->cart->calculate_totals();
+    wp_die();
+}
