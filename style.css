@@ -6,7 +6,7 @@ Author: autocircled
 Author URI: https://ticlimited.com.bd
 Description: This theme is built based on special requirements by client
 Tags: e-commerce,two-columns,left-sidebar,right-sidebar,custom-background,custom-colors,custom-header,custom-menu,featured-images,full-width-template,threaded-comments,accessibility-ready,rtl-language-support,footer-widgets,sticky-post,theme-options,editor-style
-Version: 1.0.0.1719895108
+Version: 1.0.1
 Updated: 2024-07-02 04:38:28
 textdomain: stylish-jewelry
 
@@ -530,7 +530,7 @@ li.menu-item-has-children:hover>ul, li.menu-item-has-children.focus>ul, li.page_
     outline: none;
 }
 .saccha-sm-menu-inner .modal-content {
-    background: #db6414;
+    background: #282828;
 }
 
 form.woocommerce-product-search input.search-field {
@@ -736,9 +736,20 @@ form.wpcf7-form .input-text {
 h2.has-text-align-center {
     text-align: center;
 }
+.whatsapp-link {
+    position: fixed;
+    width: 75px;
+    height: 75px;
+    z-index: 9999;
+    bottom: 80px;
+    right: 20px;
+    animation: scaleUpDown 2s infinite;
+}
 
-
-
+.whatsapp-link svg {
+    width: 100%;
+    height: 100%;
+}
 @media (max-width: 768px) {
     .saccha-sm-menu-modal .main-navigation ul li a {
         padding: 0.3em 0;
@@ -929,8 +940,21 @@ h2.has-text-align-center {
     .site-header-cart .cart-contents {
         padding: 0.6em 0;
     }
+    #reviews .comment-form-author, #reviews .comment-form-email {
+        width: 100%;
+    }
+    .whatsapp-link {
+        bottom: 30px;
+    }
 }
-
+@keyframes scaleUpDown {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
 @media screen and (max-width: 768px) {
 
     .single-product div.product form.cart {
@@ -984,7 +1008,35 @@ h2.has-text-align-center {
     }
 
 }
+.stylish-woocommerce-message {
+    margin-bottom: 2.617924em;
+    background-color: #0f834d;
+    margin-left: 0;
+    border-radius: 2px;
+    color: #fff;
+    clear: both;
+    border-left: .6180469716em solid rgba(0, 0, 0, .15);
+    padding: 1em 2em 1em 3.5em;
+    position: relative;
+    list-style: none outside;
+}
 
+.stylish-woocommerce-message:before {
+    content: "";
+    font-family: "Font Awesome 5 Free";
+    /* content: ""; */
+    display: inline-block;
+    position: absolute;
+    top: 1.05em;
+    left: 1.5em;
+    color: #fff;
+}
+#reviews .comment-reply-title {
+    display: block;
+}
+.comment-form p.comment-notes {
+    display: none;
+}
 @media screen and (min-width: 768px) and (max-width: 768px) {
     .site-branding {
         padding-left: 50px;

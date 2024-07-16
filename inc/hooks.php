@@ -61,6 +61,7 @@ add_filter('woocommerce_order_button_text', 'stylish_custom_order_button_text');
 add_action('storefront_footer', 'stylish_footer_before_copyright_widgets', 15);
 add_action('storefront_after_footer', 'storefront_credit', 10);
 add_action('woocommerce_checkout_terms_and_conditions', 'stylish_woocommerce_get_terms_and_conditions_checkbox_text', 10);
+add_action('wp_footer', 'whatapp_link', 10);
 
 
 
@@ -75,6 +76,14 @@ add_filter('woocommerce_product_tabs', 'stylish_woocommerce_product_tabs', 10);
 add_filter('woocommerce_enable_order_notes_field', '__return_false');
 add_filter('storefront_menu_toggle_text', '__return_false');
 add_filter('storefront_credit_links_output', '__return_false');
+add_filter('comment_form_fields', 'stylish_comment_form_default_fields');
 
 // add_filter('storefront_handheld_footer_bar_links', 'stylish_storefront_handheld_footer_bar_links', 0);
 
+function remove_email_requirement($fields) {
+    prettify($fields);
+    unset($fields['comment_author_email']);
+    unset($fields['cookies']);
+    return $fields;
+}
+// add_filter('preprocess_comment', 'remove_email_requirement');
