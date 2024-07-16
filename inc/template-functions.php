@@ -912,3 +912,13 @@ if(!function_exists('whatapp_link')){
         <?php
     }
 }
+
+if(!function_exists('stylish_address_fields_validation')){
+    function stylish_address_fields_validation($address_fields) {
+        // Remove validation for the state field
+        $address_fields['state']['validate'] = [];
+    
+        return $address_fields;
+    
+    }
+}

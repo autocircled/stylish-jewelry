@@ -79,11 +79,5 @@ add_filter('storefront_credit_links_output', '__return_false');
 add_filter('comment_form_fields', 'stylish_comment_form_default_fields');
 
 // add_filter('storefront_handheld_footer_bar_links', 'stylish_storefront_handheld_footer_bar_links', 0);
+add_filter('woocommerce_default_address_fields', 'stylish_address_fields_validation');
 
-function remove_email_requirement($fields) {
-    prettify($fields);
-    unset($fields['comment_author_email']);
-    unset($fields['cookies']);
-    return $fields;
-}
-// add_filter('preprocess_comment', 'remove_email_requirement');
