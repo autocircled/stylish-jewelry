@@ -6,7 +6,7 @@ Author: autocircled
 Author URI: https://ticlimited.com.bd
 Description: This theme is built based on special requirements by client
 Tags: e-commerce,two-columns,left-sidebar,right-sidebar,custom-background,custom-colors,custom-header,custom-menu,featured-images,full-width-template,threaded-comments,accessibility-ready,rtl-language-support,footer-widgets,sticky-post,theme-options,editor-style
-Version: 1.0.10
+Version: 1.0.11
 Updated: 2024-07-02 04:38:28
 textdomain: stylish-jewelry
 
@@ -752,6 +752,9 @@ h2.has-text-align-center {
 .whatsapp-link svg {
     width: 100%;
     height: 100%;
+}
+.woocommerce-checkout-review-order-table td.product-name .wrapper {
+    display: flex;
 }
 .woocommerce-checkout ul#shipping_method li {
     display: flex;

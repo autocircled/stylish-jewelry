@@ -22,6 +22,7 @@ defined('ABSPATH') || exit;
     <thead>
         <tr>
             <th class="product-name"><?php esc_html_e('Product', 'woocommerce'); ?></th>
+            <th class="product-qty"><?php esc_html_e('Qty', 'woocommerce'); ?></th>
             <th class="product-total"><?php esc_html_e('Subtotal', 'woocommerce'); ?></th>
         </tr>
     </thead>
@@ -36,10 +37,15 @@ defined('ABSPATH') || exit;
         ?>
                 <tr class="<?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key)); ?>">
                     <td class="product-name">
-                        <?php echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key)) . '&nbsp;'; ?>
-                        <?php echo apply_filters('woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf('&times;&nbsp;%s', $cart_item['quantity']) . '</strong>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+                        <div class="wrapper">
+                            <?php echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key)); ?>
+                        </div>
+                        
+                        <?php //echo wc_get_formatted_cart_item_data($cart_item); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
                         ?>
-                        <?php echo wc_get_formatted_cart_item_data($cart_item); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+                    </td>
+                    <td>
+                    <?php echo apply_filters('woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf('%s', $cart_item['quantity']) . '</strong>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
                         ?>
                     </td>
                     <td class="product-total">
@@ -58,13 +64,13 @@ defined('ABSPATH') || exit;
 
         <tr class="cart-subtotal">
             <th><?php esc_html_e('মোট মূল্য', 'woocommerce'); ?></th>
-            <td><?php wc_cart_totals_subtotal_html(); ?></td>
+            <td colspan="2"><?php wc_cart_totals_subtotal_html(); ?></td>
         </tr>
 
         <?php foreach (WC()->cart->get_coupons() as $code => $coupon) : ?>
             <tr class="cart-discount coupon-<?php echo esc_attr(sanitize_title($code)); ?>">
                 <th><?php wc_cart_totals_coupon_label($coupon); ?></th>
-                <td><?php wc_cart_totals_coupon_html($coupon); ?></td>
+                <td colspan="2"><?php wc_cart_totals_coupon_html($coupon); ?></td>
             </tr>
         <?php endforeach; ?>
 
@@ -82,7 +88,7 @@ defined('ABSPATH') || exit;
         <?php foreach (WC()->cart->get_fees() as $fee) : ?>
             <tr class="fee">
                 <th><?php echo esc_html($fee->name); ?></th>
-                <td><?php wc_cart_totals_fee_html($fee); ?></td>
+                <td colspan="2"><?php wc_cart_totals_fee_html($fee); ?></td>
             </tr>
         <?php endforeach; ?>
 
@@ -92,13 +98,13 @@ defined('ABSPATH') || exit;
                 ?>
                     <tr class="tax-rate tax-rate-<?php echo esc_attr(sanitize_title($code)); ?>">
                         <th><?php echo esc_html($tax->label); ?></th>
-                        <td><?php echo wp_kses_post($tax->formatted_amount); ?></td>
+                        <td colspan="2"><?php echo wp_kses_post($tax->formatted_amount); ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>
                 <tr class="tax-total">
                     <th><?php echo esc_html(WC()->countries->tax_or_vat()); ?></th>
-                    <td><?php wc_cart_totals_taxes_total_html(); ?></td>
+                    <td colspan="2"><?php wc_cart_totals_taxes_total_html(); ?></td>
                 </tr>
             <?php endif; ?>
         <?php endif; ?>
@@ -107,7 +113,7 @@ defined('ABSPATH') || exit;
 
         <tr class="order-total">
             <th><?php esc_html_e('সর্বমোট মূল্য', 'woocommerce'); ?></th>
-            <td><?php wc_cart_totals_order_total_html(); ?></td>
+            <td colspan="2"><?php wc_cart_totals_order_total_html(); ?></td>
         </tr>
 
         <?php do_action('woocommerce_review_order_after_order_total'); ?>
