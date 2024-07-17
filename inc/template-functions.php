@@ -492,6 +492,7 @@ if (!function_exists('storefront_before_content')) {
             $ordered_fields['billing_state']['priority'] = 40;
             $ordered_fields['billing_state']['label'] = __('জেলা', 'stylish-jewelry');
             $ordered_fields['billing_state']['type'] = 'text';
+            $ordered_fields['billing_state']['required'] = true;
             $ordered_fields['billing_state']['placeholder'] = __('আপনার জেলার নাম লিখুন', 'stylish-jewelry');
 
             $ordered_fields['billing_city']['priority'] = 50;
@@ -529,28 +530,6 @@ if (!function_exists('storefront_before_content')) {
                 </div>
                 <?php
 
-            }
-        }
-
-
-        //add_action('woocommerce_review_order_before_submit', 'stylish_checkout_terms');
-        if (!function_exists('stylish_checkout_terms')) {
-            function stylish_checkout_terms()
-            {
-                global $wp;
-                $page_id = get_option('wc_terms_page_id');
-                if ($page_id) {
-                    $page = get_post($page_id);
-                    if ($page && $page->post_content) {
-                        $page_content = $page->post_content;
-                        $page_content = apply_filters('the_content', $page_content);
-                        echo $page_content;
-                    }
-                }
-                // wc_print_notice('Stylish Jewelry Shop কোন অগ্রীম পেমেন্ট নেয় না। তাই নিচের শর্তে সম্মত হয়ে অর্ডার প্লেস করার অনুরোধ রইলো।', 'notice');
-                // wc_print_notice('সঠিক প্রোডাক্ট পাঠানোর পরেও যদি রিটার্ন করতে চান সেক্ষেত্রে ডেলিভারি চার্জ (ঢাকা সিটি - ৫০ টাকা, ঢাকার বাহিরে ১০০ টাকা) ডেলিভারি ম্যানকে প্রদান করে রিটার্ন করতে হবে।', 'notice');
-                // wc_print_notice('উপরের শর্ত ভঙ্গ হলে ‘বাংলাদেশ চুক্তি আইন ১৮৭২’ পরিপন্থী হিসেবে বিবেচিত হবে এবং আমরা এ বিষয়ে যেকোন পদক্ষেপ নেয়ার অধিকার পাবো।', 'notice');
-                // wc_print_notice('আমি সম্মতি দিয়ে অর্ডার প্লেস করছি।', 'notice');
             }
         }
 
@@ -597,9 +576,6 @@ if (!function_exists('storefront_before_content')) {
             {
                 $heading = get_option('stylish_setting_contact_fields_heading');
                 $options = get_option('stylish_setting_contact_fields');
-                // echo '<pre>';
-                // var_dump($options);
-                // echo '</pre>';
                 if (!empty($options)) {
                     echo '<ul class="page-contacts list-group ms-0 mb-3 ps-0">';
                     echo !empty($heading) ? '<li class="list-group-item list-group-item-light"><strong>' . esc_html($heading) . '</strong></li>' : '';
@@ -615,9 +591,6 @@ if (!function_exists('storefront_before_content')) {
         if (!function_exists('stylish_print_contacts')) {
             function stylish_print_contacts($option)
             {
-                // echo '<pre>';
-                // var_dump($option);
-                // echo '</pre>';
                 if (!empty($option['number'])) {
                 ?>
                     <li class="list-group-item list-group-item-light">
@@ -649,14 +622,7 @@ if (!function_exists('storefront_before_content')) {
             return __('অর্ডার কনফার্ম করুন', 'woocommerce');
         }
 
-        add_filter('woocommerce_cart_shipping_method_full_label', 'stylish_cart_shipping_method_full_label', 10);
-        function stylish_cart_shipping_method_full_label($label)
-        {
-            // need to split the label "Flat rate: ৳ 120.00" using :
-            $cost = explode(': ', $label);
-            return $cost[1];
-        }
-        add_filter('woocommerce_get_order_item_totals', 'stylish_woocommerce_get_order_item_totals', 10, 3);
+        
         function stylish_woocommerce_get_order_item_totals($total_rows, $order, $tax_display)
         {
 
@@ -670,6 +636,10 @@ if (!function_exists('storefront_before_content')) {
             $total_rows['shipping']['label'] = __('ডেলিভারি চার্জ', 'woocommerce');
             $total_rows['order_total']['label'] = __('সর্বমোট মূল্য', 'woocommerce');
             return $total_rows;
+        }
+
+        function stylish_woocommerce_shipping_package_name($package_name, $i, $package){
+            return 'ডেলিভারি চার্জ';
         }
         if (!function_exists('stylish_woocommerce_product_tabs')) {
 
@@ -757,29 +727,11 @@ if (!function_exists('storefront_before_content')) {
                         )
                     );
 
-                    // wp_nav_menu(
-                    //     array(
-                    //         'theme_location'  => 'handheld',
-                    //         'container_class' => 'handheld-navigation ddd',
-                    //     )
-                    // );
                     ?>
                 </nav><!-- #site-navigation -->
         <?php
             }
         }
-
-// add_filter('wp_nav_menu_items', function($items, $args){
-//     if ($args->theme_location == 'primary') {
-//         $new_item = '<li class="menu-item site-branding-wrapper-handheld"><div class="site-brandingd">'. storefront_site_title_or_logo(false) .'</div></li>';
-        
-//         $new_item .= $items;
-//         return $new_item;
-//     }
-   
-
-//     return $items;
-// }, 10, 2);
 
 if (!function_exists('storefront_secondary_navigation')) {
     /**
@@ -869,21 +821,6 @@ if (!function_exists('storefront_handheld_footer_bar')) {
     }
 }
 
-// if( !function_exists('stylish_storefront_handheld_footer_bar_links')){
-//     function stylish_storefront_handheld_footer_bar_links($links){
-//         prettify($links);
-//         $links['home_link'] = array(
-//             'priority' => 5,
-//             'callback' => 'stylish_home_link'
-//         ); 
-//         $links['call_link'] = array(
-//             'priority' => 30,
-//             'callback' => 'stylish_call_link'
-//         ); 
-//         return $links;
-//     }
-// }
-
 if (!function_exists('stylish_home_link')){
     function stylish_home_link(){
         echo '<a href="'. get_bloginfo( 'url', 'display' ) .'" class="home-link">Home</a>';
@@ -891,7 +828,7 @@ if (!function_exists('stylish_home_link')){
 }
 if (!function_exists('stylish_call_link')){
     function stylish_call_link(){
-        echo '<a href="tel:01816111116" class="call-link">Call</a>';
+        echo '<a href="tel:'. esc_attr(get_option('stylish_setting_top_phone')) .'" class="call-link">Call</a>';
     }
 }
 if (!function_exists('stylish_comment_form_default_fields')){

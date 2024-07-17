@@ -700,6 +700,7 @@ p.congrats {
 p.congrats img {
     display: inline;
     max-width: 500px;
+    width: 100%;
 }
 .welcome-msg {
     font-size: 14px;
@@ -751,6 +752,37 @@ h2.has-text-align-center {
 .whatsapp-link svg {
     width: 100%;
     height: 100%;
+}
+.woocommerce-checkout ul#shipping_method li {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+.woocommerce-checkout ul#shipping_method label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    white-space: nowrap;
+}
+.woocommerce-checkout ul#shipping_method input:checked+label {
+    font-weight: 700;
+}
+ul#shipping_method input {
+    margin-right: 0;
+}
+tr.woocommerce-cart-form__cart-item .quantity {
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+}
+table.cart td.product-quantity button {
+    font-size: 20px;
+    padding: 3px 1.3em;
+}
+.woocommerce-billing-fields input#billing_state {
+    width: calc(100% - 10px);
 }
 @media (max-width: 768px) {
     .saccha-sm-menu-modal .main-navigation ul li a {
@@ -837,6 +869,9 @@ h2.has-text-align-center {
     }
     .admin-bar nav.secondary-navigation ul {
         margin-top: 20px;
+    }
+    .woocommerce-order-received .woocommerce-order .row .col {
+        flex-basis: 100%;
     }
 }
 

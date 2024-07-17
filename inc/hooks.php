@@ -80,4 +80,6 @@ add_filter('comment_form_fields', 'stylish_comment_form_default_fields');
 
 // add_filter('storefront_handheld_footer_bar_links', 'stylish_storefront_handheld_footer_bar_links', 0);
 add_filter('woocommerce_default_address_fields', 'stylish_address_fields_validation');
+add_filter('woocommerce_shipping_package_name', 'stylish_woocommerce_shipping_package_name', 10, 3);
+add_filter('woocommerce_get_order_item_totals', 'stylish_woocommerce_get_order_item_totals', 10, 3);
 
