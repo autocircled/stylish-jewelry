@@ -6,7 +6,7 @@ Author: autocircled
 Author URI: https://ticlimited.com.bd
 Description: This theme is built based on special requirements by client
 Tags: e-commerce,two-columns,left-sidebar,right-sidebar,custom-background,custom-colors,custom-header,custom-menu,featured-images,full-width-template,threaded-comments,accessibility-ready,rtl-language-support,footer-widgets,sticky-post,theme-options,editor-style
-Version: 1.0.12
+Version: 1.0.13
 Updated: 2024-08-06 04:38:28
 textdomain: stylish-jewelry
 
@@ -777,7 +777,7 @@ ul#shipping_method input {
 }
 tr.woocommerce-cart-form__cart-item .quantity {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     gap: 4px;
 }
 table.cart td.product-quantity button {
@@ -1105,7 +1105,22 @@ a.remove {
 .woocommerce-checkout-review-order-table .woocommerce-shipping-totals th {
     padding-right: 0;
 }
-
+.woocommerce-checkout-review-order-table img.attachment-woocommerce_thumbnail {
+    width: 70px;
+}
+.woocommerce-checkout-review-order-table td.description {
+    width: calc(100% - 70px);
+    padding: 0 !important;
+}
+.woocommerce-checkout-review-order-table .wrapperw {
+    gap: 10px;
+}
+.woocommerce-checkout-review-order-table td.description .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 10px;
+}
 @media screen and (min-width: 768px) and (max-width: 768px) {
     .site-branding {
         padding-left: 50px;
