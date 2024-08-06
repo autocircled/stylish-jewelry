@@ -35,7 +35,7 @@ add_action('wp_enqueue_scripts', 'enqueue_bootstrap_cdn', 20);
 function custom_update_checkout_review_order_fragments($fragments) {
     ob_start();
     woocommerce_order_review();
-    $fragments['.woocommerce-checkout-review-order'] = ob_get_clean();
+    $fragments['.woocommerce-checkout-review-order-table'] = ob_get_clean();
 
     return $fragments;
 }
@@ -43,10 +43,27 @@ add_filter('woocommerce_add_to_cart_fragments', 'custom_update_checkout_review_o
 
 
 function update_cart_quantity() {
-    // var_dump($_POST);
-    WC()->cart->set_quantity($_POST['cart_item_key'], $_POST['quantity']);
-    WC()->cart->calculate_totals();
-    WC_AJAX::get_refreshed_fragments();
+
+    $cart_item_key = $_POST['cart_item_key'];
+    $quantity = $_POST['quantity'];
+
+    if (isset($cart_item_key) && isset($quantity)) {
+        WC()->cart->set_quantity($cart_item_key, $quantity, true); // true ensures the cart object is updated immediately
+        WC()->cart->calculate_totals();
+    }
+
+    if (WC()->cart->is_empty()) {
+        $response = array(
+            'redirect_url' => wc_get_cart_url() // Redirect to cart page if empty
+        );
+    } else {
+        
+        
+        $response = array(
+            'fragments' => WC_AJAX::get_refreshed_fragments()
+        );
+    }
+    wp_send_json($response); // Send response
     wp_die();
 }
 add_action('wp_ajax_update_cart_quantity', 'update_cart_quantity');
@@ -54,9 +71,6 @@ add_action('wp_ajax_nopriv_update_cart_quantity', 'update_cart_quantity');
 
 function stylish_theme_admin_scripts($hook)
 {
-    // var_dump($hook);
-    // Check if we are on the custom theme settings page.
-
 
     // Register the script.
     wp_register_style(
@@ -71,14 +85,6 @@ function stylish_theme_admin_scripts($hook)
         ['woocommerce_admin_styles'],
         '1.0.0'
     );
-    // var_dump($hook);
-
-    // if ($hook == 'post-new.php' || $hook == 'post.php') {
-    //     wp_enqueue_media();
-    //     wp_enqueue_script('jquery');
-    //     wp_enqueue_script('editor');
-    //     wp_enqueue_style('editor-buttons');
-    // }
 
     // Enqueue the script.
     if ($hook == 'toplevel_page_stylish-settings') {

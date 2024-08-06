@@ -881,4 +881,4 @@ if (!function_exists('stylish_cart_item_remove_link')){
     }
 }
 
-add_filter('woocommerce_cart_item_name', 'stylish_cart_item_remove_link', 10, 3);
+//add_filter('woocommerce_cart_item_name', 'stylish_cart_item_remove_link', 10, 3);

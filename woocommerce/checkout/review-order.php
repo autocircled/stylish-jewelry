@@ -38,6 +38,7 @@ defined('ABSPATH') || exit;
                 <tr class="<?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item woocommerce-cart-form__cart-item', $cart_item, $cart_item_key)); ?>" data-cart_item_key="<?php echo esc_attr($cart_item_key); ?>">
                     <td class="product-name">
                         <div class="wrapper">
+                            <a href="<?php echo esc_url(wc_get_cart_remove_url($cart_item_key)); ?>" class="remove" aria-label="Remove this item" data-product_id="<?php echo esc_attr($_product->get_id()); ?>" data-product_sku="<?php echo esc_attr($_product->sku); ?>">&times;</a>
                             <?php echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key)); ?>
                         </div>
                         
