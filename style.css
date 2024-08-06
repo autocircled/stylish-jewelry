@@ -1108,8 +1108,12 @@ a.remove {
 .woocommerce-checkout-review-order-table img.attachment-woocommerce_thumbnail {
     width: 70px;
 }
+.woocommerce-checkout-review-order-table td.product-thumbnail {
+    min-width: 150px !important;
+    width: 100px !important;
+}
 .woocommerce-checkout-review-order-table td.description {
-    width: calc(100% - 70px);
+    width: 100%;
     padding: 0 !important;
 }
 .woocommerce-checkout-review-order-table .wrapperw {
