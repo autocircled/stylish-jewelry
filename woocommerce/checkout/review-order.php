@@ -21,8 +21,8 @@ defined('ABSPATH') || exit;
 <table class="shop_table woocommerce-checkout-review-order-table">
     <thead>
         <tr>
-            <th class="product-name"><?php esc_html_e('Product', 'woocommerce'); ?></th>
-            <th class="product-qty"><?php esc_html_e('Qty', 'woocommerce'); ?></th>
+            <th class="product-name" colspan="2"><?php esc_html_e('Product', 'woocommerce'); ?></th>
+            <th class="product-qty" style="text-align: center;"><?php esc_html_e('Qty', 'woocommerce'); ?></th>
             <th class="product-total"><?php esc_html_e('Subtotal', 'woocommerce'); ?></th>
         </tr>
     </thead>
@@ -36,20 +36,16 @@ defined('ABSPATH') || exit;
             if ($_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters('woocommerce_checkout_cart_item_visible', true, $cart_item, $cart_item_key)) {
         ?>
                 <tr class="<?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item woocommerce-cart-form__cart-item', $cart_item, $cart_item_key)); ?>" data-cart_item_key="<?php echo esc_attr($cart_item_key); ?>">
-                    <td class="product-name">
-                        <div class="wrapper">
+                    <td class="product-name" colspan="2">
+                        <div class="wrapperw">
                             <a href="<?php echo esc_url(wc_get_cart_remove_url($cart_item_key)); ?>" class="remove" aria-label="Remove this item" data-product_id="<?php echo esc_attr($_product->get_id()); ?>" data-product_sku="<?php echo esc_attr($_product->sku); ?>">&times;</a>
-                            <?php echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key)); ?>
+                            <span class="title">
+                                <?php echo wp_kses_post(apply_filters('woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key)); ?>
+                            </span>
                         </div>
-                        
-                        <?php //echo wc_get_formatted_cart_item_data($cart_item); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
-                        ?>
                     </td>
                     <td class="qty">
                         <div class="wrapper">
-                            <!-- <input type="button" value="-" class="qty-btn" id="qty-minus"> -->
-                            <?php //echo apply_filters('woocommerce_checkout_cart_item_quantity', ' <strong class="product-quantity">' . sprintf('%s', $cart_item['quantity']) . '</strong>', $cart_item, $cart_item_key); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-                            <!-- <input type="button" value="+" class="qty-btn" id="qty-plus"> -->
                             <?php
                             if ( $_product->is_sold_individually() ) {
                                 $min_quantity = 1;
@@ -65,13 +61,13 @@ defined('ABSPATH') || exit;
                                     'input_value'  => $cart_item['quantity'],
                                     'max_value'    => $max_quantity,
                                     'min_value'    => $min_quantity,
-                                    // 'product_name' => $product_name,
+                                    'type'         => 'text'
                                 ),
                                 $_product,
                                 false
                             );
 
-                            echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ); // PHPCS: XSS ok.
+                            echo apply_filters( 'woocommerce_cart_item_quantityaaa', $product_quantity, $cart_item_key, $cart_item ); // PHPCS: XSS ok.
                             ?>
                         </div>
                     </td>
@@ -90,7 +86,7 @@ defined('ABSPATH') || exit;
     <tfoot>
 
         <tr class="cart-subtotal">
-            <th><?php esc_html_e('মোট মূল্য', 'woocommerce'); ?></th>
+            <th colspan="2"><?php esc_html_e('মোট মূল্য', 'woocommerce'); ?></th>
             <td colspan="2"><?php wc_cart_totals_subtotal_html(); ?></td>
         </tr>
 
@@ -139,8 +135,8 @@ defined('ABSPATH') || exit;
         <?php do_action('woocommerce_review_order_before_order_total'); ?>
 
         <tr class="order-total">
-            <th><?php esc_html_e('সর্বমোট মূল্য', 'woocommerce'); ?></th>
-            <td colspan="2"><?php wc_cart_totals_order_total_html(); ?></td>
+            <th colspan="3"><?php esc_html_e('সর্বমোট মূল্য', 'woocommerce'); ?></th>
+            <td><?php wc_cart_totals_order_total_html(); ?></td>
         </tr>
 
         <?php do_action('woocommerce_review_order_after_order_total'); ?>
