@@ -19,7 +19,7 @@
 	
 	// Get all the link elements within the menu.
 	const links = menu.getElementsByTagName( 'a' );
-	console.log(links);
+	// console.log(links);
 
 	// Toggle focus each time a menu link is focused or blurred.
 	for ( const link of links ) {
