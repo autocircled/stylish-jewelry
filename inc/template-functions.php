@@ -465,7 +465,7 @@ if (!function_exists('storefront_before_content')) {
             $billing_order = [
                 'billing_first_name',
                 'billing_phone',
-                // 'billing_state',
+                'billing_state',
                 'billing_city',
                 'billing_address_1',
                 // 'billing_last_name',
@@ -491,7 +491,7 @@ if (!function_exists('storefront_before_content')) {
 
             $ordered_fields['billing_state']['priority'] = 40;
             $ordered_fields['billing_state']['label'] = __('জেলা', 'stylish-jewelry');
-            $ordered_fields['billing_state']['type'] = 'text';
+            // $ordered_fields['billing_state']['type'] = 'text';
             $ordered_fields['billing_state']['required'] = true;
             $ordered_fields['billing_state']['placeholder'] = __('আপনার জেলার নাম লিখুন', 'stylish-jewelry');
 
@@ -512,6 +512,86 @@ if (!function_exists('storefront_before_content')) {
         }
 
         add_filter('woocommerce_checkout_fields', 'reorder_billing_fields');
+
+        
+        if(!function_exists('stylish_address_fields_validation')){
+            function stylish_address_fields_validation($address_fields) {
+                // Remove validation for the state field
+                $address_fields['state']['validate'] = [];
+            
+                return $address_fields;
+            
+            }
+        }
+        add_filter('woocommerce_states', 'stylish_woocommerce_states');
+        function stylish_woocommerce_states($states) {
+            $states['BD'] = array(
+                'BD-05' => 'Bagerhat - বাগেরহাট',
+                'BD-01' => 'Bandarban - বান্দরবান',
+                'BD-02' => 'Barguna - বরগুনা',
+                'BD-06' => 'Barishal - বরিশাল',
+                'BD-07' => 'Bhola - ভোলা',
+                'BD-03' => 'Bogura - বগুড়া',
+                'BD-04' => 'Brahmanbaria - ব্রাহ্মণবাড়িয়া',
+                'BD-09' => 'Chandpur - চাঁদপুর',
+                'BD-10' => 'Chattogram - চট্টগ্রাম',
+                'BD-12' => 'Chuadanga - চুয়াডাঙ্গা',
+                'BD-11' => 'Cox\'s Bazar - কক্সবাজার',
+                'BD-08' => 'Cumilla - কুমিল্লা',
+                'BD-13' => 'Dhaka - ঢাকা',
+                'BD-14' => 'Dinajpur - দিনাজপুর',
+                'BD-15' => 'Faridpur - ফরিদপুর',
+                'BD-16' => 'Feni - ফেনী',
+                'BD-19' => 'Gaibandha - গাইবাঙ্গা',
+                'BD-18' => 'Gazipur - গাজীপুর',
+                'BD-17' => 'Gopalganj - গোপালগঞ্জ',
+                'BD-20' => 'Habiganj - হবিগঞ্জ',
+                'BD-21' => 'Jamalpur - জামালপুর',
+                'BD-22' => 'Jashore - যশোর',
+                'BD-25' => 'Jhalokati - ঝালকাঠি',
+                'BD-23' => 'Jhenaidah - ঝিনাইদহ',
+                'BD-24' => 'Joypurhat - জয়পুরহাট',
+                'BD-29' => 'Khagrachhari - খাগড়াছড়ি',
+                'BD-27' => 'Khulna - খুলনা',
+                'BD-26' => 'Kishoreganj - কিশোরগঞ্জ',
+                'BD-28' => 'Kurigram - কুড়িগ্রাম',
+                'BD-30' => 'Kushtia - কুষ্টিয়া',
+                'BD-31' => 'Lakshmipur - লক্ষ্মীপুর',
+                'BD-32' => 'Lalmonirhat - লালমনিরহাট',
+                'BD-36' => 'Madaripur - মাদারীপুর',
+                'BD-37' => 'Magura - মাগুরা',
+                'BD-33' => 'Manikganj - মানিকগঞ্জ',
+                'BD-39' => 'Meherpur - মেহেরপুর',
+                'BD-38' => 'Moulvibazar - মৌলভীবাজার',
+                'BD-35' => 'Munshiganj - মুন্সীগঞ্জ',
+                'BD-34' => 'Mymensingh - ময়মনসিংহ',
+                'BD-48' => 'Naogaon - নওগাঁ',
+                'BD-43' => 'Narail - নড়াইল',
+                'BD-40' => 'Narayanganj - নারায়ণগঞ্জ',
+                'BD-42' => 'Narsingdi - নরসিংদী',
+                'BD-44' => 'Natore - নাটোর',
+                'BD-45' => 'Nawabganj - চাঁপাইনবাবগঞ্জ',
+                'BD-41' => 'Netrakona - নেত্রকোণা',
+                'BD-46' => 'Nilphamari - নীলফামারী',
+                'BD-47' => 'Noakhali - নোয়াখালী',
+                'BD-52' => 'Panchagarh - পঞ্চগড়',
+                'BD-51' => 'Patuakhali - পটুয়াখালী',
+                'BD-50' => 'Pirojpur - পিরোজপুর',
+                'BD-53' => 'Rajbari - রাজবাড়ী',
+                'BD-54' => 'Rajshahi - রাজশাহী',
+                'BD-56' => 'Rangamati - রাঙ্গামাটি',
+                'BD-55' => 'Rangpur - রংপুর',
+                'BD-58' => 'Satkhira - সাতক্ষীরা',
+                'BD-62' => 'Shariatpur - শরীয়তপুর',
+                'BD-57' => 'Sherpur - শেরপুর',
+                'BD-59' => 'Sirajganj - সিরাজগঞ্জ',
+                'BD-61' => 'Sunamganj - সুনামগঞ্জ',
+                'BD-60' => 'Sylhet - সিলেট',
+                'BD-63' => 'Tangail - টাঙ্গাইল',
+                'BD-64' => 'Thakurgaon - ঠাকুরগাঁও'
+            );
+            return $states;
+        }
 
         // add_filter('wc_add_to_cart_message', 'remove_add_to_cart_message');
 
@@ -850,15 +930,7 @@ if(!function_exists('whatapp_link')){
     }
 }
 
-if(!function_exists('stylish_address_fields_validation')){
-    function stylish_address_fields_validation($address_fields) {
-        // Remove validation for the state field
-        $address_fields['state']['validate'] = [];
-    
-        return $address_fields;
-    
-    }
-}
+
 
 
 if (!function_exists('stylish_woocommerce_quantity_input_type')){

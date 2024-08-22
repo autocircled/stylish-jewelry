@@ -31,7 +31,7 @@ defined('ABSPATH') || exit;
                 <tr class="<?php echo esc_attr(apply_filters('woocommerce_cart_item_class', 'cart_item woocommerce-cart-form__cart-item', $cart_item, $cart_item_key)); ?>" data-cart_item_key="<?php echo esc_attr($cart_item_key); ?>">
                     <td class="product-thumbnail">
                         <div class="wrapperw d-flex align-items-center gap-3">
-                            <a href="<?php echo esc_url(wc_get_cart_remove_url($cart_item_key)); ?>" class="remove" aria-label="Remove this item" data-product_id="<?php echo esc_attr($_product->get_id()); ?>" data-product_sku="<?php echo esc_attr($_product->sku); ?>">&times;</a>
+                            <a href="<?php echo esc_url(wc_get_cart_remove_url($cart_item_key)); ?>" class="remove" aria-label="Remove this item" data-product_id="<?php echo esc_attr($_product->get_id()); ?>" data-product_sku="<?php echo esc_attr($_product->get_sku()); ?>">&times;</a>
 
                             <?php 
                             $product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
