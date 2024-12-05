@@ -60,7 +60,7 @@ add_action('woocommerce_side_information_bar', 'stylish_contact_numbers', 20);
 add_filter('woocommerce_order_button_text', 'stylish_custom_order_button_text');
 add_action('storefront_footer', 'stylish_footer_before_copyright_widgets', 15);
 add_action('storefront_after_footer', 'storefront_credit', 10);
-add_action('woocommerce_checkout_terms_and_conditions', 'stylish_woocommerce_get_terms_and_conditions_checkbox_text', 10);
+// add_action('woocommerce_checkout_terms_and_conditions', 'stylish_woocommerce_get_terms_and_conditions_checkbox_text', 10);
 add_action('wp_footer', 'whatapp_link', 10);
 
 
